@@ -35,7 +35,7 @@ Two machines. Full spec for the first in
 | [volta-dual-card](https://github.com/christopherrobertbrooks-tech/volta-dual-card) | Mixed sm_70 + sm_89 layer split (`-sm layer`) | Works, no VRAM leak; helps a MoE model (+5.5% decode) and hurts a dense 27B (−9.6%) |
 | [volta-diffusion](https://github.com/christopherrobertbrooks-tech/volta-diffusion) | Dream-v0-Instruct-7B diffusion LM, V100 | Runs; 274.1 ms/step vs the 4070's 237.6 ms/step |
 | [volta-bf16](https://github.com/christopherrobertbrooks-tech/volta-bf16) | BF16 vs F16 prefill, V100 (Qwen3-4B) | BF16 costs the V100 77% of its prefill — Volta has no BF16 hardware. Convert to F16 first |
-| [volta-hadamard](https://github.com/christopherrobertbrooks-tech/volta-hadamard) | A Hadamard rotation tool for Prism's PQ2_0 format | **In progress.** The rotation math works and survives quantization; Prism's own public ternary quantizer is a stub, so public PQ2_0 cannot be reproduced |
+| [volta-hadamard](https://github.com/christopherrobertbrooks-tech/volta-hadamard) | A Hadamard rotation tool for Prism's PQ2_0 format | Rotating weights improves llama.cpp's own Q2_K by **17.8%** on Qwen3-4B (wikitext-2, 200 chunks, clear of the error bars). The benefit tracks how much damage Q2_K did: a MoE model that Q2_K barely hurt saw nothing. Prism's own public ternary quantizer is a stub |
 
 Also here, not a GPU finding:
 [ember-voice-lora](https://github.com/christopherrobertbrooks-tech/ember-voice-lora)
@@ -84,11 +84,15 @@ numbers, not a reason to doubt them.
 2. **volta-hadamard first claimed a clean crossover** — rotation hurting
    perplexity at 4-bit and helping below it — from a single model (Qwen3-4B).
    A second model (Qwen3-8B) showed the Q3_K_M and Q4_K_M results flip sign
-   between models, so they were noise at that magnitude. Only Q2_K reproduced:
-   −4.3% on Qwen3-4B and −4.7% on Qwen3-8B. The crossover claim was retracted.
-   The surviving, narrower finding is that rotation improves Q2_K by about 4–5%
-   and does nothing reliable above 2 bits.
-   (`volta-hadamard`, commit `01acf8d`.)
+   between models, so they were noise. The crossover claim was retracted.
+
+   Then the measurement itself turned out to be the weak part. Those runs used
+   20 chunks of an unsaved corpus and recorded no error bars, so nothing from
+   them could be trusted in either direction. Re-run on wikitext-2 at 200
+   chunks with error bars, Qwen3-4B Q2_K goes 36.1895 → 29.7360: **−17.8%**,
+   cleanly separated — four times the effect originally reported. The first
+   number was understated, not invented, but it was not evidence either way.
+   (`volta-hadamard`, commits `01acf8d` and `fc58596`.)
 
 A third thing worth stating plainly: a `-fa` before/after diff of which
 individual test cases newly pass was **not** established, because the unpatched
