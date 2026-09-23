@@ -1,14 +1,12 @@
 # Legacy GPU LLM notes — Tesla V100 (sm_70), Pascal GTX 1070, RTX 4070
 
-> **DRAFT — Chris to rewrite this block in his own words, then delete this line.**
->
-> These are measured notes from running local LLM inference on a Tesla V100
-> (Volta, sm_70) and a GTX 1070 (Pascal, sm_61), with an RTX 4070 (Ada, sm_89)
-> as a control card. Most projects only test on newer hardware, so what
-> actually happens on these cards is largely undocumented. Each repo below is
-> one focused question with numbers behind it. Some things work that the docs
-> say shouldn't; some are much slower than expected; and two early claims
-> turned out to be wrong and were corrected in place.
+These are measured notes from running local LLM inference on a Tesla V100
+(Volta, sm_70) and a GTX 1070 (Pascal, sm_61), with an RTX 4070 (Ada, sm_89)
+as a control card. Most projects only test on newer hardware, so what
+actually happens on these cards is largely undocumented. Each repo below is
+one focused question with numbers behind it. Some things work that the docs
+say shouldn't; some are much slower than expected; and two early claims
+turned out to be wrong and were corrected in place.
 
 ## Hardware
 
@@ -36,11 +34,6 @@ Two machines. Full spec for the first in
 | [volta-diffusion](https://github.com/christopherrobertbrooks-tech/volta-diffusion) | Dream-v0-Instruct-7B diffusion LM, V100 | Runs; 274.1 ms/step vs the 4070's 237.6 ms/step |
 | [volta-bf16](https://github.com/christopherrobertbrooks-tech/volta-bf16) | BF16 vs F16 prefill, V100 (Qwen3-4B) | BF16 costs the V100 77% of its prefill — Volta has no BF16 hardware. Convert to F16 first |
 | [volta-hadamard](https://github.com/christopherrobertbrooks-tech/volta-hadamard) | A Hadamard rotation tool for Prism's PQ2_0 format | Rotating weights improves llama.cpp's own Q2_K by **17.8%** on Qwen3-4B (wikitext-2, 200 chunks, clear of the error bars). The benefit tracks how much damage Q2_K did: a MoE model that Q2_K barely hurt saw nothing. Prism's own public ternary quantizer is a stub |
-
-Also here, not a GPU finding:
-[ember-voice-lora](https://github.com/christopherrobertbrooks-tech/ember-voice-lora)
-— building a LoRA fine-tuning set from 3,337 logged conversation episodes (508
-curated pairs; no model trained yet).
 
 ## Findings by question
 
@@ -102,13 +95,11 @@ The two logs are not comparable and an attempted diff produced meaningless
 
 ## Offer
 
-> **DRAFT — Chris to rewrite this block in his own words, then delete this line.**
->
-> I have this hardware sitting here — a Tesla V100, a GTX 1070, and an RTX 4070
-> — and most projects only test on newer cards, so behaviour on sm_70, Pascal
-> and Ada often just isn't known. If you need something run on one of these,
-> point me at a branch and a command and I'll run it and post the output.
->
-> To be clear about scope: I'm offering to run things and report exactly what
-> happened — numbers and logs from real hardware. I'm not offering to review
-> your code, argue about design, or defend a patch.
+I have this hardware sitting here — a Tesla V100, a GTX 1070, and an RTX 4070
+— and most projects only test on newer cards, so behaviour on sm_70, Pascal
+and Ada often just isn't known. If you need something run on one of these,
+point me at a branch and a command and I'll run it and post the output.
+
+To be clear about scope: I'm offering to run things and report exactly what
+happened — numbers and logs from real hardware. I'm not offering to review
+your code, argue about design, or defend a patch.
