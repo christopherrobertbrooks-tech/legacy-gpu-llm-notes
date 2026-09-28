@@ -1,0 +1,6 @@
+10:03:16 server up (4 slots)
+11:52:26 ALL DONE
+gemma26b easy: first try 43/43 = 100%  ->  with one check-and-fix 43/43 = 100%   (0 retried after failing an example; 0 fixed, 0 broken by the retry; 65 min)
+gemma26b hard-shard0of3: first try 13/27 = 48%  ->  with one check-and-fix 15/27 = 56%   (10 retried after failing an example; 2 fixed, 0 broken by the retry; 102 min)
+gemma26b hard-shard1of3: first try 10/27 = 37%  ->  with one check-and-fix 13/27 = 48%   (15 retried after failing an example; 3 fixed, 0 broken by the retry; 109 min)
+gemma26b hard-shard2of3: first try 10/26 = 38%  ->  with one check-and-fix 11/26 = 42%   (10 retried after failing an example; 1 fixed, 0 broken by the retry; 95 min)

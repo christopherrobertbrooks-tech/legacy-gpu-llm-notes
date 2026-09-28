@@ -1,0 +1,4 @@
+21:59:47 start
+gpu 1: peak 29706 MiB, mean 201 W under load
+gpu 0: peak 11186 MiB, mean 78 W under load
+22:03:17 DONE

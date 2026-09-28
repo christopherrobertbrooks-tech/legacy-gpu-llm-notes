@@ -1,0 +1,29 @@
+22:03:20 == qwen2.5-coder-7b-Q4_K_M (v100)
+qwen2.5-coder-7b-Q4_K_M: HumanEval pass@1 141/164 = 86.0%  (230 s, 24899 tokens)
+22:14:26 == coder-next-UD-Q2_K_XL (v100)
+   pp512 d0 469.2 t/s
+   tg128 d0 74.9 t/s
+   pp512 d16384 487.3 t/s
+   tg128 d16384 73.5 t/s
+coder-next-UD-Q2_K_XL: HumanEval pass@1 152/164 = 92.7%  (627 s, 38320 tokens)
+22:30:04 == coder-next-UD-IQ3_S (v100)
+   pp512 d0 465.3 t/s
+   tg128 d0 69.1 t/s
+   pp512 d16384 477.5 t/s
+   tg128 d16384 70.7 t/s
+coder-next-UD-IQ3_S: HumanEval pass@1 149/164 = 90.9%  (676 s, 40424 tokens)
+22:48:59 == coder-next-UD-Q3_K_XL (both)
+   pp512 d0 556.6 t/s
+   tg128 d0 76.5 t/s
+   pp512 d16384 633.9 t/s
+   tg128 d16384 74.8 t/s
+coder-next-UD-Q3_K_XL: HumanEval pass@1 155/164 = 94.5%  (615 s, 39693 tokens)
+23:10:47 == qwen3.5-122b-a10b-UD-IQ2_M (both)
+   pp512 d0 483.7 t/s
+   tg128 d0 56.3 t/s
+   pp512 d16384 486.0 t/s
+   tg128 d16384 55.1 t/s
+qwen3.5-122b-a10b-UD-IQ2_M: HumanEval pass@1 151/164 = 92.1%  (812 s, 38687 tokens)
+23:29:51 == llama-3.3-70b-IQ4_XS (both)
+llama-3.3-70b-IQ4_XS: HumanEval pass@1 140/164 = 85.4%  (2060 s, 32226 tokens)
+00:06:34 QUEUE DONE

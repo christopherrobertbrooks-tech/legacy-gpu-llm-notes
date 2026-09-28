@@ -1,0 +1,161 @@
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 16.61it/s]
+  1/52 abc387_c public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 16.68it/s]
+  2/52 abc388_d public-examples FAIL -> retried
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 17.51it/s]
+  3/52 abc388_c public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 18.30it/s]
+  4/52 abc389_d public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 17.65it/s]
+  5/52 abc390_d public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 18.94it/s]
+  6/52 abc390_c public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 18.46it/s]
+  7/52 abc391_d public-examples FAIL -> retried
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 10.13it/s]
+  8/52 abc392_d public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 18.44it/s]
+  9/52 abc392_c public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 20.60it/s]
+  10/52 abc394_c public-examples FAIL -> retried
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 18.39it/s]
+  11/52 abc394_d public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 18.76it/s]
+  12/52 abc395_c public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 18.52it/s]
+  13/52 abc396_c public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 18.03it/s]
+  14/52 abc396_d public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 17.90it/s]
+  15/52 abc397_c public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 18.49it/s]
+  16/52 abc397_b public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 18.40it/s]
+  17/52 abc398_b public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 18.07it/s]
+  18/52 abc398_c public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 18.38it/s]
+  19/52 abc399_d public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 18.70it/s]
+  20/52 abc399_c public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 18.79it/s]
+  21/52 abc400_c public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 17.50it/s]
+  22/52 abc400_d public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 17.35it/s]
+  23/52 arc191_a public-examples FAIL -> retried
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 21.59it/s]
+  24/52 arc192_a public-examples FAIL -> retried
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 20.09it/s]
+  25/52 arc194_a public-examples FAIL -> retried
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 17.96it/s]
+  26/52 arc195_a public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.25it/s]
+  27/52 3677 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.74it/s]
+  28/52 3720 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 21.05it/s]
+  29/52 3714 public-examples FAIL -> retried
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 20.23it/s]
+  30/52 3737 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.51it/s]
+  31/52 3721 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.69it/s]
+  32/52 3751 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.65it/s]
+  33/52 3754 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.53it/s]
+  34/52 3748 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 14.46it/s]
+  35/52 3760 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.51it/s]
+  36/52 3779 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.64it/s]
+  37/52 3771 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 20.73it/s]
+  38/52 3764 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.18it/s]
+  39/52 3786 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.45it/s]
+  40/52 3722 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.79it/s]
+  41/52 3759 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.88it/s]
+  42/52 3791 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.86it/s]
+  43/52 3750 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 20.00it/s]
+  44/52 3795 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.69it/s]
+  45/52 3809 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.61it/s]
+  46/52 3794 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 20.33it/s]
+  47/52 3793 public-examples FAIL -> retried
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 20.29it/s]
+  48/52 3743 public-examples FAIL -> retried
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.74it/s]
+  49/52 3763 public-examples FAIL -> retried
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.58it/s]
+  50/52 3785 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 21.10it/s]
+  51/52 3776 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 20.38it/s]
+  52/52 3805 public-examples pass
+Evaluating 52...
+  0%|          | 0/52 [00:00<?, ?it/s]  4%|▍         | 2/52 [00:00<00:02, 19.83it/s] 23%|██▎       | 12/52 [00:00<00:00, 63.96it/s] 37%|███▋      | 19/52 [00:00<00:00, 64.00it/s] 50%|█████     | 26/52 [00:00<00:00, 26.69it/s] 60%|█████▉    | 31/52 [00:00<00:00, 27.93it/s] 67%|██████▋   | 35/52 [00:01<00:00, 25.80it/s] 75%|███████▌  | 39/52 [00:01<00:00, 21.19it/s] 81%|████████  | 42/52 [00:01<00:00, 22.33it/s] 88%|████████▊ | 46/52 [00:01<00:00, 23.27it/s] 94%|█████████▍| 49/52 [00:03<00:00,  5.04it/s] 98%|█████████▊| 51/52 [00:04<00:00,  5.26it/s]100%|██████████| 52/52 [00:08<00:00,  6.12it/s]
+Evaluating 52...
+  0%|          | 0/52 [00:00<?, ?it/s]  4%|▍         | 2/52 [00:00<00:02, 19.16it/s] 17%|█▋        | 9/52 [00:00<00:00, 47.74it/s] 29%|██▉       | 15/52 [00:00<00:00, 49.62it/s] 42%|████▏     | 22/52 [00:00<00:00, 52.18it/s] 54%|█████▍    | 28/52 [00:00<00:01, 23.82it/s] 62%|██████▏   | 32/52 [00:01<00:00, 22.08it/s] 69%|██████▉   | 36/52 [00:01<00:00, 16.32it/s] 75%|███████▌  | 39/52 [00:01<00:00, 16.29it/s] 83%|████████▎ | 43/52 [00:01<00:00, 19.77it/s] 88%|████████▊ | 46/52 [00:02<00:00, 18.47it/s] 94%|█████████▍| 49/52 [00:04<00:00,  4.86it/s] 98%|█████████▊| 51/52 [00:04<00:00,  4.80it/s]100%|██████████| 52/52 [00:08<00:00,  6.11it/s]
+gemma26b medium: first try 38/52 = 73%  ->  with one check-and-fix 41/52 = 79%   (10 retried after failing an example; 3 fixed, 0 broken by the retry; 78 min)

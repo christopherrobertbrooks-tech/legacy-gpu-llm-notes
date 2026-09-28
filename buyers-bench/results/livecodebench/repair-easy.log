@@ -1,0 +1,134 @@
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 18.10it/s]
+  1/43 abc387_b public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 21.84it/s]
+  2/43 abc387_a public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 20.25it/s]
+  3/43 abc388_b public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.81it/s]
+  4/43 abc388_a public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  9.61it/s]100%|██████████| 1/1 [00:00<00:00,  9.27it/s]
+  5/43 abc389_b public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 13.62it/s]
+  6/43 abc389_a public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 18.89it/s]
+  7/43 abc390_a public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 20.53it/s]
+  8/43 abc390_b public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 22.13it/s]
+  9/43 abc391_a public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 22.57it/s]
+  10/43 abc391_b public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 21.43it/s]
+  11/43 abc392_a public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 22.66it/s]
+  12/43 abc392_b public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 22.35it/s]
+  13/43 abc393_a public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 22.52it/s]
+  14/43 abc393_b public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 20.75it/s]
+  15/43 abc394_b public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 20.77it/s]
+  16/43 abc394_a public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 22.43it/s]
+  17/43 abc395_b public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 20.78it/s]
+  18/43 abc395_a public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 21.75it/s]
+  19/43 abc396_b public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 18.31it/s]
+  20/43 abc396_a public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 22.93it/s]
+  21/43 abc397_a public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 23.07it/s]
+  22/43 abc398_a public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 22.56it/s]
+  23/43 abc399_a public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.20it/s]
+  24/43 abc399_b public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 23.11it/s]
+  25/43 abc400_a public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 21.77it/s]
+  26/43 abc400_b public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 22.69it/s]
+  27/43 3708 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 25.04it/s]
+  28/43 3731 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 24.99it/s]
+  29/43 3704 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 20.61it/s]
+  30/43 3753 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 23.81it/s]
+  31/43 3709 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 23.96it/s]
+  32/43 3768 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 23.56it/s]
+  33/43 3705 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 23.07it/s]
+  34/43 3788 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 25.12it/s]
+  35/43 3817 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 23.97it/s]
+  36/43 3832 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 23.07it/s]
+  37/43 3773 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 23.42it/s]
+  38/43 3747 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 23.57it/s]
+  39/43 3736 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 24.57it/s]
+  40/43 3723 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 23.85it/s]
+  41/43 3778 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 22.57it/s]
+  42/43 3799 public-examples pass
+Evaluating 1...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 22.35it/s]
+  43/43 3811 public-examples pass
+Evaluating 43...
+  0%|          | 0/43 [00:00<?, ?it/s] 21%|██        | 9/43 [00:00<00:00, 86.02it/s] 79%|███████▉  | 34/43 [00:00<00:00, 175.91it/s]100%|██████████| 43/43 [00:00<00:00, 177.38it/s]
+Evaluating 43...
+  0%|          | 0/43 [00:00<?, ?it/s] 21%|██        | 9/43 [00:00<00:00, 88.47it/s] 77%|███████▋  | 33/43 [00:00<00:00, 172.16it/s]100%|██████████| 43/43 [00:00<00:00, 179.08it/s]
+gemma26b easy: first try 43/43 = 100%  ->  with one check-and-fix 43/43 = 100%   (0 retried after failing an example; 0 fixed, 0 broken by the retry; 65 min)

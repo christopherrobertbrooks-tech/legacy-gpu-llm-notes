@@ -78,21 +78,111 @@ Sources: [GPUDojo](https://gpudojo.com/tesla-v100),
 - 32 GB is the point: the three largest models above don't fit on a 12 GB
   card, and Gemma 4 26B at Q4 misses a 16 GB V100 by a hair. A MoE at 85–92
   t/s that barely slows at 32K context is the sweet spot.
-- Dense 27B+ models run, but at ~24 t/s.
+- Dense 27B+ models run, but at ~24 t/s; MoE models are the better fit (below).
 - The traps are real but solved below: use CUDA 12.x (13 dropped Volta),
   never bf16 (convert to f16), and check flash attention per model.
 - It's a passive datacenter card: it needs forced airflow, and the PCIe
   version fits a normal x16 slot.
 
-### Splitting a model across two cards
+### MoE models are the V100's sweet spot
+
+A mixture-of-experts model uses only a slice of its weights per token, so it
+needs a lot of memory but little compute — exactly what this card has. Gemma 4
+26B-A4B (4B active) generates at 92 t/s against 24 t/s for the dense Qwen3.8 27B
+on the same card, and barely slows at 32K context. The V100-specific part is the
+32 GB: it holds the whole MoE, where a 12 GB card can't load it and a 16 GB V100
+misses by a hair. (Not claimed: that it beats other 32 GB+ cards on MoE — that
+wasn't measured.)
+
+### Splitting a model across two cards (V100 + 4070 = 44 GB)
 
 A V100 and a 4070 in one box work together in llama.cpp (`-sm layer`), with
 no VRAM leak — see [volta-dual-card](https://github.com/christopherrobertbrooks-tech/volta-dual-card).
-Short version: **only split when the model doesn't fit on one card.** For a
-model that fits, the fastest single card wins; splitting cost a dense 27B
-9.6% of its decode speed and gained a MoE only 5.5%. `-sm row` failed to
-load on the mixed pair. The payoff is capacity: 32 + 12 = 44 GB, enough for
-a 70B at Q4_K_M (~40 GB) — untested so far.
+**Only split when the model doesn't fit on one card**: for a model that fits,
+the fastest single card wins (splitting cost a dense 27B 9.6% of its decode).
+`-sm row` failed to load on the mixed pair. What 44 GB buys:
+
+| Model | File | Cards | pp512 | tg128 | tg128 deep |
+| :--- | ---: | :--- | ---: | ---: | ---: |
+| Llama 3.3 70B dense IQ4_XS | 37.9 GB | both | 336 | **16.6** | 15.7 @ 8K |
+| Qwen3-Coder-Next 80B-A3B UD-Q3_K_XL | 36.3 GB | both | 557 | **76.5** | 74.8 @ 16K |
+| Qwen3.5 122B-A10B UD-IQ2_M | 39.1 GB | both | 484 | **56.3** | 55.1 @ 16K |
+| Qwen3-Coder-Next 80B-A3B UD-Q2_K_XL | 26.8 GB | **V100 alone** | 469 | **74.9** | 73.5 @ 16K |
+| Qwen3-Coder-Next 80B-A3B UD-IQ3_S | 29.7 GB | **V100 alone** | 465 | 69.1 | 70.7 @ 16K |
+
+The 70B fills 29.7 GB of the V100 and 11.2 GB of the 4070 — about the ceiling —
+and draws ~280 W across both cards. System RAM on this box is 16 GB, so nothing
+here spills to CPU; everything is fully offloaded (`-ngl 99`).
+
+## Coding quality
+
+### HumanEval (164 problems, greedy, thinking off)
+
+The grader passes all 164 reference solutions and fails a `return None` stub on
+all 164; as a calibration, Qwen2.5-Coder-7B Q4 scores 86.0% against its published
+88.4% (bf16).
+
+| Model | Quant | Cards | HumanEval |
+| :--- | :--- | :--- | ---: |
+| Gemma 4 26B-A4B MoE | Q4_K_M | V100 | 97.6% |
+| Gemma 4 26B-A4B MoE | Q8_0 | V100 | 97.0% |
+| Qwen3.8 27B dense | Q8_0 | V100 | 95.1% |
+| Gemma 4 12B | QAT Q4 | V100 | 94.5% |
+| Qwen3-Coder-Next 80B-A3B | UD-Q3_K_XL | both | 94.5% |
+| Qwen3-Coder-Next 80B-A3B | UD-Q2_K_XL (2-bit) | V100 | 92.7% |
+| Qwen3.5 122B-A10B | UD-IQ2_M (2-bit) | both | 92.1% |
+| Qwen3-Coder-Next 80B-A3B | UD-IQ3_S | V100 | 90.9% |
+| Ternary Bonsai 2 27B | PQ2_0 | V100 | 89.6% |
+| Qwen2.5-Coder 7B | Q4_K_M | V100 | 86.0% |
+| Llama 3.3 70B dense | IQ4_XS | both | 85.4% |
+| Qwen3.5 4B | Q8_0 | V100 | 82.3% |
+
+**Read this for quantisation loss, not for ranking models.** HumanEval is from
+2021 and 2026 models have almost certainly seen it: nine of twelve land between
+89% and 98%. Within one model it is still a fair comparison — Coder-Next loses
+about 2 points from 3-bit to 2-bit (±2 points is single-run noise at n=164), and
+Gemma 4 26B shows no difference between Q4 and Q8.
+
+### LiveCodeBench v6 (175 contest problems, Jan–Apr 2025) — Gemma 4 26B-A4B Q4
+
+[LiveCodeBench](https://livecodebench.github.io/) problems come from LeetCode,
+AtCoder and Codeforces and are graded on hidden tests with LCB's own checker.
+Its inference path needs vLLM (no sm_70 build), so generation goes through
+llama-server and grading through `lcb_runner` unchanged. The grader was checked
+both ways first: empty and wrong programs pass 0/175; four hand-written correct
+solutions (stdin and LeetCode-style) pass 4/4; an off-by-one variant fails.
+
+Settings: thinking on, capped at 4,096 tokens (`--reasoning-budget 4096`), 12K
+answer budget, temperature 0. **Check-and-fix** mirrors a write-test-fix coding
+loop: the first answer is run against the problem statement's *public example*
+tests only; if one fails, the model is shown that failure (input, expected, got)
+and gets one retry. It never sees the hidden tests.
+
+| Difficulty | First try | With one check-and-fix | Retries: fixed / broken |
+| :--- | ---: | ---: | ---: |
+| Easy (43) | 100% | **100%** | 0 / 0 |
+| Medium (52) | 73% | **79%** | 3 / 0 |
+| Hard (80) | 41% | **49%** | 6 / 0 |
+| **Overall (175)** | **65.1%** | **70.3%** | 9 / 0 |
+
+- **Google's published figure is 77.1%** ([model card](https://huggingface.co/google/gemma-4-26B-A4B-it)),
+  single attempt, with thinking unrestricted and their recommended sampling
+  (temperature 1.0, top_p 0.95, top_k 64). The comparable number here is the
+  first-try 65.1%. Gemma used the full 4K thinking budget on every medium problem
+  (shortest answer 4,530 tokens), so the cap is the likely main difference.
+- **Thinking budget is the big lever**: an earlier run at 1K thinking / 8K answers,
+  no retry, scored 54.3% overall (medium 56%). 4K thinking took medium to 73%.
+- **Q8 bought nothing**: Q8_0 on the same 52 medium problems scored exactly the
+  same (73% → 79%), 18% slower.
+- **Contamination caveat**: these problems predate Gemma 4, so it may have seen
+  some. The within-model gains (budget, check-and-fix) are the most trustworthy
+  numbers; the absolute score probably reads somewhat high.
+- **A non-thinking model does poorly here**: Qwen3-Coder-Next with thinking off
+  reasons inside code comments on hard problems and hit the answer cap on ~half
+  of them at 4K; doubling to 8K rescued only 2 of 19. Run abandoned — good at
+  everyday code (HumanEval above), wrong tool for contest problems.
+- Throughput: 4 parallel streams on one V100 (`-np 4`, 19.2 GB) — easy took
+  65 min, hard ~100 min.
 
 ## The table
 
