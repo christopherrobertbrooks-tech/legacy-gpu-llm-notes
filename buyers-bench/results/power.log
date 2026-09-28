@@ -1,0 +1,12 @@
+21:25:05 Gemma_4_12B_QAT_Q4-RTX4070: idle 13 W, generating 185 W
+21:25:38 Gemma_4_12B_QAT_Q4-V100: idle 25 W, generating 178 W
+21:26:25 Gemma_4_26B-A4B_MoE_Q4_K_M-V100: idle 53 W, generating 135 W
+21:28:27 Gemma_4_26B-A4B_MoE_Q8_0-V100: idle 48 W, generating 129 W
+21:28:58 Qwen2.5-Coder_7B_Q4_K_M-RTX4070: idle 13 W, generating 191 W
+21:29:17 Qwen2.5-Coder_7B_Q4_K_M-V100: idle 25 W, generating 218 W
+21:29:49 Qwen3.5_4B_Q8_0-RTX4070: idle 14 W, generating 173 W
+21:30:10 Qwen3.5_4B_Q8_0-V100: idle 26 W, generating 154 W
+21:33:17 Qwen3.8_27B_dense_Q8_0-V100: idle 50 W, generating 182 W
+21:34:02 Ternary_Bonsai_2_27B_PQ2_0-RTX4070: idle 13 W, generating 194 W
+21:34:45 Ternary_Bonsai_2_27B_PQ2_0-V100: idle 26 W, generating 184 W
+21:34:45 POWER DONE

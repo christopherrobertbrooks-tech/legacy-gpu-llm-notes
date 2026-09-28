@@ -22,6 +22,78 @@ Two machines. Full spec for the first in
 - Driver 580.173.02, CUDA 12.9.86 — **CUDA 13 dropped Volta, so 12.x is required**
 - The V100 runs its PCIe link downgraded to x4 (8 GT/s); the 4070 at x16
 
+## Is a used V100 32GB worth it? (measured September 2026)
+
+Same machine, same llama.cpp build (PrismML fork `3ae4f51`, CUDA 12.9),
+`llama-bench -ngl 99 -fa on -p 512 -n 128 -d 0,16384,32768 -r 3`, one card
+visible at a time. Power is whole-board draw from `nvidia-smi` during a
+2,048-token generation. Raw CSVs and scripts: [buyers-bench/](buyers-bench/).
+
+**Generation speed, tokens/sec** (short prompt → at 32K tokens of context):
+
+| Model | File | V100 32GB | RTX 4070 12GB | Fits a V100 16GB? |
+| :--- | ---: | ---: | ---: | :---: |
+| Qwen3.5 4B Q8_0 | 4.5 GB | **107** → 93 | 91 → 73 | yes |
+| Qwen2.5-Coder 7B Q4_K_M | 4.7 GB | **123** → 69 | 99 → 71 | yes |
+| Gemma 4 12B QAT Q4 | 7.0 GB | **70** → 64 | 60 → 54 | yes |
+| Ternary Bonsai 2 27B PQ2_0 | 7.2 GB | 51 → 40 | **54** → 43 | yes |
+| Gemma 4 26B-A4B MoE Q4_K_M | 16.9 GB | **92** → 84 | doesn't fit | no, just over |
+| Gemma 4 26B-A4B MoE Q8_0 | 26.8 GB | **85** → 79 | doesn't fit | no |
+| Qwen3.8 27B dense Q8_0 | 29.0 GB | **24** → 22 | doesn't fit | no |
+
+**Prompt processing, tokens/sec** (pp512, short context) — the 4070 is faster here:
+
+| Model | V100 | RTX 4070 |
+| :--- | ---: | ---: |
+| Qwen3.5 4B | 4,445 | **5,860** |
+| Qwen2.5-Coder 7B | 3,156 | **5,145** |
+| Gemma 4 12B | 1,825 | **3,130** |
+| Bonsai 2 27B | 758 | **1,266** |
+| Gemma 4 26B MoE Q4 / Q8 | 1,320 / 1,022 | — |
+| Qwen3.8 27B dense Q8 | 617 | — |
+
+**Power while generating** (idle, nothing loaded: V100 25 W, 4070 13 W):
+
+| Model | V100 | tokens/joule | RTX 4070 | tokens/joule |
+| :--- | ---: | ---: | ---: | ---: |
+| Qwen3.5 4B | 154 W | 0.69 | 173 W | 0.53 |
+| Qwen2.5-Coder 7B | 218 W | 0.56 | 191 W | 0.52 |
+| Gemma 4 12B | 178 W | 0.40 | 185 W | 0.32 |
+| Bonsai 2 27B | 184 W | 0.28 | 194 W | 0.28 |
+| Gemma 4 26B MoE Q4 / Q8 | 135 / 129 W | 0.68 / 0.66 | — | — |
+| Qwen3.8 27B dense Q8 | 182 W | 0.13 | — | — |
+
+**Price** (US used market, September 2026 — listings vary widely, check sold
+prices, not asking prices): V100 32GB PCIe ~$640–750; V100 16GB PCIe
+~$230–540; RTX 3090 24GB ~$1,000–1,350; RTX 4070 ~$485 used / ~$700 new.
+Sources: [GPUDojo](https://gpudojo.com/tesla-v100),
+[GPUPoet 32GB](https://gpupoet.com/gpu/shop/nvidia-tesla-v100-32gb),
+[GPUPoet 16GB](https://gpupoet.com/gpu/shop/nvidia-tesla-v100-16gb),
+[BestValueGPU 3090](https://bestvaluegpu.com/history/new-and-used-rtx-3090-price-history-and-specs/),
+[BestValueGPU 4070](https://bestvaluegpu.com/history/new-and-used-rtx-4070-price-history-and-specs/).
+
+**What it adds up to:**
+- Generation is 15–25% faster than a new 4070 on everything but the ternary
+  model — HBM2 bandwidth. Prompt processing is 1.3–1.7× slower.
+- 32 GB is the point: the three largest models above don't fit on a 12 GB
+  card, and Gemma 4 26B at Q4 misses a 16 GB V100 by a hair. A MoE at 85–92
+  t/s that barely slows at 32K context is the sweet spot.
+- Dense 27B+ models run, but at ~24 t/s.
+- The traps are real but solved below: use CUDA 12.x (13 dropped Volta),
+  never bf16 (convert to f16), and check flash attention per model.
+- It's a passive datacenter card: it needs forced airflow, and the PCIe
+  version fits a normal x16 slot.
+
+### Splitting a model across two cards
+
+A V100 and a 4070 in one box work together in llama.cpp (`-sm layer`), with
+no VRAM leak — see [volta-dual-card](https://github.com/christopherrobertbrooks-tech/volta-dual-card).
+Short version: **only split when the model doesn't fit on one card.** For a
+model that fits, the fastest single card wins; splitting cost a dense 27B
+9.6% of its decode speed and gained a MoE only 5.5%. `-sm row` failed to
+load on the mixed pair. The payoff is capacity: 32 + 12 = 44 GB, enough for
+a 70B at Q4_K_M (~40 GB) — untested so far.
+
 ## The table
 
 | Repo | Tested | Result |

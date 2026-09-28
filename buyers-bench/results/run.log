@@ -1,0 +1,48 @@
+llama.cpp: 3ae4f51 vulkan: let PTQ1_0 use the integer-dot mat-vec on Intel Xe2 (8
+idle W gpu 1: 25
+idle W gpu 0: 13
+21:00:25 == Qwen3.5 4B Q8_0 on V100
+   decode W: 33
+cut: invalid decreasing range
+Try 'cut --help' for more information.
+21:01:31 == Qwen3.5 4B Q8_0 on RTX4070
+   decode W: 43
+cut: invalid decreasing range
+Try 'cut --help' for more information.
+21:02:21 == Qwen2.5-Coder 7B Q4_K_M on V100
+   decode W: 32
+cut: invalid decreasing range
+Try 'cut --help' for more information.
+21:03:43 == Qwen2.5-Coder 7B Q4_K_M on RTX4070
+   decode W: 32
+cut: invalid decreasing range
+Try 'cut --help' for more information.
+21:04:38 == Gemma 4 12B QAT Q4 on V100
+   decode W: 132
+cut: invalid decreasing range
+Try 'cut --help' for more information.
+21:06:19 == Gemma 4 12B QAT Q4 on RTX4070
+   decode W: 154
+cut: invalid decreasing range
+Try 'cut --help' for more information.
+21:07:27 == Ternary Bonsai 2 27B PQ2_0 on V100
+   decode W: 189
+cut: invalid decreasing range
+Try 'cut --help' for more information.
+21:09:58 == Ternary Bonsai 2 27B PQ2_0 on RTX4070
+   decode W: 184
+cut: invalid decreasing range
+Try 'cut --help' for more information.
+21:11:39 == Gemma 4 26B-A4B MoE Q4_K_M on V100
+   decode W: 44
+cut: invalid decreasing range
+Try 'cut --help' for more information.
+21:13:36 == Gemma 4 26B-A4B MoE Q8_0 on V100
+   decode W: 39
+cut: invalid decreasing range
+Try 'cut --help' for more information.
+21:17:53 == Qwen3.8 27B dense Q8_0 on V100
+   decode W: 40
+cut: invalid decreasing range
+Try 'cut --help' for more information.
+21:24:10 DONE
