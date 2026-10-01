@@ -440,7 +440,7 @@ context, 4070). Scripts and logs: [results/reviewer](buyers-bench/results/review
 | Reviewer (4070) | Buggy builds with a proven bug | Proven bugs | Wrong tests | Time per build |
 | :--- | ---: | ---: | ---: | ---: |
 | **Ternary Bonsai 2 27B** PQ2_0 | **8/10** | **25** | 34 of 68 | 95 s |
-| Ornith-9B Q6 (stopped after 7 builds) | 2/5 | 3 | 20 of 34 | ~80 s, 7 min on some |
+| Ornith-9B Q6 (stopped after 7 builds) | 2/5 | 3 | 25 of 34 | ~80 s, 7 min on some |
 | Gemma 4 12B QAT | 1/10 | 2 | 22 of 114 | 82 s |
 | LFM2.5 8B-A1B Q4_K_M | 1/10 | 3 | 29 of 33 | **16 s** |
 
