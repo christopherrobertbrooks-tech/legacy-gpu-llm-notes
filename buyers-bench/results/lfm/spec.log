@@ -1,0 +1,44 @@
+17:55:51 == plain
+short HumanEval/10 142.4 tok/s 219 tok 
+short HumanEval/11 143.3 tok/s 188 tok 
+short HumanEval/12 146.4 tok/s 128 tok 
+short HumanEval/13 147.4 tok/s 99 tok 
+short HumanEval/14 144.9 tok/s 84 tok 
+short HumanEval/15 146.0 tok/s 89 tok 
+short HumanEval/16 145.0 tok/s 142 tok 
+short HumanEval/17 146.6 tok/s 242 tok 
+long cli 144.8 tok/s 1536 tok 
+long electron 143.8 tok/s 1228 tok 
+long tests 145.9 tok/s 932 tok 
+long explain 146.0 tok/s 1395 tok 
+17:58:07 == draft-lfm2-8b
+short HumanEval/10 143.9 tok/s 219 tok 
+short HumanEval/11 145.6 tok/s 188 tok 
+short HumanEval/12 146.3 tok/s 128 tok 
+short HumanEval/13 146.8 tok/s 99 tok 
+short HumanEval/14 144.8 tok/s 84 tok 
+short HumanEval/15 144.7 tok/s 89 tok 
+short HumanEval/16 145.6 tok/s 142 tok 
+short HumanEval/17 147.1 tok/s 242 tok 
+long cli 146.0 tok/s 1536 tok 
+long electron 144.3 tok/s 1228 tok 
+long tests 146.7 tok/s 932 tok 
+long explain 146.5 tok/s 1395 tok 
+18:00:29 == draft-lfm25-8b
+short HumanEval/10 143.4 tok/s 219 tok 
+short HumanEval/11 144.7 tok/s 188 tok 
+short HumanEval/12 147.2 tok/s 128 tok 
+short HumanEval/13 147.2 tok/s 99 tok 
+short HumanEval/14 146.3 tok/s 84 tok 
+short HumanEval/15 146.1 tok/s 89 tok 
+short HumanEval/16 145.9 tok/s 142 tok 
+short HumanEval/17 146.6 tok/s 242 tok 
+long cli 145.5 tok/s 1536 tok 
+long electron 145.4 tok/s 1228 tok 
+long tests 146.3 tok/s 932 tok 
+long explain 146.7 tok/s 1395 tok 
+draft-lfm2-8b    short:  145.5 ->  145.6 tok/s (x1.00), time   10s ->   10s, acceptance nan
+draft-lfm2-8b    long :  145.3 ->  146.3 tok/s (x1.01), time   35s ->   35s, acceptance nan
+draft-lfm25-8b   short:  145.5 ->  146.2 tok/s (x1.00), time   10s ->   10s, acceptance nan
+draft-lfm25-8b   long :  145.3 ->  145.9 tok/s (x1.00), time   35s ->   35s, acceptance nan
+SPEC-DONE

@@ -345,6 +345,7 @@ all 164; as a calibration, Qwen2.5-Coder-7B Q4 scores 86.0% against its publishe
 | DiffusionGemma 26B-A4B (diffusion LM) | Q4_K_M | V100 | 89.0% ‡ |
 | Qwen2.5-Coder 7B | Q4_K_M | V100 | 86.0% |
 | Llama 3.3 70B dense | IQ4_XS | both | 85.4% |
+| LFM2 24B-A2B MoE (no reasoning) | Q8_0 | V100 | 84.8% |
 | Qwen3.5 4B | Q8_0 | V100 | 82.3% |
 | GLM-4.7-Flash 30B-A3B MoE | Q4_K_M | V100 | 81.1% † |
 | Mistral Small 4 119B-A6B MoE | UD-IQ2_M (2-bit) | both | 83.5% § |
@@ -488,6 +489,37 @@ context, 4070). Scripts and logs: [results/reviewer](buyers-bench/results/review
 - **LFM2.5 is 6× faster and nearly useless here.** On 9 builds it dropped the required code block, and the code it did
   write calls helpers with invented signatures, adds a pytest argument that can't resolve, and once isn't valid
   Python. Fluent and fast isn't the same as careful.
+
+### LFM2 / LFM2.5 (Liquid AI): fast, not careful
+
+Liquid AI's on-device family: hybrid MoE models (short-convolution plus a few attention layers) with very few active
+parameters. They're the fastest models measured on every card here. Raw data: [results/lfm](buyers-bench/results/lfm),
+[results/pascal](buyers-bench/results/pascal).
+
+| Model | Card | Generation t/s (short → 32K) | Prompt t/s |
+| :--- | :--- | ---: | ---: |
+| LFM2 24B-A2B Q8_0 (25.4 GB, 2.3B active) | V100 | **149 → 133** | 1,618 |
+| LFM2.5 8B-A1B Q4_K_M (1.5B active, reasoning) | RTX 4070 | **326 → 243** | 11,021 |
+| LFM2.5 8B-A1B Q4_K_M | V100 | 273 → 238 | 3,857 |
+| LFM2.5 8B-A1B Q4_K_M | GTX 1070 | 108 → 88 | 1,794 |
+| LFM2 8B-A1B Q4_K_M | GTX 1070 | 118 → 95 | 1,825 |
+
+For scale: Qwen3.6 35B-A3B, the agent leader, generates ~95 t/s on the V100.
+
+- **The 24B is fast and decent, not a top coder:** HumanEval 139/164 (84.8%, greedy; it's an instruct model with no
+  reasoning mode), against Qwen3.6's 153 and Gemma 26B's 160, at 1.5× Qwen3.6's speed and at Q8. Its trained context
+  is 32K, so it can't take on the 131K agent runs above.
+- **The 8B is a weak judge.** As a code reviewer, LFM2.5 proved a bug in 1 of 10 buggy builds, against Bonsai's 8
+  ([reviewer test](#code-reviewer-test-prove-each-bug-with-a-failing-test-20-builds)). As an everyday assistant it was
+  accurate on plain questions (explaining an error, summarising) in 3.5–8.5 s with reasoning on. But asked to make a
+  blaming customer reply friendly, every LFM2 variant kept the blame.
+- **The 8B can't draft for the 24B.** Speculative decoding (8B on the 4070 guessing tokens for the 24B on the V100)
+  is impossible, because the two use different vocabularies: llama.cpp refuses with "the target and draft vocabs are
+  not compatible" (BOS token id 1 vs 124,894) and serves the 24B undrafted. Same family doesn't mean same tokenizer.
+- **Power:** the 1070 numbers are in its section. The V100 and 4070 readings for these models caught the card still
+  loading and are being re-measured.
+- **Where it fits:** the job it was built for, a fast inner-loop model for tool calls, routing and quick replies, and
+  the best everyday model for an 8 GB Pascal card. It's not a builder and not a reviewer.
 
 ### DiffusionGemma 26B-A4B on the V100 (llama.cpp PR #24423)
 

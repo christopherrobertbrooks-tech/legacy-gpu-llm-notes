@@ -1,0 +1,11 @@
+15:16:40 4070: LFM2.5-8B speed
+15:17:27   LFM2.5_8B-A1B_Q4_K_M-RTX4070: 80 W, busy 40%
+15:17:27 4070: reviewer server up (Bonsai's reviewer settings)
+15:23:30 4070 done
+17:45:31 V100: LFM2-24B-A2B Q8 speed
+17:49:41   LFM2-24B-A2B_Q8_0-V100: 38 W, busy 0%
+17:49:41 V100: LFM2.5-8B speed
+17:50:40   LFM2.5_8B-A1B_Q4_K_M-V100: 97 W, busy 48%
+17:50:40 V100: LFM2-24B HumanEval (greedy, no reasoning: it's an instruct model)
+17:55:46 V100 done: humaneval-lfm2-24b-a2b-q8.jsonl                  strict 139/164  dedented 139/164
+LFM-GW-DONE
