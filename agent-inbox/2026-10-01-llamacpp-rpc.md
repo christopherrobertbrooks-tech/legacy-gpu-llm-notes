@@ -47,3 +47,23 @@ both ends (both need `-DGGML_RPC=ON`).
 Split runs measured, single-card baselines compared, README section written,
 and this note flipped to `Status: done` with the headline result (even if the
 headline is "not worth it — the network kills it").
+
+## Progress (Claude Code)
+
+**2026-10-01 — reviewed, plumbing proven, queued** (Chris approved: Wi-Fi first, re-download the 70B). Review notes:
+- **The link is Wi-Fi on both ends.** Both machines' Ethernet ports are unplugged, and hostnames resolve to Tailscale
+  (WireGuard over Wi-Fi). Quiet: ~4 ms RTT, 16–20 MB/s. During a concurrent 38 GB download on the gateway: 17–350 ms
+  RTT, 3–5 MB/s. The queued run measures the link itself (LAN IP and Tailscale) right before the tests.
+- **`-cpu` confirmed in ik_llama.cpp's rpc-server** (mainline uses the CPU only when there's no accelerator). **Skipped:**
+  the main PC has 24 GB with systemd-oomd, which has killed the desktop session, and today's experts-in-RAM runs filled
+  its swap twice. Exposing its RAM isn't safe beyond ~8 GB, and that isn't worth the risk.
+- **The note left out the 4070.** The gateway already pools V100 + 4070 (44 GB) locally; Llama 3.3 70B IQ4_XS ran that
+  way at 16.6 t/s. So the clean comparison is the same 70B across V100+4070 (PCIe) vs V100+1070 (RPC), plus all three.
+- **Builds:** the same PrismML fork with `-DGGML_RPC=ON`; the target is `ggml-rpc-server` in this tree. The 1070 side was
+  built CPU-portable for the i5. Devices on the client: CUDA0 = V100, CUDA1 = 4070, RPC0 = 1070.
+- **Smoke test (4070 + 1070 over RPC, Qwen3 1.7B, during the download):** works (`CUDA,RPC` backend). pp128 140 t/s,
+  **tg 5.4 t/s**: decode is one network round trip per token, so latency, not bandwidth, sets the ceiling.
+- **Queued** (Dev-Console `~/pascal-bench/rpc-queue.sh`, after the gateway's current queue): link measurement; 7B coder
+  V100 vs V100+1070 (and a reload to time rpc-server's `-c` tensor cache); Gemma 26B Q8 V100 vs V100+1070; Llama 3.3 70B
+  IQ4_XS on V100+4070, V100+1070 (may not fit) and all three, at depth 0 and 8K. rpc-server binds the LAN IP only while
+  the tests run.
