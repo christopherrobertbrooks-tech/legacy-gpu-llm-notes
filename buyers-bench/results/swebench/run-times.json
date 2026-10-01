@@ -1,0 +1,1303 @@
+{
+ "gemma": [
+  {
+   "instance_id": "django__django-13794",
+   "secs": 395,
+   "turns": 97,
+   "error": "",
+   "patch_lines": 26
+  },
+  {
+   "instance_id": "django__django-11951",
+   "secs": 1713,
+   "turns": 195,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 120
+  },
+  {
+   "instance_id": "django__django-14493",
+   "secs": 171,
+   "turns": 51,
+   "error": "",
+   "patch_lines": 12
+  },
+  {
+   "instance_id": "django__django-16429",
+   "secs": 187,
+   "turns": 60,
+   "error": "",
+   "patch_lines": 16
+  },
+  {
+   "instance_id": "django__django-11119",
+   "secs": 164,
+   "turns": 35,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "django__django-11179",
+   "secs": 130,
+   "turns": 32,
+   "error": "",
+   "patch_lines": 12
+  },
+  {
+   "instance_id": "django__django-15467",
+   "secs": 559,
+   "turns": 137,
+   "error": "",
+   "patch_lines": 69
+  },
+  {
+   "instance_id": "django__django-11433",
+   "secs": 365,
+   "turns": 78,
+   "error": "",
+   "patch_lines": 62
+  },
+  {
+   "instance_id": "sympy__sympy-16886",
+   "secs": 168,
+   "turns": 50,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "sympy__sympy-19954",
+   "secs": 341,
+   "turns": 67,
+   "error": "",
+   "patch_lines": 29
+  },
+  {
+   "instance_id": "sympy__sympy-12481",
+   "secs": 357,
+   "turns": 57,
+   "error": "",
+   "patch_lines": 33
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-9281",
+   "secs": 242,
+   "turns": 81,
+   "error": "",
+   "patch_lines": 32808
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-7889",
+   "secs": 210,
+   "turns": 68,
+   "error": "",
+   "patch_lines": 16
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-13989",
+   "secs": 337,
+   "turns": 90,
+   "error": "",
+   "patch_lines": 15
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-20676",
+   "secs": 428,
+   "turns": 78,
+   "error": "",
+   "patch_lines": 26
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-13496",
+   "secs": 613,
+   "turns": 84,
+   "error": "",
+   "patch_lines": 120
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-25973",
+   "secs": 266,
+   "turns": 77,
+   "error": "",
+   "patch_lines": 27
+  },
+  {
+   "instance_id": "pytest-dev__pytest-5262",
+   "secs": 147,
+   "turns": 29,
+   "error": "",
+   "patch_lines": 15
+  },
+  {
+   "instance_id": "psf__requests-1724",
+   "secs": 344,
+   "turns": 62,
+   "error": "",
+   "patch_lines": 44
+  },
+  {
+   "instance_id": "pydata__xarray-4075",
+   "secs": 1803,
+   "turns": 172,
+   "error": "timeout",
+   "patch_lines": 13
+  }
+ ],
+ "ornith": [
+  {
+   "instance_id": "django__django-11951",
+   "secs": 806,
+   "turns": 547,
+   "error": "",
+   "patch_lines": 92
+  },
+  {
+   "instance_id": "django__django-14493",
+   "secs": 66,
+   "turns": 26,
+   "error": "",
+   "patch_lines": 12
+  },
+  {
+   "instance_id": "django__django-16429",
+   "secs": 111,
+   "turns": 54,
+   "error": "",
+   "patch_lines": 12
+  },
+  {
+   "instance_id": "django__django-11119",
+   "secs": 194,
+   "turns": 98,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "django__django-11179",
+   "secs": 125,
+   "turns": 73,
+   "error": "",
+   "patch_lines": 30
+  },
+  {
+   "instance_id": "django__django-15467",
+   "secs": 184,
+   "turns": 115,
+   "error": "",
+   "patch_lines": 48
+  },
+  {
+   "instance_id": "django__django-11433",
+   "secs": 1037,
+   "turns": 254,
+   "error": "",
+   "patch_lines": 26
+  },
+  {
+   "instance_id": "sympy__sympy-16886",
+   "secs": 71,
+   "turns": 37,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "sympy__sympy-19954",
+   "secs": 138,
+   "turns": 57,
+   "error": "",
+   "patch_lines": 26
+  },
+  {
+   "instance_id": "sympy__sympy-12481",
+   "secs": 147,
+   "turns": 66,
+   "error": "",
+   "patch_lines": 32
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-9281",
+   "secs": 166,
+   "turns": 79,
+   "error": "",
+   "patch_lines": 38
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-7889",
+   "secs": 141,
+   "turns": 55,
+   "error": "",
+   "patch_lines": 14
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-13989",
+   "secs": 133,
+   "turns": 52,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-20676",
+   "secs": 333,
+   "turns": 154,
+   "error": "",
+   "patch_lines": 27
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-13496",
+   "secs": 951,
+   "turns": 128,
+   "error": "",
+   "patch_lines": 76
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-25973",
+   "secs": 618,
+   "turns": 215,
+   "error": "",
+   "patch_lines": 63
+  },
+  {
+   "instance_id": "pytest-dev__pytest-5262",
+   "secs": 90,
+   "turns": 32,
+   "error": "",
+   "patch_lines": 19
+  },
+  {
+   "instance_id": "psf__requests-1724",
+   "secs": 150,
+   "turns": 56,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "pydata__xarray-4075",
+   "secs": 145,
+   "turns": 61,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "django__django-13794",
+   "secs": 316,
+   "turns": 143,
+   "error": "",
+   "patch_lines": 41
+  }
+ ],
+ "ornith15": [
+  {
+   "instance_id": "django__django-13794",
+   "secs": 542,
+   "turns": 126,
+   "error": "",
+   "patch_lines": 14
+  },
+  {
+   "instance_id": "django__django-11951",
+   "secs": 265,
+   "turns": 101,
+   "error": "",
+   "patch_lines": 51
+  },
+  {
+   "instance_id": "django__django-14493",
+   "secs": 285,
+   "turns": 153,
+   "error": "",
+   "patch_lines": 50
+  },
+  {
+   "instance_id": "django__django-16429",
+   "secs": 102,
+   "turns": 55,
+   "error": "",
+   "patch_lines": 40
+  },
+  {
+   "instance_id": "django__django-11119",
+   "secs": 156,
+   "turns": 100,
+   "error": "",
+   "patch_lines": 46
+  },
+  {
+   "instance_id": "django__django-11179",
+   "secs": 286,
+   "turns": 141,
+   "error": "",
+   "patch_lines": 65
+  },
+  {
+   "instance_id": "django__django-15467",
+   "secs": 192,
+   "turns": 105,
+   "error": "",
+   "patch_lines": 69
+  },
+  {
+   "instance_id": "django__django-11433",
+   "secs": 485,
+   "turns": 176,
+   "error": "",
+   "patch_lines": 14
+  },
+  {
+   "instance_id": "sympy__sympy-16886",
+   "secs": 86,
+   "turns": 48,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "sympy__sympy-19954",
+   "secs": 135,
+   "turns": 36,
+   "error": "",
+   "patch_lines": 24
+  },
+  {
+   "instance_id": "sympy__sympy-12481",
+   "secs": 168,
+   "turns": 57,
+   "error": "",
+   "patch_lines": 19
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-9281",
+   "secs": 133,
+   "turns": 70,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-7889",
+   "secs": 248,
+   "turns": 92,
+   "error": "",
+   "patch_lines": 61
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-13989",
+   "secs": 113,
+   "turns": 46,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-20676",
+   "secs": 684,
+   "turns": 163,
+   "error": "",
+   "patch_lines": 81
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-13496",
+   "secs": 137,
+   "turns": 72,
+   "error": "",
+   "patch_lines": 87
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-25973",
+   "secs": 143,
+   "turns": 51,
+   "error": "",
+   "patch_lines": 34
+  },
+  {
+   "instance_id": "pytest-dev__pytest-5262",
+   "secs": 120,
+   "turns": 49,
+   "error": "",
+   "patch_lines": 27
+  },
+  {
+   "instance_id": "psf__requests-1724",
+   "secs": 238,
+   "turns": 114,
+   "error": "",
+   "patch_lines": 18
+  },
+  {
+   "instance_id": "pydata__xarray-4075",
+   "secs": 228,
+   "turns": 83,
+   "error": "",
+   "patch_lines": 65
+  }
+ ],
+ "qwen36": [
+  {
+   "instance_id": "django__django-13794",
+   "secs": 272,
+   "turns": 109,
+   "error": "",
+   "patch_lines": 25
+  },
+  {
+   "instance_id": "django__django-11951",
+   "secs": 160,
+   "turns": 68,
+   "error": "",
+   "patch_lines": 14
+  },
+  {
+   "instance_id": "django__django-14493",
+   "secs": 92,
+   "turns": 44,
+   "error": "",
+   "patch_lines": 12
+  },
+  {
+   "instance_id": "django__django-16429",
+   "secs": 141,
+   "turns": 83,
+   "error": "",
+   "patch_lines": 12
+  },
+  {
+   "instance_id": "django__django-11119",
+   "secs": 163,
+   "turns": 106,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "django__django-11179",
+   "secs": 131,
+   "turns": 58,
+   "error": "",
+   "patch_lines": 12
+  },
+  {
+   "instance_id": "django__django-15467",
+   "secs": 156,
+   "turns": 92,
+   "error": "",
+   "patch_lines": 15
+  },
+  {
+   "instance_id": "django__django-11433",
+   "secs": 334,
+   "turns": 167,
+   "error": "",
+   "patch_lines": 22
+  },
+  {
+   "instance_id": "sympy__sympy-16886",
+   "secs": 83,
+   "turns": 42,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "sympy__sympy-19954",
+   "secs": 146,
+   "turns": 68,
+   "error": "",
+   "patch_lines": 27
+  },
+  {
+   "instance_id": "sympy__sympy-12481",
+   "secs": 463,
+   "turns": 93,
+   "error": "",
+   "patch_lines": 16
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-9281",
+   "secs": 169,
+   "turns": 78,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-7889",
+   "secs": 93,
+   "turns": 38,
+   "error": "",
+   "patch_lines": 12
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-13989",
+   "secs": 154,
+   "turns": 62,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-20676",
+   "secs": 354,
+   "turns": 114,
+   "error": "",
+   "patch_lines": 60
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-13496",
+   "secs": 171,
+   "turns": 64,
+   "error": "",
+   "patch_lines": 68
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-25973",
+   "secs": 136,
+   "turns": 39,
+   "error": "",
+   "patch_lines": 25
+  },
+  {
+   "instance_id": "pytest-dev__pytest-5262",
+   "secs": 115,
+   "turns": 41,
+   "error": "",
+   "patch_lines": 22
+  },
+  {
+   "instance_id": "psf__requests-1724",
+   "secs": 190,
+   "turns": 57,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "pydata__xarray-4075",
+   "secs": 104,
+   "turns": 37,
+   "error": "",
+   "patch_lines": 13
+  }
+ ],
+ "glm": [
+  {
+   "instance_id": "django__django-13794",
+   "secs": 848,
+   "turns": 187,
+   "error": "",
+   "patch_lines": 38
+  },
+  {
+   "instance_id": "django__django-11951",
+   "secs": 485,
+   "turns": 131,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "django__django-14493",
+   "secs": 572,
+   "turns": 172,
+   "error": "",
+   "patch_lines": 92
+  },
+  {
+   "instance_id": "django__django-16429",
+   "secs": 232,
+   "turns": 63,
+   "error": "",
+   "patch_lines": 18
+  },
+  {
+   "instance_id": "django__django-11119",
+   "secs": 614,
+   "turns": 142,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "django__django-11179",
+   "secs": 416,
+   "turns": 137,
+   "error": "",
+   "patch_lines": 12
+  },
+  {
+   "instance_id": "django__django-15467",
+   "secs": 284,
+   "turns": 106,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "django__django-11433",
+   "secs": 486,
+   "turns": 135,
+   "error": "",
+   "patch_lines": 16
+  },
+  {
+   "instance_id": "sympy__sympy-16886",
+   "secs": 293,
+   "turns": 60,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "sympy__sympy-19954",
+   "secs": 231,
+   "turns": 67,
+   "error": "",
+   "patch_lines": 29
+  },
+  {
+   "instance_id": "sympy__sympy-12481",
+   "secs": 852,
+   "turns": 102,
+   "error": "",
+   "patch_lines": 39
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-9281",
+   "secs": 1103,
+   "turns": 234,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 14
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-7889",
+   "secs": 342,
+   "turns": 86,
+   "error": "",
+   "patch_lines": 14
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-13989",
+   "secs": 1805,
+   "turns": 113,
+   "error": "timeout",
+   "patch_lines": 24
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-20676",
+   "secs": 532,
+   "turns": 120,
+   "error": "",
+   "patch_lines": 22
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-13496",
+   "secs": 588,
+   "turns": 130,
+   "error": "",
+   "patch_lines": 128
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-25973",
+   "secs": 444,
+   "turns": 115,
+   "error": "",
+   "patch_lines": 97
+  },
+  {
+   "instance_id": "pytest-dev__pytest-5262",
+   "secs": 378,
+   "turns": 100,
+   "error": "",
+   "patch_lines": 15
+  },
+  {
+   "instance_id": "psf__requests-1724",
+   "secs": 345,
+   "turns": 104,
+   "error": "",
+   "patch_lines": 44
+  },
+  {
+   "instance_id": "pydata__xarray-4075",
+   "secs": 225,
+   "turns": 59,
+   "error": "",
+   "patch_lines": 15
+  }
+ ],
+ "qwen36-nothink": [
+  {
+   "instance_id": "django__django-13794",
+   "secs": 309,
+   "turns": 97,
+   "error": "",
+   "patch_lines": 28
+  },
+  {
+   "instance_id": "django__django-11951",
+   "secs": 233,
+   "turns": 82,
+   "error": "",
+   "patch_lines": 14
+  },
+  {
+   "instance_id": "django__django-14493",
+   "secs": 85,
+   "turns": 32,
+   "error": "",
+   "patch_lines": 12
+  },
+  {
+   "instance_id": "django__django-16429",
+   "secs": 95,
+   "turns": 34,
+   "error": "",
+   "patch_lines": 12
+  },
+  {
+   "instance_id": "django__django-11119",
+   "secs": 87,
+   "turns": 38,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "django__django-11179",
+   "secs": 79,
+   "turns": 26,
+   "error": "",
+   "patch_lines": 12
+  },
+  {
+   "instance_id": "django__django-15467",
+   "secs": 80,
+   "turns": 35,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "django__django-11433",
+   "secs": 297,
+   "turns": 100,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "sympy__sympy-16886",
+   "secs": 151,
+   "turns": 30,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "sympy__sympy-19954",
+   "secs": 111,
+   "turns": 42,
+   "error": "",
+   "patch_lines": 27
+  },
+  {
+   "instance_id": "sympy__sympy-12481",
+   "secs": 165,
+   "turns": 58,
+   "error": "",
+   "patch_lines": 19
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-9281",
+   "secs": 126,
+   "turns": 64,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-7889",
+   "secs": 238,
+   "turns": 46,
+   "error": "",
+   "patch_lines": 20
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-13989",
+   "secs": 126,
+   "turns": 35,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-20676",
+   "secs": 529,
+   "turns": 83,
+   "error": "",
+   "patch_lines": 27
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-13496",
+   "secs": 210,
+   "turns": 52,
+   "error": "",
+   "patch_lines": 79
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-25973",
+   "secs": 202,
+   "turns": 80,
+   "error": "",
+   "patch_lines": 50
+  },
+  {
+   "instance_id": "pytest-dev__pytest-5262",
+   "secs": 99,
+   "turns": 28,
+   "error": "",
+   "patch_lines": 21
+  },
+  {
+   "instance_id": "psf__requests-1724",
+   "secs": 151,
+   "turns": 47,
+   "error": "",
+   "patch_lines": 12
+  },
+  {
+   "instance_id": "pydata__xarray-4075",
+   "secs": 67,
+   "turns": 15,
+   "error": "",
+   "patch_lines": 13
+  }
+ ],
+ "ornith-nothink": [
+  {
+   "instance_id": "django__django-13794",
+   "secs": 285,
+   "turns": 104,
+   "error": "",
+   "patch_lines": 41
+  },
+  {
+   "instance_id": "django__django-11951",
+   "secs": 102,
+   "turns": 42,
+   "error": "",
+   "patch_lines": 14
+  },
+  {
+   "instance_id": "django__django-14493",
+   "secs": 92,
+   "turns": 40,
+   "error": "",
+   "patch_lines": 15
+  },
+  {
+   "instance_id": "django__django-16429",
+   "secs": 95,
+   "turns": 38,
+   "error": "",
+   "patch_lines": 39
+  },
+  {
+   "instance_id": "django__django-11119",
+   "secs": 111,
+   "turns": 43,
+   "error": "",
+   "patch_lines": 41
+  },
+  {
+   "instance_id": "django__django-11179",
+   "secs": 59,
+   "turns": 19,
+   "error": "",
+   "patch_lines": 14
+  },
+  {
+   "instance_id": "django__django-15467",
+   "secs": 111,
+   "turns": 55,
+   "error": "",
+   "patch_lines": 59
+  },
+  {
+   "instance_id": "django__django-11433",
+   "secs": 365,
+   "turns": 167,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 47
+  },
+  {
+   "instance_id": "sympy__sympy-16886",
+   "secs": 63,
+   "turns": 20,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "sympy__sympy-19954",
+   "secs": 121,
+   "turns": 43,
+   "error": "",
+   "patch_lines": 28
+  },
+  {
+   "instance_id": "sympy__sympy-12481",
+   "secs": 147,
+   "turns": 57,
+   "error": "",
+   "patch_lines": 66
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-9281",
+   "secs": 129,
+   "turns": 54,
+   "error": "",
+   "patch_lines": 57
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-7889",
+   "secs": 77,
+   "turns": 29,
+   "error": "",
+   "patch_lines": 16
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-13989",
+   "secs": 86,
+   "turns": 25,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-20676",
+   "secs": 215,
+   "turns": 99,
+   "error": "",
+   "patch_lines": 46
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-13496",
+   "secs": 118,
+   "turns": 34,
+   "error": "",
+   "patch_lines": 67
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-25973",
+   "secs": 191,
+   "turns": 68,
+   "error": "",
+   "patch_lines": 55
+  },
+  {
+   "instance_id": "pytest-dev__pytest-5262",
+   "secs": 156,
+   "turns": 59,
+   "error": "",
+   "patch_lines": 53
+  },
+  {
+   "instance_id": "psf__requests-1724",
+   "secs": 143,
+   "turns": 68,
+   "error": "",
+   "patch_lines": 17
+  },
+  {
+   "instance_id": "pydata__xarray-4075",
+   "secs": 264,
+   "turns": 97,
+   "error": "",
+   "patch_lines": 62
+  }
+ ],
+ "gemma-nothink": [
+  {
+   "instance_id": "django__django-13794",
+   "secs": 262,
+   "turns": 100,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 42
+  },
+  {
+   "instance_id": "django__django-11951",
+   "secs": 244,
+   "turns": 48,
+   "error": "",
+   "patch_lines": 26
+  },
+  {
+   "instance_id": "django__django-14493",
+   "secs": 55,
+   "turns": 12,
+   "error": "",
+   "patch_lines": 12
+  },
+  {
+   "instance_id": "django__django-16429",
+   "secs": 65,
+   "turns": 17,
+   "error": "",
+   "patch_lines": 12
+  },
+  {
+   "instance_id": "django__django-11119",
+   "secs": 179,
+   "turns": 23,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "django__django-11179",
+   "secs": 48,
+   "turns": 12,
+   "error": "",
+   "patch_lines": 0
+  },
+  {
+   "instance_id": "django__django-15467",
+   "secs": 439,
+   "turns": 91,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "django__django-11433",
+   "secs": 593,
+   "turns": 100,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 0
+  },
+  {
+   "instance_id": "sympy__sympy-16886",
+   "secs": 166,
+   "turns": 53,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "sympy__sympy-19954",
+   "secs": 408,
+   "turns": 100,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 21
+  },
+  {
+   "instance_id": "sympy__sympy-12481",
+   "secs": 457,
+   "turns": 100,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 0
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-9281",
+   "secs": 163,
+   "turns": 41,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-7889",
+   "secs": 450,
+   "turns": 100,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 17
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-13989",
+   "secs": 434,
+   "turns": 83,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-20676",
+   "secs": 352,
+   "turns": 100,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 0
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-13496",
+   "secs": 284,
+   "turns": 100,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 61
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-25973",
+   "secs": 691,
+   "turns": 100,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 0
+  },
+  {
+   "instance_id": "pytest-dev__pytest-5262",
+   "secs": 99,
+   "turns": 22,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "psf__requests-1724",
+   "secs": 349,
+   "turns": 100,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 37
+  },
+  {
+   "instance_id": "pydata__xarray-4075",
+   "secs": 168,
+   "turns": 46,
+   "error": "",
+   "patch_lines": 13
+  }
+ ],
+ "glm-nothink": [
+  {
+   "instance_id": "django__django-13794",
+   "secs": 632,
+   "turns": 155,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 17
+  },
+  {
+   "instance_id": "django__django-11951",
+   "secs": 717,
+   "turns": 152,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 42
+  },
+  {
+   "instance_id": "django__django-14493",
+   "secs": 503,
+   "turns": 163,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 15
+  },
+  {
+   "instance_id": "django__django-16429",
+   "secs": 307,
+   "turns": 81,
+   "error": "",
+   "patch_lines": 12
+  },
+  {
+   "instance_id": "django__django-11119",
+   "secs": 684,
+   "turns": 133,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "django__django-11179",
+   "secs": 229,
+   "turns": 72,
+   "error": "",
+   "patch_lines": 12
+  },
+  {
+   "instance_id": "django__django-15467",
+   "secs": 554,
+   "turns": 154,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 23
+  },
+  {
+   "instance_id": "django__django-11433",
+   "secs": 599,
+   "turns": 179,
+   "error": "",
+   "patch_lines": 16
+  },
+  {
+   "instance_id": "sympy__sympy-16886",
+   "secs": 326,
+   "turns": 59,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "sympy__sympy-19954",
+   "secs": 141,
+   "turns": 45,
+   "error": "",
+   "patch_lines": 23
+  },
+  {
+   "instance_id": "sympy__sympy-12481",
+   "secs": 367,
+   "turns": 103,
+   "error": "",
+   "patch_lines": 31
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-9281",
+   "secs": 339,
+   "turns": 107,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 0
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-7889",
+   "secs": 400,
+   "turns": 94,
+   "error": "",
+   "patch_lines": 21
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-13989",
+   "secs": 422,
+   "turns": 96,
+   "error": "",
+   "patch_lines": 16
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-20676",
+   "secs": 994,
+   "turns": 187,
+   "error": "Claude Code returned an error result: Reached maximum number of turns (100)",
+   "patch_lines": 80
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-13496",
+   "secs": 508,
+   "turns": 96,
+   "error": "",
+   "patch_lines": 99
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-25973",
+   "secs": 1804,
+   "turns": 129,
+   "error": "timeout",
+   "patch_lines": 39
+  }
+ ],
+ "qwen36-dflash": [
+  {
+   "instance_id": "django__django-11951",
+   "secs": 252,
+   "turns": 92,
+   "error": "",
+   "patch_lines": 14
+  },
+  {
+   "instance_id": "django__django-15467",
+   "secs": 165,
+   "turns": 72,
+   "error": "",
+   "patch_lines": 15
+  },
+  {
+   "instance_id": "sympy__sympy-19954",
+   "secs": 241,
+   "turns": 77,
+   "error": "",
+   "patch_lines": 34
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-9281",
+   "secs": 188,
+   "turns": 69,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-25973",
+   "secs": 240,
+   "turns": 75,
+   "error": "",
+   "patch_lines": 32
+  },
+  {
+   "instance_id": "pydata__xarray-4075",
+   "secs": 121,
+   "turns": 34,
+   "error": "",
+   "patch_lines": 14
+  }
+ ]
+}

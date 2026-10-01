@@ -1,0 +1,13 @@
+plain median 101.9 tok/s | dflash median 189.2 tok/s | speed-up x1.86 | identical outputs 6/12 | draft acceptance median 0.67
+  HumanEval/0     101.4 ->  210.8 tok/s  DIFFERENT
+  HumanEval/1     101.8 ->  162.7 tok/s  DIFFERENT
+  HumanEval/2     102.2 ->  187.8 tok/s  same
+  HumanEval/3     102.2 ->  206.5 tok/s  same
+  HumanEval/4     101.7 ->  212.4 tok/s  same
+  HumanEval/5     102.1 ->  190.5 tok/s  DIFFERENT
+  HumanEval/6     103.1 ->  177.7 tok/s  same
+  HumanEval/7     103.2 ->  207.5 tok/s  same
+  HumanEval/8     101.9 ->  212.2 tok/s  same
+  HumanEval/9     101.5 ->  182.3 tok/s  DIFFERENT
+  long-cli        101.2 ->   83.1 tok/s  DIFFERENT
+  long-refactor   101.5 ->   72.0 tok/s  DIFFERENT

@@ -1,0 +1,4 @@
+thinking off short:   95.8 ->  208.6 tok/s (x2.18), total time    16s ->    11s, draft acceptance 0.74
+thinking off long :   95.0 ->  113.9 tok/s (x1.20), total time    66s ->    63s, draft acceptance 0.34
+thinking ON  short:   96.0 ->  117.9 tok/s (x1.23), total time   131s ->    95s, draft acceptance 0.35
+thinking ON  long :   95.6 ->   96.0 tok/s (x1.00), total time   129s ->   136s, draft acceptance 0.27

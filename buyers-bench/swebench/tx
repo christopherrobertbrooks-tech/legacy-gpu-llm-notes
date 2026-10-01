@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Run a command INSIDE the task's container, in the project folder, with the project's Python environment.
+# The model uses it for python, pytest and anything that needs the project's dependencies.
+#   tx python -m pytest tests/x.py -q      (separate words: each keeps its own quoting)
+#   tx 'python a.py | head -20'            (one quoted string: run as a shell command, pipes allowed)
+if [ $# -eq 1 ]; then CMD="$1"; else CMD=$(printf '%q ' "$@"); fi
+exec docker exec -i -w /testbed "$SWE_CT" bash -lc "source /opt/miniconda3/bin/activate testbed && $CMD"

@@ -79,6 +79,8 @@ Sources: [GPUDojo](https://gpudojo.com/tesla-v100),
   card, and Gemma 4 26B at Q4 misses a 16 GB V100 by a hair. A MoE at 85–92
   t/s that barely slows at 32K context is the sweet spot.
 - Dense 27B+ models run, but at ~24 t/s; MoE models are the better fit (below).
+- As a **coding agent** it holds a 35B-A3B MoE at 131K context and fixes 18 of
+  20 real SWE-bench issues in an hour ([below](#swe-bench-verified-as-a-coding-agent-20-tasks)).
 - The traps are real but solved below: use CUDA 12.x (13 dropped Volta),
   never bf16 (convert to f16), and check flash attention per model.
 - It's a passive datacenter card: it needs forced airflow, and the PCIe
@@ -129,19 +131,35 @@ all 164; as a calibration, Qwen2.5-Coder-7B Q4 scores 86.0% against its publishe
 | Qwen3.8 27B dense | Q8_0 | V100 | 95.1% |
 | Gemma 4 12B | QAT Q4 | V100 | 94.5% |
 | Qwen3-Coder-Next 80B-A3B | UD-Q3_K_XL | both | 94.5% |
+| Qwen3.6 35B-A3B MoE | UD-Q4_K_M | V100 | 94.5% † |
+| Ornith-1.0 35B-A3B MoE | Q4_K_M | V100 | 94.5% † |
 | Qwen3-Coder-Next 80B-A3B | UD-Q2_K_XL (2-bit) | V100 | 92.7% |
 | Qwen3.5 122B-A10B | UD-IQ2_M (2-bit) | both | 92.1% |
+| DiffusionGemma 26B-A4B (diffusion LM) | Q8_0 | both | 92.1% ‡ |
 | Qwen3-Coder-Next 80B-A3B | UD-IQ3_S | V100 | 90.9% |
 | Ternary Bonsai 2 27B | PQ2_0 | V100 | 89.6% |
+| DiffusionGemma 26B-A4B (diffusion LM) | Q4_K_M | V100 | 89.0% ‡ |
 | Qwen2.5-Coder 7B | Q4_K_M | V100 | 86.0% |
 | Llama 3.3 70B dense | IQ4_XS | both | 85.4% |
 | Qwen3.5 4B | Q8_0 | V100 | 82.3% |
+| GLM-4.7-Flash 30B-A3B MoE | Q4_K_M | V100 | 81.1% † |
+
+† Run through llama-swap at the **maker's recommended sampling** (temperature
+0.6–1.0), not greedy. Re-running Gemma 4 26B Q4 the same way (temperature 0.7)
+scored exactly its greedy 97.6%. ‡ The diffusion model's own decoder defaults,
+seed 1 — see [DiffusionGemma](#diffusiongemma-26b-a4b-on-the-v100-llamacpp-pr-24423) below.
 
 **Read this for quantisation loss, not for ranking models.** HumanEval is from
-2021 and 2026 models have almost certainly seen it: nine of twelve land between
+2021 and 2026 models have almost certainly seen it: most of these land between
 89% and 98%. Within one model it is still a fair comparison — Coder-Next loses
 about 2 points from 3-bit to 2-bit (±2 points is single-run noise at n=164), and
-Gemma 4 26B shows no difference between Q4 and Q8.
+Gemma 4 26B shows no difference between Q4 and Q8. **It also ranks agent work
+wrongly:** Gemma 4 26B tops this table but came third of four on real bug fixes
+([SWE-bench](#swe-bench-verified-as-a-coding-agent-20-tasks) below).
+
+**Thinking on** (Gemma 4 26B Q4, 4,096-token thinking budget): 161/164 (98.2%)
+against 160 — but 69 minutes against 6.3. Two of its three misses hit the
+6,144-token answer cap mid-thought and pass when given room (163/164).
 
 ### LiveCodeBench v6 (175 contest problems, Jan–Apr 2025) — Gemma 4 26B-A4B Q4
 
@@ -184,6 +202,120 @@ and gets one retry. It never sees the hidden tests.
 - Throughput: 4 parallel streams on one V100 (`-np 4`, 19.2 GB) — easy took
   65 min, hard ~100 min.
 
+### SWE-bench Verified as a coding agent (20 tasks)
+
+HumanEval asks for one function from scratch. [SWE-bench Verified](https://www.swebench.com/)
+gives a real GitHub issue and the whole repository; the fix is graded on the
+project's own hidden tests. Each model ran as an **agent**, through the same
+engine as Claude Code (Claude Agent SDK 0.3.283, `claude_code` preset), pointed at
+llama-server on the V100 — so these numbers are what a local model does in that
+kind of tool, not in a harness tuned for the benchmark.
+
+- **Tasks:** 20 from the "<15 min fix" group, spread over 8 projects (8 django,
+  3 sympy, 2 each sphinx / matplotlib / scikit-learn, 1 each pytest / requests /
+  xarray), fixed seed. 20 is a small sample: read a 1–2 task gap as a hint.
+- **Rules:** each task in its own SWE-bench container with **no network** (the
+  first trial run reached the internet, so a model could have fetched the real
+  fix); web tools off; Python and tests run *inside* the container through a
+  small wrapper ([`tx`](buyers-bench/swebench/tx)); 30-minute / 100-step limit.
+- **Grading:** the official `swebench` 5.0.2 harness. New scratch files and folders
+  the agent created outside the project's own source tree are dropped before
+  grading (one patch was 32,791 lines of a Sphinx `_build/`), the same for every
+  model. Everything at Q4 on the V100 alone, 131K context, each maker's
+  recommended sampling, 4,096-token thinking budget.
+
+| Model (Q4, V100) | Thinking on | Thinking off | HumanEval |
+| :--- | :--- | :--- | ---: |
+| **Qwen3.6 35B-A3B MoE** | **18/20 — 60 min** | 16/20 — 57 min | 94.5% |
+| **Ornith-1.5 35B-A3B MoE** | **18/20 — 79 min** | 16/20 — 49 min | — |
+| Ornith-1.0 35B-A3B MoE | 17/20 — 99 min | — | 94.5% |
+| Gemma 4 26B-A4B MoE | 16/20 — 149 min | 11/20 — 98 min | 97.6% |
+| GLM-4.7-Flash 30B-A3B MoE | 12/20 — 185 min | 10/16 vs 10/16 on (stopped) | 81.1% |
+
+- **HumanEval does not predict this.** Gemma 4 leads HumanEval and is third here;
+  Qwen3.6 and Ornith-1.5 are behind it on HumanEval and lead here. They fixed
+  the **same** 18 tasks; two tasks beat every model.
+- **Ornith's "self-improving" agent training didn't beat the plain Qwen MoE** in
+  this tool — 1.5 tied Qwen3.6 (and was slower), 1.0 was one task behind.
+- **Thinking is worth two fixes for both leaders** — and the same two
+  (django-11433, requests-1724). It costs Qwen3.6 only 5% of the time: it thinks
+  briefly on an agent step (median 87 characters; 37% of everything it wrote,
+  never near the budget). Ornith-1.5 and Gemma think far more (≈⅔ of their
+  output), so switching it off saves them 40% — and Gemma falls apart without
+  it (9 tasks hit the step limit, 5 produced nothing).
+- **Most of an agent step is re-reading the growing context** (prefill), not
+  writing — which is why thinking off, and speculative decoding (below), buy
+  so little here.
+- Raw grading reports, per-task times and steps, and the scripts:
+  [results/swebench](buyers-bench/results/swebench), [swebench/](buyers-bench/swebench).
+
+### DiffusionGemma 26B-A4B on the V100 (llama.cpp PR #24423)
+
+DiffusionGemma is Google's Gemma 4 26B-A4B turned into a block-diffusion LM: it
+fills a 256-token block over several refinement passes instead of one token at a
+time. llama.cpp support is the unmerged [PR #24423](https://github.com/ggml-org/llama.cpp/pull/24423);
+it builds and runs on sm_70 (`-DCMAKE_CUDA_ARCHITECTURES=70`). The PR has no
+OpenAI-style server, so HumanEval ran through one `llama-diffusion-cli` process in
+conversation mode, with a small **local, not upstream** patch to feed multi-line
+prompts and mark the end of each reply ([humaneval_dg.py](buyers-bench/humaneval_dg.py)).
+
+| DiffusionGemma | HumanEval | Whole run | Typical answer |
+| :--- | ---: | ---: | ---: |
+| Q4_K_M, thinking off | 89.0% (146) | 10 min | 2.5 s |
+| Q4_K_M, thinking on | 89.6% (147) | 62 min | 15.6 s |
+| **Q8_0, thinking off** (split, see below) | **92.1% (151)** | 16 min | 3.1 s |
+| *Gemma 4 26B-A4B, same test* | *97.6% / 97.0%* | *6.3 min* | *1.6 s* |
+
+- **Speed is about the same as autoregressive Gemma on this card.** One pass over
+  a 256-token block takes ~0.33 s and blocks settle in 3–17 passes (the
+  entropy-bound decoder stops early), so effective throughput is ~88–136 tok/s
+  against Gemma's 92. Diffusion is compute-bound and the V100 is short on compute
+  — its big speed claims are for datacentre cards.
+- **Q4 costs it ~3 points where autoregressive Gemma loses nothing.** Plausibly
+  because every refinement step acts on the logits' confidence, so quantisation
+  error compounds. (Sampling isn't greedy here — treat ±3 as suggestive.)
+- **Thinking adds almost nothing**: it fixed 8 problems, broke 7, and made answers
+  ~8× slower; 8 times it was still thinking when it ran out of room.
+- **A known diffusion weakness showed up:** 3 answers stopped at the first block
+  boundary mid-docstring instead of continuing into a second block.
+- **Memory:** Q4 at `-n 1536` used 23.3 GB — ~15.7 GB of weights plus ~7.5 GB of
+  working space (whole-block logits). **Q8 does not fit the V100 alone.** Split
+  with the 4070 it ran out of memory with the V100 listed first; listing the 4070
+  first (`CUDA_VISIBLE_DEVICES=0,1 -ts 12/88`) puts the last layer and its big
+  buffer on the V100, and it ran.
+
+### DFlash speculative decoding on the V100
+
+[DFlash](https://github.com/ggml-org/llama.cpp/issues?q=dflash) is a small
+block-diffusion **drafter** (6 layers, ~0.8 GB) that reads the target model's
+hidden states and proposes 16 tokens at once for the target to verify. It is in
+recent llama.cpp (`-md draft.gguf --spec-type draft-dflash --spec-draft-n-max 16`).
+The drafters ship as BF16 safetensors; convert them to **F16** for the V100:
+`convert_hf_to_gguf.py <draft dir> --target-model-dir <dir with the target's
+config + tokenizer> --outtype f16`.
+
+Qwen3.6 35B-A3B Q4 + [z-lab's drafter](https://huggingface.co/z-lab/Qwen3.6-35B-A3B-DFlash),
+greedy, V100 alone ([raw](buyers-bench/results/dflash/qwen3.6-compare.txt)):
+
+| | tok/s, plain → DFlash | Speed-up | Drafts accepted |
+| :--- | ---: | ---: | ---: |
+| Thinking off, short answers (code) | 96 → **209** | **2.2×** | 74% |
+| Thinking off, long answers | 95 → 114 | 1.2× | 34% |
+| Thinking on, short answers | 96 → 118 | 1.2× | 35% |
+| Thinking on, long answers | 96 → 96 | 1.0× | 27% |
+
+- **The drafter predicts code well and thinking/prose badly** (an all-prose
+  "explain" prompt: 17% accepted, slower than plain).
+- **As a coding agent it was 40% slower:** 6 SWE-bench tasks, all fixed either
+  way, 20.1 min with DFlash against 14.5 without (2.9 vs 2.3 s per step). Agent
+  steps are mostly prefill of a long context, which DFlash can't speed up and the
+  drafter adds to. Use it for short, thinking-off answers, not for agents.
+- Greedy output is **not byte-identical** with DFlash (6 of 12 diverged, usually
+  early, from batched-verification arithmetic flipping near-ties) — but every
+  diverged HumanEval answer still passed.
+- Ornith-1.5 35B-A3B with its own drafter showed the same pattern: 1.9× on short
+  answers, slower on long ones ([raw](buyers-bench/results/dflash/ornith-1.5-compare.txt)).
+
 ## The table
 
 | Repo | Tested | Result |
@@ -206,6 +338,8 @@ and gets one retry. It never sees the hidden tests.
 - **Vision on Volta** — correct on a dense table with SKU codes, prices and footnotes, including leading zeros. Image encode 158–394 ms. [volta-bonsai](https://github.com/christopherrobertbrooks-tech/volta-bonsai)
 - **ik_llama.cpp** — an open upstream issue states Volta is not officially supported. It builds with zero source changes and runs correctly. [volta-ik-llama](https://github.com/christopherrobertbrooks-tech/volta-ik-llama)
 - **Diffusion LMs** (`dream`, via `llama-diffusion-cli`) — run on Volta at 274.1 ms/step. [volta-diffusion](https://github.com/christopherrobertbrooks-tech/volta-diffusion)
+- **DiffusionGemma (llama.cpp PR #24423)** — builds for sm_70 and runs; 89.0% HumanEval at Q4, 92.1% at Q8. [DiffusionGemma](#diffusiongemma-26b-a4b-on-the-v100-llamacpp-pr-24423)
+- **DFlash drafters** — convert to F16 and run on sm_70; 2.2× on short thinking-off code. [DFlash](#dflash-speculative-decoding-on-the-v100)
 - **Mixed-architecture layer split** (sm_70 + sm_89 in one job) — works, no VRAM leak; beat the V100 alone by 5.5% decode on a MoE model. [volta-dual-card](https://github.com/christopherrobertbrooks-tech/volta-dual-card)
 - **Flash-attention tile kernel on Pascal** — built for `sm_61;sm_70` and verified with `cuobjdump` to contain both. `test-backend-ops -o FLASH_ATTN_EXT -p "hsk=192"` gives **66 OK / 0 FAIL on the GTX 1070 and 66/0 on the V100**, covering GQA ratios 1, 4 and 5 — the non-multiples of 8 that previously hit a hard abort. [volta-deepseek-mla/pr26404-test](https://github.com/christopherrobertbrooks-tech/volta-deepseek-mla/tree/main/pr26404-test)
 
@@ -213,6 +347,8 @@ and gets one retry. It never sees the hidden tests.
 
 - **BF16 costs the V100 77% of prefill.** Volta has no BF16 hardware; the identical model in F16 is 4.37× faster at prefill on the same card. Decode is unaffected. [volta-bf16](https://github.com/christopherrobertbrooks-tech/volta-bf16)
 - **DeepSeek flash-attention regression.** `-fa on` costs 80% of decode on the V100 and 52% on the 4070, with byte-identical output and no warning. The cause is the model's attention head shape (192/128, GQA ratio 1), not the GPU — see [Corrections](#corrections). [volta-deepseek-mla](https://github.com/christopherrobertbrooks-tech/volta-deepseek-mla)
+  **GLM-4.7-Flash**, also MLA (`deepseek2` arch, key/value 576/512), is **not** caught by it: `-fa on` is −7% decode, +7% prefill. Measure per model.
+- **DFlash slows a coding agent down** (−40% on SWE-bench tasks) even though it doubles short thinking-off answers. [DFlash](#dflash-speculative-decoding-on-the-v100)
 
 ### Tooling gotchas
 
@@ -220,6 +356,9 @@ and gets one retry. It never sees the hidden tests.
 - **`llama-diffusion-cli` defaults abort.** Exactly one of `--diffusion-eps` / `--diffusion-block-length` must be non-zero, and both default to zero, so the stock invocation core-dumps before generating anything.
 - **`-ts` is slash-separated, not comma-separated.** `-ts 0,1` silently runs two separate benchmark configs instead of one ratio, and can print a plausible-looking number before failing.
 - **`-sm row` fails to load** on this mixed card pair, independent of memory pressure (confirmed with a model needing only ~4.8 GiB/card).
+- **Claude Code–style agents send a second system message after the user turn** (the environment block: working directory, platform). Templates with `raise_exception('System message must be at the beginning.')` — Ornith's recommended template, both 1.0 and 1.5 — refuse **every** request with HTTP 500. Render non-first system messages in place instead. Qwen3.6, GLM and Gemma accept it as shipped.
+- **Agents ignore a server-side "thinking off" unless the server forces it.** The Agent SDK sends `thinking: {type: adaptive}` on every request; `--reasoning off --reasoning-budget 0` overrides it.
+- **Docker 29 keeps images in `/var/lib/containerd`, not `data-root`.** Twenty SWE-bench images (47 GB) filled a root disk despite `daemon.json` pointing elsewhere; relocate `/var/lib/containerd` before pulling.
 
 ## Corrections
 

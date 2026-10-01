@@ -1,0 +1,53 @@
+{
+    "total_instances": 6,
+    "submitted_instances": 6,
+    "completed_instances": 6,
+    "resolved_instances": 6,
+    "unresolved_instances": 0,
+    "infra_failure_instances": 0,
+    "ambiguous_failure_instances": 0,
+    "empty_patch_instances": 0,
+    "error_instances": 0,
+    "completed_ids": [
+        "django__django-11951",
+        "django__django-15467",
+        "pydata__xarray-4075",
+        "scikit-learn__scikit-learn-25973",
+        "sphinx-doc__sphinx-9281",
+        "sympy__sympy-19954"
+    ],
+    "incomplete_ids": [],
+    "empty_patch_ids": [],
+    "submitted_ids": [
+        "django__django-11951",
+        "django__django-15467",
+        "pydata__xarray-4075",
+        "scikit-learn__scikit-learn-25973",
+        "sphinx-doc__sphinx-9281",
+        "sympy__sympy-19954"
+    ],
+    "resolved_ids": [
+        "django__django-11951",
+        "django__django-15467",
+        "pydata__xarray-4075",
+        "scikit-learn__scikit-learn-25973",
+        "sphinx-doc__sphinx-9281",
+        "sympy__sympy-19954"
+    ],
+    "unresolved_ids": [],
+    "infra_failure_ids": [],
+    "ambiguous_failure_ids": [],
+    "failure_reasons": {},
+    "error_ids": [],
+    "schema_version": 2,
+    "unstopped_instances": 0,
+    "unstopped_containers": [],
+    "unremoved_images": [
+        "swebench/sweb.eval.x86_64.django_1776_django-11951:latest",
+        "swebench/sweb.eval.x86_64.django_1776_django-15467:latest",
+        "swebench/sweb.eval.x86_64.pydata_1776_xarray-4075:latest",
+        "swebench/sweb.eval.x86_64.scikit-learn_1776_scikit-learn-25973:latest",
+        "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-9281:latest",
+        "swebench/sweb.eval.x86_64.sympy_1776_sympy-19954:latest"
+    ]
+}
