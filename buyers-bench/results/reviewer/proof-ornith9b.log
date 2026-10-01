@@ -1,0 +1,7 @@
+  b17 buggy: 3 tests, 1 proven, 2 wrong (80 s)
+  b15 buggy: 2 tests, 0 proven, 2 wrong (78 s)
+  b11 buggy: 4 tests, 0 proven, 2 wrong (81 s)
+  b18 buggy: 13 tests, 2 proven, 10 wrong (427 s)
+  b07 clean: 7 tests, 0 proven, 5 wrong (427 s)
+  b06 clean: 5 tests, 0 proven, 4 wrong (428 s)
+  b19 buggy: 0 tests, 0 proven, 0 wrong (424 s)

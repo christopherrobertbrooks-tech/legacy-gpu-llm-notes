@@ -1,0 +1,155 @@
+[
+ {
+  "id": "b00",
+  "source": "sdk-whole-1",
+  "failed": [],
+  "buggy": false
+ },
+ {
+  "id": "b01",
+  "source": "sdk-v1/sdk-whole-3",
+  "failed": [],
+  "buggy": false
+ },
+ {
+  "id": "b02",
+  "source": "grok@gemma-think-t07/multi-gemma4kv-3",
+  "failed": [],
+  "buggy": false
+ },
+ {
+  "id": "b03",
+  "source": "grok@gemma-think-t07/multi-gemma4kx-2",
+  "failed": [],
+  "buggy": false
+ },
+ {
+  "id": "b04",
+  "source": "grok@gemma-think-t07/multi-gemma4kx-3",
+  "failed": [],
+  "buggy": false
+ },
+ {
+  "id": "b05",
+  "source": "grok@gemma-think-t07/multi-gptoss-1",
+  "failed": [],
+  "buggy": false
+ },
+ {
+  "id": "b06",
+  "source": "grok@gemma-think-t07/multi-qwen38-1",
+  "failed": [],
+  "buggy": false
+ },
+ {
+  "id": "b07",
+  "source": "grok@gemma-think-t07/multi-qwen38-2",
+  "failed": [],
+  "buggy": false
+ },
+ {
+  "id": "b08",
+  "source": "grok@gemma-think-t07/multi-qwen38-3",
+  "failed": [],
+  "buggy": false
+ },
+ {
+  "id": "b09",
+  "source": "grok@split-q38-27b-q8/multi-qwen38-1",
+  "failed": [],
+  "buggy": false
+ },
+ {
+  "id": "b10",
+  "source": "sdk-whole-2",
+  "failed": [
+   "06"
+  ],
+  "buggy": true
+ },
+ {
+  "id": "b11",
+  "source": "sdk-whole-3",
+  "failed": [
+   "06"
+  ],
+  "buggy": true
+ },
+ {
+  "id": "b12",
+  "source": "sdk-v1/sdk-whole-1",
+  "failed": [
+   "10"
+  ],
+  "buggy": true
+ },
+ {
+  "id": "b13",
+  "source": "grok@gemma-think-t07/multi-gemma4k-1",
+  "failed": [
+   "10"
+  ],
+  "buggy": true
+ },
+ {
+  "id": "b14",
+  "source": "grok@gemma-think-t07/multi-gemmat-1",
+  "failed": [
+   "10"
+  ],
+  "buggy": true
+ },
+ {
+  "id": "b15",
+  "source": "grok@gemma-think-t07/multi-gemma4k-3",
+  "failed": [
+   "06",
+   "07",
+   "10"
+  ],
+  "buggy": true
+ },
+ {
+  "id": "b16",
+  "source": "grok@gemma-think-t07/multi-q122-3",
+  "failed": [
+   "06",
+   "07"
+  ],
+  "buggy": true
+ },
+ {
+  "id": "b17",
+  "source": "grok@gemma-think-t07/multi-gptoss-3",
+  "failed": [
+   "04",
+   "12"
+  ],
+  "buggy": true
+ },
+ {
+  "id": "b18",
+  "source": "grok@gemma-think-t07/multi-gemma4kv-1",
+  "failed": [
+   "05",
+   "07",
+   "09",
+   "10",
+   "11"
+  ],
+  "buggy": true
+ },
+ {
+  "id": "b19",
+  "source": "grok@gemma-think-t07/multi-gptoss-2",
+  "failed": [
+   "01",
+   "02",
+   "03",
+   "06",
+   "08",
+   "12"
+  ],
+  "buggy": true
+ }
+]

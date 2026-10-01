@@ -130,7 +130,8 @@ libraries, so nothing was installed on that machine. Same `llama-bench` settings
 
 | Model | File | GTX 1070 8GB | V100 | RTX 4070 | 1070 prompt t/s | 1070 power |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: |
-| **LFM2 8B-A1B MoE** Q4_K_M | 5.0 GB | **118** → 95 | — | — | 1,825 | 79 W |
+| **LFM2 8B-A1B MoE** Q4_K_M | 5.0 GB | **118** → 95 | — | — | 1,825 | 56–79 W ¹ |
+| LFM2.5 8B-A1B MoE (reasoning) Q4_K_M | 5.2 GB | 108 → 88 | — | **326** → 243 | 1,794 | 142 W |
 | Granite 4.0 H Tiny (7B-A1B MoE) Q4_K_M | 4.3 GB | 71 → 58 | — | — | 1,326 | 75 W |
 | Qwen3.5 4B Q8_0 | 4.5 GB | 35 → 29 | 107 → 93 | 91 → 73 | 863 | 120 W |
 | Qwen2.5-Coder 7B Q4_K_M | 4.7 GB | 32 → 12 | 123 → 69 | 99 → 71 | 567 | 110 W |
@@ -140,14 +141,17 @@ libraries, so nothing was installed on that machine. Same `llama-bench` settings
 | gpt-oss 20B MXFP4, experts of 10 layers in system RAM | 12.1 GB | 20, short context only | — | — | 406 | 77 W |
 | Gemma 4 26B-A4B Q4_K_M, experts of 21 layers in RAM | 16.9 GB | 14, short context only | 92 → 84 | — | 257 | — |
 
-Idle, nothing loaded: 11 W.
+Idle, nothing loaded: 11 W. ¹ Two measurements: GPU only 29–48% busy at 113 t/s. LFM2.5 has the same architecture
+and quantization and keeps the GPU 98% busy at 101 t/s; the difference is unexplained but repeats. LFM2.5's 4070
+number: prompt 11,021 → 8,095 t/s at 32K, the fastest model measured on any card here.
 
 - **Dense models run at about a third of V100 speed**, and the long-context drop is much steeper (the 7B coder falls
   from 32 to 12 t/s at 32K). With no tensor cores, prompt reading is 4–5× slower than the V100.
 - **Small MoE models are what this card is for.** LFM2 8B-A1B (about 1.5B parameters active per token) writes at 118 t/s,
   faster than the V100 manages with any model in the table above, and holds 95 t/s at 32K. It's also the most
-  efficient result on any card here, at 1.43 tokens per joule. The i5-7400 can't keep the card fed on models this
-  small (GPU ~50% busy), which is why it draws only 79 W.
+  efficient result on any card here. The i5-7400 can't keep the card fed on models this
+  small (GPU 29–48% busy), which is why it draws only 56–79 W (1.4–2.0 tokens per joule). The newer reasoning-tuned
+  LFM2.5 8B-A1B is ~10% slower and draws 142 W (0.72 tok/J), but answers far better (below).
 - **Bonsai's two packings rank differently on each card.** Writing: PQ2_0 wins clearly on the 1070 (14.0 vs 8.1 t/s,
   PTQ1_0 at 58%) and on the V100 (PTQ1_0 at 67.5%), while on the 4070 they're even (PTQ1_0 54.7 vs 53.9). Prompt
   reading: PQ2_0 wins about 2× on the 1070 (148 vs 77) and on the 4070, while the V100 is the one card where PTQ1_0
@@ -169,13 +173,14 @@ coding cards. All runs on the 1070.
 | Etsy listing from a design image (title ≤140 chars, 13 tags ≤20 chars) | Qwen3-VL 4B | rules met on both tries, 13–37 s; usable first drafts |
 | | Qwen3.5 0.8B | fails (1–5 tags) |
 | Three everyday requests (reword a reply, explain an error, summarise) | LFM2 8B-A1B | 0.5–1.1 s each; fast but weak judgement (the "friendly" reword still blamed the customer) |
+| | LFM2.5 8B-A1B (thinking on) | 3.5–8.5 s at ~100 t/s; accurate explanation and summary, the reword still blamed the customer |
 | | Granite 4.0 H Tiny | 0.9–1.9 s; polite but vague |
 | | Qwen3 8B (thinking off) | 3–4 s; the reword was barely changed |
 | | Gemma 4 12B (thinking off) | 7–8 s; best writing |
 | | gpt-oss 20B (low reasoning) | 11–19 s; best short answers |
 
 **Verdict:** not a coding card, but a useful helper: screen reading with a 4B vision model, quick drafting with
-Gemma 12B or gpt-oss 20B, and instant lookups with LFM2.
+Gemma 12B or gpt-oss 20B, and quick answers from LFM2.5 (or instant ones from LFM2).
 
 **Setup notes for Pascal:**
 - **Driver 580 still supports Pascal, and CUDA 12.9 builds for it** (`-DCMAKE_CUDA_ARCHITECTURES=61`). Since the
@@ -422,6 +427,28 @@ kind of tool, not in a harness tuned for the benchmark.
   so little here.
 - Raw grading reports, per-task times and steps, and the scripts:
   [results/swebench](buyers-bench/results/swebench), [swebench/](buyers-bench/swebench).
+
+### Code reviewer test: prove each bug with a failing test (20 builds)
+
+Workbench's second check uses a model on the 4070 to review the builder's code. This tests that seat. 20 builds of the
+same small three-part program (an Etsy inventory/orders CLI), 10 of which fail some of 12 hidden tests. The reviewer
+sees the request and the code, never the tests, and must **prove** each bug it claims with a pytest test. Each test
+runs on the build and on a known-good build: fails on the build and passes on the good one = a proven bug; fails on
+both = a wrong test. Same prompt and settings for every model (`--reasoning-budget 4096`, temperature 0.7, 32K
+context, 4070). Scripts and logs: [results/reviewer](buyers-bench/results/reviewer).
+
+| Reviewer (4070) | Buggy builds with a proven bug | Proven bugs | Wrong tests | Time per build |
+| :--- | ---: | ---: | ---: | ---: |
+| **Ternary Bonsai 2 27B** PQ2_0 | **8/10** | **25** | 34 of 68 | 95 s |
+| Ornith-9B Q6 (stopped after 7 builds) | 2/5 | 3 | 20 of 34 | ~80 s, 7 min on some |
+| Gemma 4 12B QAT | 1/10 | 2 | 22 of 114 | 82 s |
+| LFM2.5 8B-A1B Q4_K_M | 1/10 | 3 | 29 of 33 | **16 s** |
+
+- **Bonsai stays the reviewer.** It's the only one that finds and proves bugs reliably. It also "proved" a difference in
+  5 of the 10 builds that pass the hidden tests; those may be real gaps the hidden tests don't cover.
+- **LFM2.5 is 6× faster and nearly useless here.** On 9 builds it dropped the required code block, and the code it did
+  write calls helpers with invented signatures, adds a pytest argument that can't resolve, and once isn't valid
+  Python. Fluent and fast isn't the same as careful.
 
 ### DiffusionGemma 26B-A4B on the V100 (llama.cpp PR #24423)
 
