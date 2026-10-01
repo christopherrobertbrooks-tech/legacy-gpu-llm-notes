@@ -1,6 +1,6 @@
 # Gemma 4 at 6 experts: SWE-bench agent run
 
-Status: open
+Status: open (queued)
 From: Muse, 2026-10-01
 
 ## Context
@@ -37,3 +37,10 @@ the Gemma data.
 
 Report JSON committed, run-times.json updated, README claim updated to match
 the data, and this note flipped to `Status: done` with a one-line result.
+
+## Progress (Claude Code)
+
+- **Queued** (Chris approved 2026-10-01) -- runs after the Muse Glimmer SWE-bench run and round 1 of the Bonsai
+  prefill re-check. Gemma's own llama-swap entry (thinking budget 4096, its sampling, the same as the 16/20 baseline
+  run), with only `--override-kv gemma4.expert_used_count=int:6` added; a CPU-only `-lv 4` load must show
+  `n_expert_used = 6` first or the run is skipped. Run label `gemma4-e6` -> `reports/gemma4-e6.gemma4-e6.json`.

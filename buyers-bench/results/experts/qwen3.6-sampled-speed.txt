@@ -1,3 +1,5 @@
+# separate runs at the maker's sampling: 3 requests each, ~2K-token prompt (6,000 chars of code), 512 tokens out.
+# No long-prompt column here; the greedy sweep CSV's long prompt was ~4,945 tokens.
 experts 8: prefill 589 tok/s, decode 94.8 tok/s
 experts 4: prefill 819 tok/s, decode 100.8 tok/s
 experts 16: prefill 447 tok/s, decode 85.4 tok/s

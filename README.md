@@ -41,6 +41,9 @@ visible at a time. Power is whole-board draw from `nvidia-smi` during a
 | Gemma 4 26B-A4B MoE Q8_0 | 26.8 GB | **85** → 79 | doesn't fit | no |
 | Qwen3.8 27B dense Q8_0 | 29.0 GB | **24** → 22 | doesn't fit | no |
 
+Qwen3.8 27B's 24 t/s here is with `-fa on`, as the rest of this table; [volta-dual-card](https://github.com/christopherrobertbrooks-tech/volta-dual-card)'s
+23.07 t/s for the same model is with `-fa 0`. Both are right for their flag.
+
 **Prompt processing, tokens/sec** (pp512, short context) — the 4070 is faster here:
 
 | Model | V100 | RTX 4070 |

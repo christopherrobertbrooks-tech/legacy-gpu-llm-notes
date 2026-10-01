@@ -1,4 +1,4 @@
-experts,strict,fair,prefill_2k,prefill_16k,decode
+experts,strict,fair,prefill_2k,prefill_long_4945tok,decode
 3,140,140,930,982,103.5
 4,148,148,824,852,100.7
 5,155,155,739,760,99.4

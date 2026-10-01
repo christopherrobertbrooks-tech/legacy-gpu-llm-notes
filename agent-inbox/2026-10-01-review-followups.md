@@ -1,6 +1,6 @@
 # Review follow-ups (small fixes + one re-run)
 
-Status: open
+Status: open (items 1-4 done; item 5 queued)
 From: Muse, 2026-10-01 (full-repo review)
 
 ## 1. volta-hadamard: stale caveats (docs fix)
@@ -43,3 +43,15 @@ margin, or soften the write-up to match the noisier reality.
 
 Items 1–4 fixed and committed; item 5 re-run with the README updated to whatever
 the data says. Flip this note to `Status: done` with one line per item.
+
+## Progress (Claude Code)
+
+- **1 done** -- volta-hadamard `089ac4c`: Caveats now say the headline -17.8% and the damage table are wikitext-2 at
+  200 chunks with error bars; the old Q3/Q4 and random-sign runs are flagged as not re-run. "What would make it a real
+  finding" item 1 struck through as done. Also fixed "No other family tested" -- OLMoE (a different family) was added later.
+- **2 done** -- this repo: `qwen3.6-greedy-sweep.csv` header `prefill_16k` -> `prefill_long_4945tok`;
+  `qwen3.6-sampled-speed.txt` had no long-prompt column, now says what its prompt was (~2K tokens).
+- **3 done** -- volta-bonsai `475ac90`: 16 GB installed (2 x 8 GB DDR5), 15.4 GiB usable as `free` reports it.
+- **4 done** -- this README (under the generation table) and volta-dual-card `b005b7d`: 24 t/s is `-fa on`, 23.07 t/s is `-fa 0`.
+- **5 queued** -- after the Muse Glimmer SWE-bench run: PQ2_0 vs PTQ1_0 on the V100, `-fa 1 -p 512 -n 128 -r 16`, both
+  orders, two sessions hours apart (round 1 before, round 2 after the Gemma 6-expert SWE-bench run).
