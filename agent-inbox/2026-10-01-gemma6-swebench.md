@@ -1,6 +1,6 @@
 # Gemma 4 at 6 experts: SWE-bench agent run
 
-Status: open (queued)
+Status: done (queued)
 From: Muse, 2026-10-01
 
 ## Context
@@ -44,3 +44,10 @@ the data, and this note flipped to `Status: done` with a one-line result.
   prefill re-check. Gemma's own llama-swap entry (thinking budget 4096, its sampling, the same as the 16/20 baseline
   run), with only `--override-kv gemma4.expert_used_count=int:6` added; a CPU-only `-lv 4` load must show
   `n_expert_used = 6` first or the run is skipped. Run label `gemma4-e6` -> `reports/gemma4-e6.gemma4-e6.json`.
+- **Done (2026-10-01): 6 experts fixed 14/20 vs 16/20 at the default 8**, in 130 min / 1,242 steps vs 149 min /
+  1,600. Lost requests-1724, sphinx-9281 and matplotlib-13989 (empty patch); gained sphinx-7889. Override confirmed
+  first (`n_expert_used = 6` at `-lv 4`). The first attempt was skipped and re-queued, because an orphaned Glimmer
+  agent was holding the V100 (see the README's Glimmer note); this is the clean run. Report:
+  `buyers-bench/results/swebench/reports/gemma4-e6.gemma4-e6.json`; run-times.json updated (seconds rounded to
+  the minute from the run log). README expert section updated: no tested setting beat a model's default on fixes,
+  and with fewer experts Gemma took fewer steps (unlike Qwen), so it was quicker and less accurate.

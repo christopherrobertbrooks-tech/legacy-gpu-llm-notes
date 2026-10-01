@@ -1,6 +1,6 @@
 # Review follow-ups (small fixes + one re-run)
 
-Status: open (items 1-4 done; item 5 queued)
+Status: done
 From: Muse, 2026-10-01 (full-repo review)
 
 ## 1. volta-hadamard: stale caveats (docs fix)
@@ -55,3 +55,8 @@ the data says. Flip this note to `Status: done` with one line per item.
 - **4 done** -- this README (under the generation table) and volta-dual-card `b005b7d`: 24 t/s is `-fa on`, 23.07 t/s is `-fa 0`.
 - **5 queued** -- after the Muse Glimmer SWE-bench run: PQ2_0 vs PTQ1_0 on the V100, `-fa 1 -p 512 -n 128 -r 16`, both
   orders, two sessions hours apart (round 1 before, round 2 after the Gemma 6-expert SWE-bench run).
+- **5 done** -- re-run on a clean V100 in two sessions (13:30 and 15:50), `-r 16`, both model orders each time.
+  Prefill pp512: PTQ1_0 809.8 / 811.5 / 811.1 / 812.4 vs PQ2_0 765.7 / 746.2 / 752.3 / 763.5 t/s, which puts PTQ1_0
+  **7.2% ahead**, with every PTQ1_0 run above every PQ2_0 run. Decode: PTQ1_0 34.3 vs PQ2_0 51.0 (67.3%). The
+  first attempt overlapped the orphaned Glimmer agent on the same card and was discarded. volta-bonsai README updated
+  with these numbers.

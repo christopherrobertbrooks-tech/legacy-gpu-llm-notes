@@ -547,10 +547,15 @@ every expert is loaded either way; only the compute per token does.
   HumanEval and lost 3 of 18 on SWE-bench.
 - **Ornith-1.5 35B-A3B** (same design): 12 experts scored 148 vs 145 on HumanEval
   (greedy), then fixed the same 18 SWE-bench tasks in 121 min instead of 79.
-- **Gemma 4 26B-A4B** (128 experts, default 8): 6 experts scored 158 vs 160.
-- **Every model's default was its best setting for agent work.** HumanEval
-  (single answers) pointed the wrong way each time — the same lesson as DFlash and
-  thinking off.
+- **Gemma 4 26B-A4B** (128 experts, default 8): 6 experts scored 158 vs 160 on HumanEval, then **fixed 14
+  SWE-bench tasks instead of 16**, in 130 min / 1,242 steps instead of 149 min / 1,600. It lost three
+  (requests-1724, sphinx-9281, and matplotlib-13989, where it produced an empty patch) and gained one
+  (sphinx-7889). Unlike Qwen, Gemma took *fewer* steps with fewer experts. It was 13% quicker and less
+  accurate, not slower.
+- **Every model's default was its best setting for agent work.** Six changed settings were tested on SWE-bench (Qwen3.6
+  at 5, 12 and 16; Ornith-1.5 at 12; Gemma at 6), and none fixed more than the default. HumanEval didn't predict
+  it: it pointed the wrong way for Qwen at 5 and 16 and for Ornith at 12, and only Gemma's small dip agreed. That's
+  the same lesson as DFlash and thinking off.
 
 **Mistral Small 4 119B-A6B** (128 experts, default 4) at **UD-IQ2_M (37.6 GB)**,
 split V100 + 4070 (`CUDA_VISIBLE_DEVICES=<V100>,<4070> -ts 75/25`), reasoning off,

@@ -1883,5 +1883,147 @@
    "error": "timeout (30 min); run stopped here",
    "patch_lines": 0
   }
+ ],
+ "gemma4-e6": [
+  {
+   "instance_id": "django__django-13794",
+   "secs": 240,
+   "turns": 26,
+   "error": "",
+   "patch_lines": 20
+  },
+  {
+   "instance_id": "django__django-11951",
+   "secs": 300,
+   "turns": 72,
+   "error": "",
+   "patch_lines": 102
+  },
+  {
+   "instance_id": "django__django-14493",
+   "secs": 480,
+   "turns": 47,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "django__django-16429",
+   "secs": 180,
+   "turns": 47,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "django__django-11119",
+   "secs": 180,
+   "turns": 50,
+   "error": "",
+   "patch_lines": 14
+  },
+  {
+   "instance_id": "django__django-11179",
+   "secs": 480,
+   "turns": 84,
+   "error": "",
+   "patch_lines": 13
+  },
+  {
+   "instance_id": "django__django-15467",
+   "secs": 180,
+   "turns": 44,
+   "error": "",
+   "patch_lines": 14
+  },
+  {
+   "instance_id": "django__django-11433",
+   "secs": 660,
+   "turns": 104,
+   "error": "",
+   "patch_lines": 34
+  },
+  {
+   "instance_id": "sympy__sympy-16886",
+   "secs": 180,
+   "turns": 40,
+   "error": "",
+   "patch_lines": 14
+  },
+  {
+   "instance_id": "sympy__sympy-19954",
+   "secs": 480,
+   "turns": 54,
+   "error": "",
+   "patch_lines": 24
+  },
+  {
+   "instance_id": "sympy__sympy-12481",
+   "secs": 1440,
+   "turns": 98,
+   "error": "",
+   "patch_lines": 21
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-9281",
+   "secs": 420,
+   "turns": 131,
+   "error": "",
+   "patch_lines": 17
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-7889",
+   "secs": 240,
+   "turns": 40,
+   "error": "",
+   "patch_lines": 23
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-13989",
+   "secs": 240,
+   "turns": 78,
+   "error": "",
+   "patch_lines": 1
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-20676",
+   "secs": 420,
+   "turns": 62,
+   "error": "",
+   "patch_lines": 57
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-13496",
+   "secs": 240,
+   "turns": 58,
+   "error": "",
+   "patch_lines": 33
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-25973",
+   "secs": 300,
+   "turns": 55,
+   "error": "",
+   "patch_lines": 15
+  },
+  {
+   "instance_id": "pytest-dev__pytest-5262",
+   "secs": 420,
+   "turns": 56,
+   "error": "",
+   "patch_lines": 33
+  },
+  {
+   "instance_id": "psf__requests-1724",
+   "secs": 360,
+   "turns": 56,
+   "error": "",
+   "patch_lines": 23
+  },
+  {
+   "instance_id": "pydata__xarray-4075",
+   "secs": 360,
+   "turns": 40,
+   "error": "",
+   "patch_lines": 18
+  }
  ]
 }
