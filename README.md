@@ -230,11 +230,14 @@ all 164; as a calibration, Qwen2.5-Coder-7B Q4 scores 86.0% against its publishe
 | Llama 3.3 70B dense | IQ4_XS | both | 85.4% |
 | Qwen3.5 4B | Q8_0 | V100 | 82.3% |
 | GLM-4.7-Flash 30B-A3B MoE | Q4_K_M | V100 | 81.1% † |
+| Mistral Small 4 119B-A6B MoE | UD-IQ2_M (2-bit) | both | 83.5% § |
 
 † Run through llama-swap at the **maker's recommended sampling** (temperature
 0.6–1.0), not greedy. Re-running Gemma 4 26B Q4 the same way (temperature 0.7)
 scored exactly its greedy 97.6%. ‡ The diffusion model's own decoder defaults,
 seed 1 — see [DiffusionGemma](#diffusiongemma-26b-a4b-on-the-v100-llamacpp-pr-24423) below.
+§ Temperature 0.3 (Mistral gives a 0.0–0.7 range for reasoning off); "fair" score,
+64.0% strict — it indents whole answers ([details](#changing-how-many-experts-a-moe-uses-4-models)).
 
 **Read this for quantisation loss, not for ranking models.** HumanEval is from
 2021 and 2026 models have almost certainly seen it: most of these land between
@@ -403,6 +406,62 @@ greedy, V100 alone ([raw](buyers-bench/results/dflash/qwen3.6-compare.txt)):
 - Ornith-1.5 35B-A3B with its own drafter showed the same pattern: 1.9× on short
   answers, slower on long ones ([raw](buyers-bench/results/dflash/ornith-1.5-compare.txt)).
 
+### Changing how many experts a MoE uses (4 models)
+
+A MoE's active-expert count is just a number in the GGUF, and llama.cpp can
+override it at load — no retraining (this is all the community "A6B" variants
+do): `--override-kv qwen35moe.expert_used_count=int:N` (`gemma4.` / `mistral4.`
+for those models). The server doesn't log it at normal verbosity; `-lv 4` shows
+`n_expert_used = N`, which is how these runs were checked. Memory doesn't change —
+every expert is loaded either way; only the compute per token does.
+
+**Qwen3.6 35B-A3B Q4** (256 experts, default 8), V100; HumanEval greedy, prefill at
+~2K / ~5K-token prompts ([raw](buyers-bench/results/experts)); SWE-bench as above
+(20 tasks, thinking on, the same 18 fixed wherever 18 is shown):
+
+| Active experts | 3 | 4 | 5 | 6 | **8 (default)** | 12 | 16 |
+| :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| HumanEval | 140 | 148 | 155 | 154 | 153 | — | 154 † |
+| Prefill tok/s, ~2K / ~5K | 930 / 982 | 824 / 852 | 739 / 760 | 676 / 696 | 585 / 598 | — | 447 † |
+| Decode tok/s | 103.5 | 100.7 | 99.4 | 98.1 | 94.6 | — | 85.4 † |
+| **SWE-bench fixed** | — | — | 18/20 | — | **18/20** | 18/20 | **15/20** |
+| SWE-bench time / steps | — | — | 89 min / 1,997 | — | **60 min / 1,460** | 63 min / 1,581 | 64 min / 1,453 |
+
+† separate run at the maker's sampling, not greedy.
+
+- **Fewer experts read faster but take more agent steps:** 5 experts matched the
+  default on HumanEval and read 26% faster, then needed 37% more steps on SWE-bench
+  and took 50% longer for the same fixes.
+- **More experts cost time and, at 16, fixes** — 16 looked as good as 8 on
+  HumanEval and lost 3 of 18 on SWE-bench.
+- **Ornith-1.5 35B-A3B** (same design): 12 experts scored 148 vs 145 on HumanEval
+  (greedy), then fixed the same 18 SWE-bench tasks in 121 min instead of 79.
+- **Gemma 4 26B-A4B** (128 experts, default 8): 6 experts scored 158 vs 160.
+- **Every model's default was its best setting for agent work.** HumanEval
+  (single answers) pointed the wrong way each time — the same lesson as DFlash and
+  thinking off.
+
+**Mistral Small 4 119B-A6B** (128 experts, default 4) at **UD-IQ2_M (37.6 GB)**,
+split V100 + 4070 (`CUDA_VISIBLE_DEVICES=<V100>,<4070> -ts 75/25`), reasoning off,
+temperature 0.3 ([raw](buyers-bench/results/mistral4)):
+
+| Active experts | HumanEval strict | HumanEval fair | Prefill (~2K prompt) | Decode |
+| :--- | ---: | ---: | ---: | ---: |
+| 2 | 53.7% (88) | 68.3% (112) | 135 | 64.5 |
+| **4 (default)** | 64.0% (105) | **83.5% (137)** | 118 | 58.1 |
+| 8 | 84.8% (139) | 84.8% (139) | 94 | 48.6 |
+
+- **At 4 experts it indents every answer** — the whole function shifted right, so
+  Python rejects it before the logic is tested. "Fair" removes that indentation
+  only when the reply is a complete, shifted `def` (body-only answers are meant to
+  be indented; a blanket dedent wrongly cost other models up to 16 points), and
+  changed no other model's score ([regrade_dedent.py](buyers-bench/regrade_dedent.py)).
+  **At 8 experts the quirk disappears.** At 2-bit it trails Qwen3.6 at 4-bit by ~10
+  points; Qwen3.5 122B at 2-bit held 92.1%.
+- **It can't be a coding agent on this pair of cards:** `-fa on` crashes it (MLA,
+  key/value 320/256), and without flash attention a **32K** context runs the 4070
+  out of memory (+2.2 GB of compute buffer); 16K fits. Agents need 30K–130K.
+
 ## The table
 
 | Repo | Tested | Result |
@@ -436,6 +495,8 @@ greedy, V100 alone ([raw](buyers-bench/results/dflash/qwen3.6-compare.txt)):
 - **DeepSeek flash-attention regression.** `-fa on` costs 80% of decode on the V100 and 52% on the 4070, with byte-identical output and no warning. The cause is the model's attention head shape (192/128, GQA ratio 1), not the GPU — see [Corrections](#corrections). [volta-deepseek-mla](https://github.com/christopherrobertbrooks-tech/volta-deepseek-mla)
   **GLM-4.7-Flash**, also MLA (`deepseek2` arch, key/value 576/512), is **not** caught by it: `-fa on` is −7% decode, +7% prefill. Measure per model.
 - **DFlash slows a coding agent down** (−40% on SWE-bench tasks) even though it doubles short thinking-off answers. [DFlash](#dflash-speculative-decoding-on-the-v100)
+- **Mistral Small 4 (`mistral4`, MLA 320/256) crashes with `-fa on`,** and without it can't reach a 32K context across 44 GB. [Experts](#changing-how-many-experts-a-moe-uses-4-models)
+- **Changing a MoE's expert count never beat the default as an agent** — fewer experts add steps, more add cost. [Experts](#changing-how-many-experts-a-moe-uses-4-models)
 
 ### Tooling gotchas
 

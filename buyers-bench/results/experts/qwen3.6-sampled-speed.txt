@@ -1,0 +1,5 @@
+experts 8: prefill 589 tok/s, decode 94.8 tok/s
+experts 4: prefill 819 tok/s, decode 100.8 tok/s
+experts 16: prefill 447 tok/s, decode 85.4 tok/s
+experts 5: prefill 740 tok/s, decode 99.0 tok/s
+experts 6: prefill 675 tok/s, decode 97.9 tok/s

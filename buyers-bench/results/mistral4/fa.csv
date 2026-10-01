@@ -1,0 +1,30 @@
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,load_mode,embeddings,no_op_offload,no_host,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"3ae4f51","1","13th Gen Intel(R) Core(TM) i7-13700KF","Tesla V100-PCIE-32GB, NVIDIA GeForce RTX 4070","CUDA","/mnt/steam/models/mistral4/Mistral-Small-4-119B-2603-UD-IQ2_M.gguf","mistral4 ?B IQ2_M - 2.7 bpw","37567074304","118972826624","2048","512","8","0x0","0","50","f16","f16","99","0","layer","0","0","0","auto","75.00/25.00","none","auto","0","0","0","0","0","512","0","0","2026-10-01T04:20:19Z","694312747","52987344","739.573547","56.441465"
+"3ae4f51","1","13th Gen Intel(R) Core(TM) i7-13700KF","Tesla V100-PCIE-32GB, NVIDIA GeForce RTX 4070","CUDA","/mnt/steam/models/mistral4/Mistral-Small-4-119B-2603-UD-IQ2_M.gguf","mistral4 ?B IQ2_M - 2.7 bpw","37567074304","118972826624","2048","512","8","0x0","0","50","f16","f16","99","0","layer","0","0","0","auto","75.00/25.00","none","auto","0","0","0","0","0","0","128","0","2026-10-01T04:20:21Z","1634321162","9201283","78.321221","0.440951"
+[New LWP 4183560]
+[New LWP 4183559]
+[New LWP 4183558]
+[New LWP 4183557]
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+0x0000725cded10913 in __GI___wait4 (pid=4184315, stat_loc=0x0, options=0, usage=0x0) at ../sysdeps/unix/sysv/linux/wait4.c:30
+#0  0x0000725cded10913 in __GI___wait4 (pid=4184315, stat_loc=0x0, options=0, usage=0x0) at ../sysdeps/unix/sysv/linux/wait4.c:30
+30	in ../sysdeps/unix/sysv/linux/wait4.c
+#1  0x0000725cdf2f27b3 in ggml_print_backtrace () from /home/chris/bonsai/llama.cpp/build/bin/libggml-base.so.0
+#2  0x0000725cdf2f295b in ggml_abort () from /home/chris/bonsai/llama.cpp/build/bin/libggml-base.so.0
+#3  0x0000725cd8268147 in ggml_cuda_error(char const*, char const*, char const*, int, char const*) () from /home/chris/bonsai/llama.cpp/build/bin/libggml-cuda.so.0
+#4  0x0000725cd86b69ba in void ggml_cuda_flash_attn_ext_mma_f16_case<320, 256, 2, 32>(ggml_backend_cuda_context&, ggml_tensor*) () from /home/chris/bonsai/llama.cpp/build/bin/libggml-cuda.so.0
+#5  0x0000725cd827b5e6 in ggml_cuda_compute_forward(ggml_backend_cuda_context&, ggml_tensor*) () from /home/chris/bonsai/llama.cpp/build/bin/libggml-cuda.so.0
+#6  0x0000725cd827e141 in ggml_cuda_graph_evaluate_and_capture(ggml_backend_cuda_context*, ggml_cgraph*, bool, bool, void const*) () from /home/chris/bonsai/llama.cpp/build/bin/libggml-cuda.so.0
+#7  0x0000725cd8280f00 in ggml_backend_cuda_graph_compute(ggml_backend*, ggml_cgraph*) () from /home/chris/bonsai/llama.cpp/build/bin/libggml-cuda.so.0
+#8  0x0000725cdf3118a7 in ggml_backend_sched_graph_compute_async () from /home/chris/bonsai/llama.cpp/build/bin/libggml-base.so.0
+#9  0x0000725cde303f91 in llama_context::graph_compute(ggml_cgraph*, bool) () from /home/chris/bonsai/llama.cpp/build/bin/libllama.so.0
+#10 0x0000725cde30899a in llama_context::process_ubatch(llama_ubatch const&, llm_graph_type, llama_memory_context_i*, ggml_status&) () from /home/chris/bonsai/llama.cpp/build/bin/libllama.so.0
+#11 0x0000725cde30df5d in llama_context::decode(llama_batch const&) () from /home/chris/bonsai/llama.cpp/build/bin/libllama.so.0
+#12 0x0000725cde30f61f in llama_decode () from /home/chris/bonsai/llama.cpp/build/bin/libllama.so.0
+#13 0x0000725cdf416d31 in test_prompt(llama_context*, int, int, int) () from /home/chris/bonsai/llama.cpp/build/bin/libllama-bench-impl.so
+#14 0x0000725cdf425cee in llama_bench(int, char**) () from /home/chris/bonsai/llama.cpp/build/bin/libllama-bench-impl.so
+#15 0x0000725cdec2a1ca in __libc_start_call_main (main=main@entry=0x64b2e386e270 <main>, argc=argc@entry=17, argv=argv@entry=0x7ffd16b01e28) at ../sysdeps/nptl/libc_start_call_main.h:58
+#16 0x0000725cdec2a28b in __libc_start_main_impl (main=0x64b2e386e270 <main>, argc=17, argv=0x7ffd16b01e28, init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, stack_end=0x7ffd16b01e18) at ../csu/libc-start.c:360
+#17 0x000064b2e386e2a5 in _start ()
+[Inferior 1 (process 4183556) detached]
