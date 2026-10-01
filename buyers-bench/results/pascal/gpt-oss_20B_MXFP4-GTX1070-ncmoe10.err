@@ -1,0 +1,8 @@
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 8101 MiB):
+  Device 0: NVIDIA GeForce GTX 1070, compute capability 6.1, VMM: yes, VRAM: 8101 MiB
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 8101 MiB):
+  Device 0: NVIDIA GeForce GTX 1070, compute capability 6.1, VMM: yes, VRAM: 8101 MiB
+llama_bench: error: failed to create context with model '/home/futtbuck/pascal-bench/models/gpt-oss-20b-mxfp4.gguf'
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 8101 MiB):
+  Device 0: NVIDIA GeForce GTX 1070, compute capability 6.1, VMM: yes, VRAM: 8101 MiB
+llama_bench: error: failed to create context with model '/home/futtbuck/pascal-bench/models/gpt-oss-20b-mxfp4.gguf'

@@ -119,6 +119,75 @@ The 70B fills 29.7 GB of the V100 and 11.2 GB of the 4070 — about the ceiling 
 and draws ~280 W across both cards. System RAM on this box is 16 GB, so nothing
 here spills to CPU; everything is fully offloaded (`-ngl 99`).
 
+## What a GTX 1070 (Pascal, 8 GB) is still good for (measured October 2026)
+
+The 1070 sits in the main PC (i5-7400, 24 GB RAM, driver 580). Same llama.cpp commit as the V100/4070 table above
+(PrismML fork `3ae4f51`), built for `sm_61` on the gateway and copied over as a folder with its CUDA 12.9 runtime
+libraries, so nothing was installed on that machine. Same `llama-bench` settings. Raw data and scripts:
+[buyers-bench/results/pascal](buyers-bench/results/pascal).
+
+**Generation speed, tokens/sec** (short prompt → at 32K tokens of context), with the V100 and 4070 for reference:
+
+| Model | File | GTX 1070 8GB | V100 | RTX 4070 | 1070 prompt t/s | 1070 power |
+| :--- | ---: | ---: | ---: | ---: | ---: | ---: |
+| **LFM2 8B-A1B MoE** Q4_K_M | 5.0 GB | **118** → 95 | — | — | 1,825 | 79 W |
+| Granite 4.0 H Tiny (7B-A1B MoE) Q4_K_M | 4.3 GB | 71 → 58 | — | — | 1,326 | 75 W |
+| Qwen3.5 4B Q8_0 | 4.5 GB | 35 → 29 | 107 → 93 | 91 → 73 | 863 | 120 W |
+| Qwen2.5-Coder 7B Q4_K_M | 4.7 GB | 32 → 12 | 123 → 69 | 99 → 71 | 567 | 110 W |
+| Gemma 4 12B QAT Q4 | 7.0 GB | 22, 16K doesn't fit | 70 → 64 | 60 → 54 | 344 | 122 W |
+| Ternary Bonsai 2 27B PQ2_0 | 7.2 GB | 14, 16K doesn't fit | 51 → 40 | 54 → 43 | 148 | 108 W |
+| Ternary Bonsai 2 27B PTQ1_0 | 5.9 GB | 8.1 → 7.5 at 16K | 34 | 55 | 77 | 105 W |
+| gpt-oss 20B MXFP4, experts of 10 layers in system RAM | 12.1 GB | 20, short context only | — | — | 406 | 77 W |
+| Gemma 4 26B-A4B Q4_K_M, experts of 21 layers in RAM | 16.9 GB | 14, short context only | 92 → 84 | — | 257 | — |
+
+Idle, nothing loaded: 11 W.
+
+- **Dense models run at about a third of V100 speed**, and the long-context drop is much steeper (the 7B coder falls
+  from 32 to 12 t/s at 32K). With no tensor cores, prompt reading is 4–5× slower than the V100.
+- **Small MoE models are what this card is for.** LFM2 8B-A1B (about 1.5B parameters active per token) writes at 118 t/s,
+  faster than the V100 manages with any model in the table above, and holds 95 t/s at 32K. It's also the most
+  efficient result on any card here, at 1.43 tokens per joule. The i5-7400 can't keep the card fed on models this
+  small (GPU ~50% busy), which is why it draws only 79 W.
+- **Bonsai's two packings rank differently on each card.** Writing: PQ2_0 wins clearly on the 1070 (14.0 vs 8.1 t/s,
+  PTQ1_0 at 58%) and on the V100 (PTQ1_0 at 67.5%), while on the 4070 they're even (PTQ1_0 54.7 vs 53.9). Prompt
+  reading: PQ2_0 wins about 2× on the 1070 (148 vs 77) and on the 4070, while the V100 is the one card where PTQ1_0
+  reads faster ([volta-bonsai](https://github.com/christopherrobertbrooks-tech/volta-bonsai); that margin is being
+  re-measured). So the 1070 sides with the V100 on writing and with the 4070 on reading, and no one card predicts the
+  others. Perplexity wasn't re-measured; it depends on the weights, not the card.
+- **Bigger MoE models run with their experts in system RAM** (`-ncmoe N` = keep the experts of the first N layers on
+  the CPU; use the smallest N that loads). gpt-oss 20B at 20 t/s is usable for chat; Gemma 26B at 14 t/s is slow. Both
+  fit only a short conversation in the remaining VRAM. **On a 24 GB PC this filled the 8 GB swap file both times**
+  (idle programs pushed out to make room). Nothing crashed, and `sudo swapoff -a && sudo swapon -a` pulled it back.
+
+**Real jobs, not just speed.** The question was whether an 8 GB Pascal card is useful as a helper next to the
+coding cards. All runs on the 1070.
+
+| Job | Model | Result |
+| :--- | :--- | :--- |
+| Read a screenshot (made-up backup-error dialog, 8 facts) | Qwen3-VL 4B | **8/8 on all 3 tries**, ~9 s |
+| | Qwen3.5 0.8B | 6, 8 and 7 of 8 (misses the buttons), 1–3 s |
+| Etsy listing from a design image (title ≤140 chars, 13 tags ≤20 chars) | Qwen3-VL 4B | rules met on both tries, 13–37 s; usable first drafts |
+| | Qwen3.5 0.8B | fails (1–5 tags) |
+| Three everyday requests (reword a reply, explain an error, summarise) | LFM2 8B-A1B | 0.5–1.1 s each; fast but weak judgement (the "friendly" reword still blamed the customer) |
+| | Granite 4.0 H Tiny | 0.9–1.9 s; polite but vague |
+| | Qwen3 8B (thinking off) | 3–4 s; the reword was barely changed |
+| | Gemma 4 12B (thinking off) | 7–8 s; best writing |
+| | gpt-oss 20B (low reasoning) | 11–19 s; best short answers |
+
+**Verdict:** not a coding card, but a useful helper: screen reading with a 4B vision model, quick drafting with
+Gemma 12B or gpt-oss 20B, and instant lookups with LFM2.
+
+**Setup notes for Pascal:**
+- **Driver 580 still supports Pascal, and CUDA 12.9 builds for it** (`-DCMAKE_CUDA_ARCHITECTURES=61`). Since the
+  binaries are static apart from `libcudart`/`libcublas`, building on another machine and copying a folder works.
+- **If you build on a newer CPU, set `-DGGML_NATIVE=OFF`.** A `-march=native` build from the i7-13700KF ran every
+  GPU-only test fine, then died with `Illegal instruction` the moment experts ran on the i5-7400's CPU (AVX-VNNI it
+  doesn't have).
+- **Run `llama-server` with `-np 1` on 8 GB.** The default opens 4 conversation slots, and Gemma 12B then fails to
+  allocate its KV cache even at 4K context.
+- **Turn thinking off for Gemma 4 as an assistant** (`chat_template_kwargs: {"enable_thinking": false}`), or it
+  spends the whole answer budget thinking. That cost one false start here.
+
 ## Setting up a used V100 on Linux
 
 What worked on this machine (Ubuntu 24.04, Gigabyte Z790 UD AC, i7-13700KF),

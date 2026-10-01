@@ -1,0 +1,23 @@
+llama.cpp: 3ae4f51 2026-09-21  driver: 580.173.02
+idle W: 11
+12:56:28 == Qwen3.5 4B Q8_0
+   decode W: 120
+12:59:54 == Qwen2.5-Coder 7B Q4_K_M
+   decode W: 110
+13:05:45 == Gemma 4 12B QAT Q4
+   decode W: 122
+13:07:39 == Ternary Bonsai 2 27B PQ2_0
+   decode W: 108
+13:10:06 == Ternary Bonsai 2 27B PTQ1_0
+   decode W: 105
+13:19:21 == Gemma 26B-A4B Q4, experts of 14 layers in RAM (free 19399 MiB)
+   14: llama_bench: error: failed to load model '/home/futtbuck/pascal-bench/models/gemma26b-a4b-q4.gguf'
+13:20:10 == Gemma 26B-A4B Q4, experts of 18 layers in RAM (free 19306 MiB)
+   18: llama_bench: error: failed to load model '/home/futtbuck/pascal-bench/models/gemma26b-a4b-q4.gguf'
+13:20:36 == Gemma 26B-A4B Q4, experts of 22 layers in RAM (free 19162 MiB)
+./run.sh: line 21: 2288475 Illegal instruction     (core dumped) $B -m $G -ngl 99 -ncmoe $N -fa on -p 512 -n 128 -r 2 -o csv > $O/.part 2> $O/$tag$N.err
+   loads at 22
+./run.sh: line 21: 2288600 Illegal instruction     (core dumped) $B "$@" -fa on -p 512 -n 128 -d $d -r 3 -o csv > $O/.part 2>> $O/$tag.err
+./run.sh: line 21: 2288851 Illegal instruction     (core dumped) $B "$@" -fa on -p 512 -n 128 -d $d -r 3 -o csv > $O/.part 2>> $O/$tag.err
+./run.sh: line 21: 2289852 Aborted                 (core dumped) $B "$@" -fa on -p 512 -n 128 -d $d -r 3 -o csv > $O/.part 2>> $O/$tag.err
+13:22:48 DONE

@@ -1,0 +1,10 @@
+llama.cpp: 3ae4f51 2026-09-21  driver: 580.173.02
+idle W: 51
+13:25:32 == Gemma 26B-A4B Q4, experts of 19 layers in RAM (free 19332 MiB)
+   19: llama_bench: error: failed to load model '/home/futtbuck/pascal-bench/models/gemma26b-a4b-q4.gguf'
+13:26:15 == Gemma 26B-A4B Q4, experts of 20 layers in RAM (free 19417 MiB)
+   20: llama_bench: error: failed to create context with model '/home/futtbuck/pascal-bench/models/gemma26b-a4b-q4.gguf'
+13:26:32 == Gemma 26B-A4B Q4, experts of 21 layers in RAM (free 19451 MiB)
+   loads at 21
+13:27:52 DONE
+GEMMA-DONE

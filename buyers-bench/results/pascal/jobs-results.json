@@ -1,0 +1,240 @@
+{
+ "eyes": {
+  "qwen3.5:0.8b": [
+   {
+    "secs": 9.3,
+    "tokens": 213,
+    "tok_s": 75.5,
+    "load_s": 6.1,
+    "facts": 6,
+    "missing": [
+     "retry now",
+     "open disks"
+    ],
+    "reply": "The issue is that your \u201cPhotos-2TB\u201d partition on /dev/sdc1 has reached 97% capacity, but there are not enough free blocks to complete the full 31.8 GB backup (you only have 12.4 GB available). The next automatic attempt scheduled for Thursday at 3:45 PM may still be too soon if the drive isn\u2019t ready before that time. To fix this:\n\n- Run `df -h` or `lsblk -f` to see the exact mount points and sizes of partitions.\n- Use `du -sh /dev/sdc1` (or `df -T`) to confirm how full it is and what free space remains after that backup finishes.\n- Consider pausing the automatic backup if the drive appears nearly full, or rebooting to try again later in your schedule.\n- Once the file size drops below 31.8 GB, you can retry running a \u201cDeja Dup\u201d or standard backup on /dev/sdc1."
+   },
+   {
+    "secs": 3.0,
+    "tokens": 208,
+    "tok_s": 70.9,
+    "load_s": 0.0,
+    "facts": 8,
+    "missing": [],
+    "reply": "The backup failed because the system detected that one of your disks \u2014 specifically `/dev/sdc1` labeled \u201cPhotos-2TB\u201d \u2014 is already at 97% capacity. Since only 12.4 GB has space available and this backup requires 31.8 GB total, you cannot proceed with a successful copy right now due to insufficient free space.\n\n\ud83d\udd38 Disk name: /dev/sdc1  \n\ud83d\udfe3 Status: 97% full  \n\ud83d\udcb0 Free: Only 12.4 GB  \n\ud83d\udce6 Needed for this backup: 31.8 GB  \n\n\u23f3 Next attempt time: Thursday at 3:45 PM (you may wait until then if you\u2019re busy, though ideally you\u2019d check your schedule soon)  \n\n\ud83e\uddfe Buttons available:  \n- \u201cRetry now\u201d \u2014 likely to try the backup again after space is freed  \n- \u201cOpen Disks\u201d \u2014 probably opens a window to inspect available disk space before deciding on next steps"
+   },
+   {
+    "secs": 1.2,
+    "tokens": 87,
+    "tok_s": 73.0,
+    "load_s": 0.0,
+    "facts": 7,
+    "missing": [
+     "open disks"
+    ],
+    "reply": "The backup failed because the system disk /dev/sdc1 (labeled as \"Photos-2TB\") is at 97% full \u2014 only 12.4 GB free, and this backup needs to take 31.8 GB of space. The next attempt is scheduled for Thursday at 3:45 PM. You can either click the \u201cRetry now\u201d button or open the disks menu first."
+   }
+  ],
+  "qwen3-vl:4b": [
+   {
+    "secs": 23.8,
+    "tokens": 321,
+    "tok_s": 44.4,
+    "load_s": 13.5,
+    "facts": 8,
+    "missing": [],
+    "reply": "The backup process failed because the disk /dev/sdc1 (labeled \"Photos-2TB\") is 97% full. There is only 12.4 GB of free space on this disk, but the backup requires 31.8 GB. The next automatic attempt to back up will occur on Thursday at 3:45 PM. You can press the \"Retry now\" button to try starting the backup immediately or the \"Open Disks\" button to view the disk's details."
+   },
+   {
+    "secs": 9.6,
+    "tokens": 421,
+    "tok_s": 44.2,
+    "load_s": 0.0,
+    "facts": 8,
+    "missing": [],
+    "reply": "A backup failed because the disk /dev/sdc1 (labeled \"Photos-2TB\") is 97% full. There is only 12.4 GB of free space on this disk, but the backup requires 31.8 GB. The next automatic attempt to back up will be on Thursday at 3:45 PM. You can press the \"Retry now\" button to attempt the backup immediately or the \"Open Disks\" button to view the disk's details."
+   },
+   {
+    "secs": 9.1,
+    "tokens": 397,
+    "tok_s": 43.9,
+    "load_s": 0.0,
+    "facts": 8,
+    "missing": [],
+    "reply": "A backup failed because the disk /dev/sdc1 (named \"Photos-2TB\") is 97% full. Only 12.4 GB of space is free on this disk, but the backup process requires 31.8 GB. The next automatic attempt to run the backup will be on Thursday at 3:45 PM. You can press the \"Retry now\" button to try starting the backup immediately or the \"Open Disks\" button to view the disk details."
+   }
+  ]
+ },
+ "etsy": {
+  "qwen3-vl:4b": [
+   {
+    "secs": 20.3,
+    "tokens": 590,
+    "tok_s": 43.4,
+    "load_s": 3.5,
+    "title_len": 65,
+    "title_ok": true,
+    "n_tags": 13,
+    "tags_ok": true,
+    "long_tags": [],
+    "reply": "TITLE: Lion in Black Suit - Edgy SVG for Laser Engraving & Vinyl Cutting  \nTAGS: lion, black suit, laser engraving, vinyl cutting, svg, png, digital design, custom, animal, edgy, masculine, character, design file  \nDESCRIPTION: Bold lion in a sharp black suit and sunglasses. Ideal for laser engraving or vinyl cutting projects. High-resolution SVG/PNG files ready for custom designs."
+   },
+   {
+    "secs": 37.1,
+    "tokens": 1535,
+    "tok_s": 41.5,
+    "load_s": 0.0,
+    "title_len": 61,
+    "title_ok": true,
+    "n_tags": 13,
+    "tags_ok": true,
+    "long_tags": [],
+    "reply": "TITLE: Majestic Lion in Suit: Laser Engraving & Vinyl Cutting Design\nTAGS: lion,suit,sunglasses,laser engraving,vinyl cutting,svg,png,design,etsy,professional,animal,manly,cool\nDESCRIPTION: Stylish lion in a suit with sunglasses \u2013 perfect for laser engraving or vinyl cutting. High-quality SVG/PNG file for personalized gifts, signs, and creative projects. Modern and bold design."
+   }
+  ],
+  "qwen3.5:0.8b": [
+   {
+    "secs": 7.6,
+    "tokens": 65,
+    "tok_s": 71.8,
+    "load_s": 6.2,
+    "title_len": 53,
+    "title_ok": true,
+    "n_tags": 5,
+    "tags_ok": false,
+    "long_tags": [],
+    "reply": "TITLE: LEXINGTON LEGEND: MIRROR DESIGN FOR DIGITAL PRINTINGS\nTAGS: lion emblem, digital art, vector illustration, custom tattoo design, graphic print\nDESCRIPTION: A striking black and white illustration of a lion in formal attire, perfect for laser engraving, vinyl cutting, or digital printing."
+   },
+   {
+    "secs": 0.5,
+    "tokens": 26,
+    "tok_s": 65.2,
+    "load_s": 0.0,
+    "title_len": 20,
+    "title_ok": true,
+    "n_tags": 1,
+    "tags_ok": false,
+    "long_tags": [
+     "laser engraving SVG png vinyl cutting digital illustration abstract lion art"
+    ],
+    "reply": "TITLE: \"Cubist Lion Design\"\nTAGS: laser engraving SVG png vinyl cutting digital illustration abstract lion art"
+   }
+  ]
+ },
+ "assistant": {
+  "qwen3:8b": [
+   {
+    "secs": 18.8,
+    "tokens": 20,
+    "tok_s": 29.3,
+    "load_s": 17.9,
+    "reply": "Your order is delayed because of the wrong shipping option you chose. It\u2019s not my fault."
+   },
+   {
+    "secs": 2.8,
+    "tokens": 74,
+    "tok_s": 28.6,
+    "load_s": 0.0,
+    "reply": "\"Permission denied\" means the program can't access something because you don't have the right to. It\u2019s like trying to open a locked door. The usual fix is to run the program as an administrator (using `sudo` in Linux) or change file permissions with `chmod` to give you access. Always be careful with `sudo` to avoid mistakes."
+   },
+   {
+    "secs": 4.1,
+    "tokens": 108,
+    "tok_s": 28.8,
+    "load_s": 0.0,
+    "reply": "- Pascal-generation GPUs like the GTX 1070 lack tensor cores, so matrix operations rely on slower CUDA cores, impacting performance for long prompts (prefill).  \n- During decoding, memory speed becomes the limiting factor, with the 1070's 256 GB/s bandwidth being about a third of modern mid-range GPUs.  \n- An 8 GB card can handle models up to around 12-14 billion parameters at 4-bit, or larger ternary models, depending on optimization."
+   }
+  ],
+  "gemma-4-12b-qat": [
+   {
+    "secs": 8.4,
+    "tok_s": 21.3,
+    "tokens": 175,
+    "reply": "Here are a few ways to say this, depending on the level of \"firmness\" you want:\n\n**Option 1: Softest (Best for general customer service)**\n\"Your order is currently delayed because of the shipping method selected at checkout. I'm happy to help you look into options for future orders!\"\n\n**Option 2: Professional & Direct (Best for clarity)**\n\"Please note that the delay is due to the specific shipping method selected during purchase. Because this was an external choice, I'm unable to expedite the delivery at this time.\"\n\n**Option 3: Short & Firm (Best if they are being pushy)**\n\"The current delay is a result of the shipping method chosen at checkout. As I cannot control the carrier's timeline for that specific service, your order will arrive as soon as possible.\"",
+    "reasoning": null
+   },
+   {
+    "secs": 7.6,
+    "tok_s": 21.3,
+    "tokens": 156,
+    "reply": "Think of Linux like a highly secure office building. Every file and folder has a \"lock,\" and only specific people have the keys to open them. \n\n**\"Permission denied\"** means you are trying to enter a room or edit a file, but the system doesn't recognize your user account as having the \"key\" (authorization) to do so. This happens for security reasons to prevent programs from accidentally deleting or changing important system files.\n\n**The usual fix:** Use the **`sudo`** command. Adding `sudo` before your command tells the computer, \"I am the administrator; let me in.\" If that doesn't work, you may need to change the file's ownership or permissions using `chmod` or `chown`.",
+    "reasoning": null
+   },
+   {
+    "secs": 7.3,
+    "tok_s": 21.3,
+    "tokens": 145,
+    "reply": "Here is the summary:\n\n*   **Hardware Limitation:** Pascal-generation GPUs (like the GTX 1070) lack tensor cores, forcing them to use standard CUDA cores for matrix calculations, which slows down the \"prefill\" (reading) phase of language models.\n*   **Memory Bottleneck:** During the \"decode\" (writing) phase, performance is limited by memory speed; the 1070\u2019s 256 GB/s is significantly slower than modern mid-range cards.\n*   **Capacity:** An 8 GB card can accommodate models up to roughly 12\u201314 billion parameters at 4-bit quantization, or larger ternary models.",
+    "reasoning": null
+   }
+  ],
+  "lfm2-8b-a1b": [
+   {
+    "secs": 0.5,
+    "tok_s": 108.6,
+    "tokens": 36,
+    "reply": "Your order arrived late due to selecting the wrong shipping option\u2014that\u2019s on you. I\u2019m sorry for the delay, but I can\u2019t change that once the choice was made.",
+    "reasoning": null
+   },
+   {
+    "secs": 0.9,
+    "tok_s": 113.1,
+    "tokens": 90,
+    "reply": "\"Permission denied\" means the program can\u2019t do something because your user account doesn\u2019t have enough rights. Most often, it\u2019s because you need to run the program with admin (root) privileges. The usual fix is to use `sudo` before the command, like `sudo ./program`. This lets you run the program with higher permission, giving it the needed access safely. Always double-check file/folder permissions if needed.",
+    "reasoning": null
+   },
+   {
+    "secs": 1.1,
+    "tok_s": 113.2,
+    "tokens": 111,
+    "reply": "- Pascal-generation GPUs like the GTX 1070 lack tensor cores, causing matrix operations to run on standard CUDA cores, limiting performance in language models.  \n- Prefilling long prompts is slower due to inefficient computation, while decoding (generating responses) is bottlenecked by memory bandwidth, which is significantly slower than modern cards.  \n- An 8 GB VRAM supports models with 12\u201314 billion parameters (at 4-bit precision) or larger ternary models, but falls short of larger-scale architectures.",
+    "reasoning": null
+   }
+  ],
+  "granite-4.0-h-tiny": [
+   {
+    "secs": 0.9,
+    "tok_s": 68.8,
+    "tokens": 48,
+    "reply": "Dear Customer,\n\nWe apologize for the inconvenience caused by the delay in your order due to incorrect shipping selection. We appreciate your understanding and assure you that we're working diligently to rectify this situation. Thank you for your patience and cooperation.",
+    "reasoning": null
+   },
+   {
+    "secs": 1.6,
+    "tok_s": 69.4,
+    "tokens": 93,
+    "reply": "When a program displays 'permission denied', it means you don't have the necessary rights to access or execute that particular program. This often happens when you're trying to run a file as a regular user, but it requires administrative privileges. The usual solution is to run the command with 'sudo' before the program's name, which gives you temporary administrator access. Remember, be careful when using 'sudo', as it can potentially harm your system if used incorrectly.",
+    "reasoning": null
+   },
+   {
+    "secs": 1.9,
+    "tok_s": 69.4,
+    "tokens": 106,
+    "reply": "- Pascal-generation GPUs like the GTX 1070 don't have tensor cores, causing matrix maths to run on regular CUDA cores.\n- For language models, this affects reading long prompts (prefill) but decoding (answer generation) is mostly limited by memory speed, with the GTX 1070's 256 GB/s being about a third of a modern mid-range card.\n- An 8 GB Pascal GPU can accommodate models up to approximately 12-14 billion parameters at 4-bit, or larger ternary models.",
+    "reasoning": null
+   }
+  ],
+  "gpt-oss-20b (low reasoning)": [
+   {
+    "secs": 10.5,
+    "tok_s": 16.5,
+    "tokens": 47,
+    "reply": "Hey! Your order is delayed because the shipping option you selected doesn\u2019t match the delivery time you expected. We\u2019re happy to help find a better choice.",
+    "reasoning": "Need rewrite friendly firm short."
+   },
+   {
+    "secs": 19.3,
+    "tok_s": 17.8,
+    "tokens": 326,
+    "reply": "When a program says **\u201cpermission denied,\u201d** the operating system is telling you that the user who is running the program doesn\u2019t have the right to do what it\u2019s trying to do.  \nExamples:  \n\n* Trying to read a file you don\u2019t own or that is marked \u201cread\u2011only.\u201d  \n* Trying to write to a directory you can\u2019t write in.  \n* Trying to execute a file that isn\u2019t marked executable.  \n* Trying to bind to a network port that\u2019s already in use or that requires root privileges.\n\n**Typical fixes**\n\n1. **Check ownership/permissions**  \n   ```bash\n   ls -l file_or_dir\n   ```\n   If you need to change them:\n   ```bash\n   sudo chown user:user file      # change owner\n   sudo chmod u+x file            # give execute permission\n   sudo chmod 644 file            # read/write for owner, read for others\n   ```\n\n2. **Run as a different user or with `sudo`**  \n   If you need administrative rights:\n   ```bash\n   sudo command\n   ```\n\n3. **Use the correct directory**  \n   Make sure you\u2019re in the right folder or that the folder exists and is writable.\n\n4. **Avoid port conflicts**  \n   If a port is taken, choose another port or stop the program that\u2019s using it.\n\nIn short, \u201cpermission denied\u201d means you\u2019re not allowed to perform the action; fix it by giving yourself the right permissions or running the command with the appropriate privileges.",
+    "reasoning": "Need concise explanation."
+   },
+   {
+    "secs": 10.7,
+    "tok_s": 17.9,
+    "tokens": 168,
+    "reply": "- **Hardware limitation**: GTX\u202f1070\u2011style GPUs have no tensor cores, so all matrix operations for language models run on standard CUDA cores.  \n- **Performance impact**: The lack of tensor cores mainly slows the *prefill* stage (reading a long prompt), while the *decode* phase is bottlenecked by the 1070\u2019s low memory bandwidth (~256\u202fGB/s, ~\u2153 of a modern mid\u2011range GPU).  \n- **Model size ceiling**: With 8\u202fGB of VRAM, such GPUs can only handle models up to ~12\u201314\u202fbillion parameters when quantized to 4\u2011bit, or larger models if using ternary (3\u2011bit) quantization.",
+    "reasoning": "Need 3 bullet points summarizing."
+   }
+  ]
+ }
+}

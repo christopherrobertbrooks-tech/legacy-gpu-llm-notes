@@ -1,0 +1,4 @@
+assistant lfm2-8b-a1b [(0.5, 108.6), (0.9, 113.1), (1.1, 113.2)]
+assistant granite-4.0-h-tiny [(0.9, 68.8), (1.6, 69.4), (1.9, 69.4)]
+assistant gpt-oss-20b (low reasoning) [(10.5, 16.5), (19.3, 17.8), (10.7, 17.9)]
+MOE-JOBS-DONE
