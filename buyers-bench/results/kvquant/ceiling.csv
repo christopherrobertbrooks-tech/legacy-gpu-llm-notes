@@ -1,0 +1,27 @@
+model,card,ctx,kv,loaded,vram_mib,note
+qwen36,1,131072,f16,yes,23778,
+qwen36,1,131072,q8_0,yes,22818,
+qwen36,1,131072,q4_0,yes,22178,
+qwen36,1,196608,f16,yes,25122,
+qwen36,1,196608,q8_0,yes,23690,
+qwen36,1,196608,q4_0,yes,22730,
+qwen36,1,262144,f16,yes,26466,
+qwen36,1,262144,q8_0,yes,24562,
+qwen36,1,262144,q4_0,yes,23282,
+glimmer,1,65536,f16,yes,15918,
+glimmer,1,65536,q8_0,yes,15486,
+glimmer,1,65536,q4_0,yes,15254,
+glimmer,1,131072,f16,yes,16814,
+glimmer,1,131072,q8_0,yes,16020,
+glimmer,1,131072,q4_0,yes,15580,
+bonsai,0,32768,f16,yes,10084,
+bonsai,0,32768,q8_0,yes,9208,
+bonsai,0,32768,q4_0,yes,8696,
+bonsai,0,65536,f16,no,962,cudaMalloc failed: out of memory
+bonsai,0,65536,q8_0,yes,10456,
+bonsai,0,65536,q4_0,yes,9432,
+bonsai,0,131072,f16,no,962,cudaMalloc failed: out of memory
+bonsai,0,131072,q8_0,no,962,cudaMalloc failed: out of memory
+bonsai,0,131072,q4_0,yes,10904,
+mistral4,1,32768,f16,no,10,cudaMalloc failed: out of memory
+mistral4,1+0,32768,k-only-q8_0,no,1122,

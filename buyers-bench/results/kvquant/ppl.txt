@@ -1,0 +1,3 @@
+f16 Final estimate: PPL = 5.3652 +/- 0.03225
+q8_0 Final estimate: PPL = 5.3699 +/- 0.03230
+q4_0 Final estimate: PPL = 5.3764 +/- 0.03231

@@ -119,6 +119,45 @@ The 70B fills 29.7 GB of the V100 and 11.2 GB of the 4070 — about the ceiling 
 and draws ~280 W across both cards. System RAM on this box is 16 GB, so nothing
 here spills to CPU; everything is fully offloaded (`-ngl 99`).
 
+### KV-cache quantization: how much context does it buy?
+
+llama.cpp can store the conversation memory (the KV cache) at 8 or 4 bits instead of 16: `-ctk q8_0 -ctv q8_0`
+or `q4_0`. **A quantized V cache needs flash attention** in this build (`-fa on`); without it the model refuses to
+load. Raw data and scripts: [results/kvquant](buyers-bench/results/kvquant).
+
+**What fits** (does the server load; VRAM in use):
+
+| Model | Card | f16 cache | q8_0 | q4_0 |
+| :--- | :--- | :--- | :--- | :--- |
+| Qwen3.6 35B-A3B Q4 | V100 | **262K** (26.5 GB) | 262K (24.6 GB) | 262K (23.3 GB) |
+| Muse Glimmer 30B dense Q4 | V100 | 131K (16.8 GB) | 131K (16.0 GB) | 131K (15.6 GB) |
+| Ternary Bonsai 2 27B PQ2_0 | RTX 4070 12GB | **32K** max | **64K** | **131K** |
+| Mistral Small 4 119B UD-IQ2_M | V100 + 4070 | 32K fails | can't be used | can't be used |
+
+- **Qwen3.6 doesn't need it:** it reaches its full trained 262K at f16 on the V100, because few of its layers keep a KV
+  cache. Quantizing saves only ~3 GB. Glimmer's sliding-window attention is the same story.
+- **On a 12 GB card it's the difference between 32K and 131K.** Bonsai's context grows fourfold.
+- **Mistral can't use it on these cards.** Its MLA design keeps K and V as one latent cache, so K alone can't be
+  quantized ("does not support different K and V cache types"), and quantizing both needs flash attention, which
+  crashes it. What actually stops it at 32K is the **2.2–2.4 GB compute buffer on the 4070**, not the cache.
+
+**What it costs** (Qwen3.6 on the V100):
+
+| KV cache | Perplexity (wikitext-2, 16K-token chunks) | HumanEval (greedy) | Prompt t/s at 32K | Generation t/s at 32K |
+| :--- | ---: | ---: | ---: | ---: |
+| f16 | 5.3652 ± 0.032 | 153/164 | 638 | 89.4 |
+| q8_0 | 5.3699 (+0.09%) | 153/164 | 636 | 76.9 (−14%) |
+| q4_0 | 5.3764 (+0.21%) | 157/164 | 633 | 69.5 (−22%) |
+
+Glimmer's generation at 32K: 38.3 → 35.4 → 33.9 t/s.
+
+- **Quality: no measurable loss** at either setting. Both perplexity changes are inside the error bar, and HumanEval
+  moved within run-to-run noise.
+- **Speed: generation slows** as the cache is unpacked on every token (−14% at q8, −22% at q4 at 32K); prompt reading
+  doesn't change.
+- **Verdict:** use it where context is the limit (a 12 GB card), not where it isn't (Qwen3.6 on a V100). A SWE-bench
+  run with a q4_0 cache is queued; until it reports, treat agent use as unproven.
+
 ## What a GTX 1070 (Pascal, 8 GB) is still good for (measured October 2026)
 
 The 1070 sits in the main PC (i5-7400, 24 GB RAM, driver 580). Same llama.cpp commit as the V100/4070 table above

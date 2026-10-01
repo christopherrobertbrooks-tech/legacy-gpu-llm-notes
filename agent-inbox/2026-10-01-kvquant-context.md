@@ -56,3 +56,19 @@ SWE-bench run (`~/buyers-bench/kvquant.sh`, results in `~/buyers-bench/kvquant/`
   `llama-bench -d 32768` for each KV type on Qwen3.6 and Glimmer.
 - Caveat for later: a good PPL and HumanEval result wouldn't on its own justify changing Workbench's
   builder settings. That would need a SWE-bench run with the quantized cache.
+
+**2026-10-01 — measured; one agent check still running.** README section "KV-cache quantization: how much context
+does it buy?"; raw data in `buyers-bench/results/kvquant/`. Results:
+- **Ceilings:** Qwen3.6 fits its full 262K at f16 on the V100 (26.5 GB). Quantizing saves ~3 GB and buys nothing.
+  Bonsai on the 4070 goes 32K (f16) → 64K (q8) → 131K (q4).
+- **Mistral:** K-only is impossible (MLA's single latent cache: "does not support different K and V cache types"),
+  and V needs flash attention, which crashes it. The binding constraint at 32K is the 2.2–2.4 GB compute buffer on the
+  4070, as this note suspected.
+- **Quality** (Qwen3.6, 16K chunks): PPL 5.3652 / 5.3699 / 5.3764 (f16 / q8 / q4), all inside ±0.032. HumanEval
+  153 / 153 / 157.
+- **Speed at 32K:** generation −14% (q8) / −22% (q4); prompt reading unchanged.
+- The first attempt overlapped an orphaned Glimmer agent on the V100 (every load OOM) and was discarded and re-run.
+  The speed step asked llama-bench for the full 3×3 K/V cross product; it was stopped and re-run with matched types
+  only.
+- **Still running:** SWE-bench (20 tasks) for Qwen3.6 with a q4_0 cache, vs its 18/20 baseline. This note flips to
+  done when that reports.

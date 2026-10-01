@@ -1,0 +1,9 @@
+0.00.027.907 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.029.075 W srv  llama_server: -----------------
+0.00.029.078 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+0.00.029.078 W srv  llama_server: this can be a security risk (cross-origin attacks)
+0.00.029.078 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+0.00.029.078 W srv  llama_server: -----------------
+0.00.030.410 I srv    load_model: loading model '/mnt/steam/models/mistral4/Mistral-Small-4-119B-2603-UD-IQ2_M.gguf'
+0.00.353.446 E llama_init_from_model: model does not support different K (q8_0) and V (f16) cache types
+0.00.378.503 E common_fit_params: encountered an error while trying to fit params to free device memory: failed to create llama_context from model
