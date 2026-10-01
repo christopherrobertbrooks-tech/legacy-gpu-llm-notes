@@ -1867,5 +1867,21 @@
    "error": "",
    "patch_lines": 60
   }
+ ],
+ "glimmer": [
+  {
+   "instance_id": "django__django-13794",
+   "secs": 1805,
+   "turns": 44,
+   "error": "timeout (30 min)",
+   "patch_lines": 0
+  },
+  {
+   "instance_id": "django__django-11951",
+   "secs": 1806,
+   "turns": 70,
+   "error": "timeout (30 min); run stopped here",
+   "patch_lines": 0
+  }
  ]
 }

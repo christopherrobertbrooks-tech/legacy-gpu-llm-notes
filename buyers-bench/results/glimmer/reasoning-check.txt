@@ -1,0 +1,2 @@
+low: reasoning chars 770 | reply chars 772 | tokens 392 | decode tok/s 38.9
+high: reasoning chars 1966 | reply chars 1001 | tokens 795 | decode tok/s 39.3

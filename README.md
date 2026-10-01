@@ -218,6 +218,7 @@ all 164; as a calibration, Qwen2.5-Coder-7B Q4 scores 86.0% against its publishe
 | :--- | :--- | :--- | ---: |
 | Gemma 4 26B-A4B MoE | Q4_K_M | V100 | 97.6% |
 | Gemma 4 26B-A4B MoE | Q8_0 | V100 | 97.0% |
+| Muse Glimmer 30B dense | UD-Q4_K_XL | V100 | 96.3% ¶ |
 | Qwen3.8 27B dense | Q8_0 | V100 | 95.1% |
 | Gemma 4 12B | QAT Q4 | V100 | 94.5% |
 | Qwen3-Coder-Next 80B-A3B | UD-Q3_K_XL | both | 94.5% |
@@ -241,6 +242,8 @@ scored exactly its greedy 97.6%. ‡ The diffusion model's own decoder defaults,
 seed 1 — see [DiffusionGemma](#diffusiongemma-26b-a4b-on-the-v100-llamacpp-pr-24423) below.
 § Temperature 0.3 (Mistral gives a 0.0–0.7 range for reasoning off); "fair" score,
 64.0% strict — it indents whole answers ([details](#changing-how-many-experts-a-moe-uses-4-models)).
+¶ Greedy, with reasoning on at Meta's lowest setting (`Reasoning strength: low` in the system prompt; median
+~1,000 characters of reasoning per answer) — 42 minutes for the set. See the SWE-bench note below.
 
 **Read this for quantisation loss, not for ranking models.** HumanEval is from
 2021 and 2026 models have almost certainly seen it: most of these land between
@@ -324,6 +327,7 @@ kind of tool, not in a harness tuned for the benchmark.
 | Ornith-1.0 35B-A3B MoE | 17/20 — 99 min | — | 94.5% |
 | Gemma 4 26B-A4B MoE | 16/20 — 149 min | 11/20 — 98 min | 97.6% |
 | GLM-4.7-Flash 30B-A3B MoE | 12/20 — 185 min | 10/16 vs 10/16 on (stopped) | 81.1% |
+| Muse Glimmer 30B dense | 0/2 — stopped, both hit the 30-min limit | — | 96.3% |
 
 - **HumanEval does not predict this.** Gemma 4 leads HumanEval and is third here;
   Qwen3.6 and Ornith-1.5 are behind it on HumanEval and lead here. They fixed
@@ -336,6 +340,14 @@ kind of tool, not in a harness tuned for the benchmark.
   never near the budget). Ornith-1.5 and Gemma think far more (≈⅔ of their
   output), so switching it off saves them 40% — and Gemma falls apart without
   it (9 tasks hit the step limit, 5 produced nothing).
+- **Muse Glimmer (Meta, 28B dense, reasoning strength high) is too slow to be an agent on a V100.**
+  It scores 96.3% on HumanEval, but both tasks it tried hit the 30-minute limit with no fix. On the second
+  (django-11951, fixed by 12 of the 14 earlier runs; Qwen3.6 took 68 steps in 2 minutes) it took 70 steps
+  in 30. Each step pulled in ~14K new tokens (it reads whole source files instead of searching them), at
+  ~760 t/s prefill for a dense model on this card — ~25 s before it writes anything — and it filled the
+  131K context every ~5 steps, forcing a compaction. Its prompt cache worked; the cost is the model's
+  reading habit times dense prefill. Run stopped after two tasks; speed is pp512 717 / tg128 39 t/s.
+  [Raw data](buyers-bench/results/glimmer).
 - **Most of an agent step is re-reading the growing context** (prefill), not
   writing — which is why thinking off, and speculative decoding (below), buy
   so little here.

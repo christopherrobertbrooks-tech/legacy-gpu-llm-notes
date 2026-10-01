@@ -1,0 +1,6 @@
+17:03:40 django__django-13794: pulling swebench/sweb.eval.x86_64.django_1776_django-13794:latest
+17:33:45 django__django-13794: done in 30 min, 44 turns, patch 1 lines, timeout
+17:33:45 django__django-11951: pulling swebench/sweb.eval.x86_64.django_1776_django-11951:latest
+18:03:51 django__django-11951: done in 30 min, 70 turns, patch 1 lines, timeout
+18:03:51 django__django-14493: pulling swebench/sweb.eval.x86_64.django_1776_django-14493:latest
+STOPPED after task 2 (Chris: too slow)

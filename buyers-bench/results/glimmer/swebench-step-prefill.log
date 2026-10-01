@@ -1,0 +1,40 @@
+52.58.062.384 I slot      release: id  0 | task 19728 | stop processing: n_tokens = 90238, truncated = 0
+53.26.137.779 I slot print_timing: id  0 | task 19881 | prompt eval time =   24977.70 ms / 13680 tokens (    1.83 ms per token,   547.69 tokens per second)
+53.26.139.530 I slot      release: id  0 | task 19881 | stop processing: n_tokens = 104011, truncated = 0
+54.44.793.448 I slot print_timing: id  0 | task 19984 | prompt eval time =   29097.93 ms / 15630 tokens (    1.86 ms per token,   537.15 tokens per second)
+54.44.795.287 I slot      release: id  0 | task 19984 | stop processing: n_tokens = 106926, truncated = 0
+55.36.799.479 I slot print_timing: id  0 | task 21714 | prompt eval time =   47470.74 ms / 33545 tokens (    1.42 ms per token,   706.65 tokens per second)
+55.36.800.462 I slot      release: id  0 | task 21714 | stop processing: n_tokens = 48842, truncated = 0
+56.03.326.167 I slot print_timing: id  0 | task 21896 | prompt eval time =   23244.18 ms / 14848 tokens (    1.57 ms per token,   638.78 tokens per second)
+56.03.327.356 I slot      release: id  0 | task 21896 | stop processing: n_tokens = 63804, truncated = 0
+56.30.847.476 I slot print_timing: id  0 | task 22020 | prompt eval time =   24318.58 ms / 14554 tokens (    1.67 ms per token,   598.47 tokens per second)
+56.30.848.987 I slot      release: id  0 | task 22020 | stop processing: n_tokens = 78466, truncated = 0
+57.11.182.265 I slot print_timing: id  0 | task 22138 | prompt eval time =   25723.15 ms / 14595 tokens (    1.76 ms per token,   567.39 tokens per second)
+57.11.190.145 I slot      release: id  0 | task 22138 | stop processing: n_tokens = 93569, truncated = 0
+57.39.076.452 I slot print_timing: id  0 | task 22656 | prompt eval time =   25399.62 ms / 13719 tokens (    1.85 ms per token,   540.13 tokens per second)
+57.39.078.297 I slot      release: id  0 | task 22656 | stop processing: n_tokens = 107365, truncated = 0
+59.13.787.478 I slot print_timing: id  0 | task 22743 | prompt eval time =   29898.46 ms / 16034 tokens (    1.86 ms per token,   536.28 tokens per second)
+59.13.789.300 I slot      release: id  0 | task 22743 | stop processing: n_tokens = 110815, truncated = 0
+60.05.164.688 I slot print_timing: id  0 | task 24992 | prompt eval time =   48181.88 ms / 34008 tokens (    1.42 ms per token,   705.83 tokens per second)
+60.05.165.685 I slot      release: id  0 | task 24992 | stop processing: n_tokens = 49255, truncated = 0
+60.37.525.050 I slot print_timing: id  0 | task 25124 | prompt eval time =   23730.29 ms / 14934 tokens (    1.59 ms per token,   629.32 tokens per second)
+60.37.526.263 I slot      release: id  0 | task 25124 | stop processing: n_tokens = 64498, truncated = 0
+61.05.220.353 I slot print_timing: id  0 | task 25444 | prompt eval time =   24348.86 ms / 14513 tokens (    1.68 ms per token,   596.04 tokens per second)
+61.05.221.834 I slot      release: id  0 | task 25444 | stop processing: n_tokens = 79124, truncated = 0
+61.36.895.607 I slot      release: id  0 | task 25567 | stop processing: n_tokens = 93918, truncated = 0
+62.11.090.016 I slot print_timing: id  0 | task 25777 | prompt eval time =     712.71 ms /   405 tokens (    1.76 ms per token,   568.25 tokens per second)
+62.11.090.617 I slot      release: id  0 | task 25777 | stop processing: n_tokens = 2280, truncated = 0
+62.57.708.510 I slot print_timing: id  0 | task 25778 | prompt eval time =   41050.14 ms / 31180 tokens (    1.32 ms per token,   759.56 tokens per second)
+62.57.709.238 I slot      release: id  0 | task 25778 | stop processing: n_tokens = 31386, truncated = 0
+63.41.240.985 I slot print_timing: id  0 | task 27163 | prompt eval time =   26776.96 ms / 18117 tokens (    1.48 ms per token,   676.59 tokens per second)
+63.41.246.111 I slot      release: id  0 | task 27163 | stop processing: n_tokens = 50119, truncated = 0
+4.00.066.777 I slot print_timing: id  0 | task 0 | prompt eval time =  172028.83 ms / 64096 tokens (    2.68 ms per token,   372.59 tokens per second)
+4.00.159.642 I slot      release: id  0 | task 0 | stop processing: n_tokens = 64405, truncated = 0
+5.34.105.572 I slot print_timing: id  0 | task 344 | prompt eval time =   45211.17 ms / 13813 tokens (    3.27 ms per token,   305.52 tokens per second)
+5.34.107.083 I slot      release: id  0 | task 344 | stop processing: n_tokens = 78955, truncated = 0
+6.34.804.802 I slot print_timing: id  0 | task 1091 | prompt eval time =   49528.98 ms / 14000 tokens (    3.54 ms per token,   282.66 tokens per second)
+6.34.806.635 I slot      release: id  0 | task 1091 | stop processing: n_tokens = 92840, truncated = 0
+7.57.331.036 I slot print_timing: id  0 | task 1262 | prompt eval time =   49604.36 ms / 13726 tokens (    3.61 ms per token,   276.71 tokens per second)
+7.57.333.495 I slot      release: id  0 | task 1262 | stop processing: n_tokens = 107041, truncated = 0
+9.59.845.381 I slot print_timing: id  0 | task 1747 | prompt eval time =   55638.43 ms / 15694 tokens (    3.55 ms per token,   282.07 tokens per second)
+9.59.927.297 I slot      release: id  0 | task 1747 | stop processing: n_tokens = 109009, truncated = 0

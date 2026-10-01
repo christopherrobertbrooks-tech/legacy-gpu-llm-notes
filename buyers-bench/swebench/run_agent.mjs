@@ -47,7 +47,7 @@ for (const t of tasks) {
     try {
       for await (const m of query({ prompt: `Fix this issue in the repository:\n\n${t.problem_statement}`, options: {
           cwd: work, env, model, abortController: abort, permissionMode: "bypassPermissions", settingSources: [], maxTurns: 100,
-          disallowedTools: ["WebSearch", "WebFetch"], systemPrompt: { type: "preset", preset: "claude_code", append: RULES } } })) {
+          disallowedTools: ["WebSearch", "WebFetch"], systemPrompt: { type: "preset", preset: "claude_code", append: RULES + (process.env.SWE_SYSTEM_EXTRA ? "\n" + process.env.SWE_SYSTEM_EXTRA : "") } } })) {   // SWE_SYSTEM_EXTRA: model-specific line, e.g. Muse Glimmer's "Reasoning strength: high"
         if (m.type === "assistant") turns++;
         if (m.type === "result" && m.subtype !== "success") err = m.subtype;
       }

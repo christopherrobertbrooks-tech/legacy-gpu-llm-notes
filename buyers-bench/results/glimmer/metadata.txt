@@ -1,0 +1,10 @@
+arch muse-glimmer
+  muse-glimmer.block_count [52]
+  muse-glimmer.context_length [131072]
+  muse-glimmer.attention.head_count [32]
+  muse-glimmer.attention.head_count_kv [2]
+  muse-glimmer.attention.key_length [128]
+  muse-glimmer.attention.value_length [128]
+  muse-glimmer.attention.sliding_window [2048]
+  muse-glimmer.attention.sliding_window_pattern [4]
+template mentions Reasoning strength: True | raises on system position: False | thinking tags: []
