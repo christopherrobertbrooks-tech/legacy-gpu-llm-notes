@@ -151,8 +151,11 @@ speed or a curve that is already high enough at idle.
 - The card's own limits (*here*): normal max 83 °C, throttles at 87 °C, shuts
   down at 90 °C; memory max 85 °C. It idles at 35 °C.
 - Watch it under load: `nvidia-smi --query-gpu=temperature.gpu,power.draw --format=csv -l 2`.
-- To trade a little speed for heat, `sudo nvidia-smi -i <index> -pl 200` lowers
-  the power limit (the speed cost wasn't measured here).
+- **A power limit gains nothing with MoE models** (measured: Qwen3.6 35B-A3B Q4,
+  limit changed between rounds on a loaded server). It only draws ~120–130 W, so
+  250 → 125 W changes nothing (577 prefill / 96 decode tok/s, 44–47 °C). At the
+  100 W floor: −6% decode, −1% prefill, 20 W less, same temperature. Limits only
+  bite for heavy dense or diffusion models; set one with `sudo nvidia-smi -i <index> -pl <watts>`.
 
 **BIOS** — turn **Above 4G Decoding on** and boot in **UEFI** mode (CSM off).
 Without it the card shows in `lspci` but the driver reports "No devices were
