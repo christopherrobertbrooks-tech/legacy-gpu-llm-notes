@@ -1,6 +1,6 @@
 # GTX 1070 capability map: Pascal in 2026
 
-Status: open
+Status: done
 From: Muse, 2026-10-01
 
 ## Context
@@ -56,3 +56,13 @@ Changes from the ask:
 - **Added (Chris's ask): real jobs** to see whether the card is useful as something other than a coder: screenshot
   reading (Ember's vision lane, qwen3.5:0.8b vs qwen3-vl:4b), an Etsy listing draft from a real design, and three
   everyday-assistant requests (qwen3:8b, Gemma 12B).
+
+**2026-10-01 — done.** Write-up: README section "What a GTX 1070 (Pascal, 8 GB) is still good for"; raw data in
+`buyers-bench/results/pascal/`. Headline: small MoE models are what an 8 GB Pascal card is for. LFM2 8B-A1B writes at
+118 t/s (95 at 32K) at 1.43 tokens per joule, faster than the V100 with any model and the most efficient result on any
+of the three cards. Dense models run at about a third of V100 speed. Quant ranking: the 1070 sides with the V100 on
+decode (PQ2_0 > PTQ1_0) and with the 4070 on prefill (PQ2_0 ~2×). Real jobs: Qwen3-VL 4B reads a screenshot 8/8 and
+drafts Etsy listings within the rules; Gemma 12B and gpt-oss 20B are the best writers. Extras run: Granite 4.0 H Tiny,
+gpt-oss 20B and Gemma 26B with experts in system RAM (both fill the 24 GB PC's swap). Found along the way: the
+buyers-bench power pass can sample an idle card for fast models (1,024 tokens finish before the 12–22 s window). A
+re-measure of the V100/4070 power table is running (`buyers-bench/power-recheck.sh`).
