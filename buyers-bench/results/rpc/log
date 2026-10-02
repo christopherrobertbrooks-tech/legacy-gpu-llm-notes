@@ -1,0 +1,42 @@
+20:28:43 network (gateway -> this PC, Wi-Fi both ends)
+rtt min/avg/max/mdev = 1.863/3.452/16.277/2.457 ms
+192.168.0.53: 210 MB in 10.8s = 19.4 MB/s
+rtt min/avg/max/mdev = 3.036/4.892/11.378/1.443 ms
+100.114.197.44: 210 MB in 12.7s = 16.5 MB/s
+20:30:17 == coder7b-v100 (CUDA0 )
+20:30:24    2 rows in 7 s 
+   pp512 tg0 depth 0: 3146.8 t/s
+   pp0 tg128 depth 0: 122.9 t/s
+20:30:24 == coder7b-v100+1070 (CUDA0/RPC0 -ts 1/1)
+20:33:04    2 rows in 160 s 
+   pp512 tg0 depth 0: 481.4 t/s
+   pp0 tg128 depth 0: 14.2 t/s
+20:33:04 == coder7b-v100+1070-2 (CUDA0/RPC0 -ts 1/1)
+20:33:48    2 rows in 44 s 
+   pp512 tg0 depth 0: 498.8 t/s
+   pp0 tg128 depth 0: 14.1 t/s
+20:33:48 == gemma26bq8-v100 (CUDA0 )
+20:35:31    2 rows in 103 s 
+   pp512 tg0 depth 0: 980.4 t/s
+   pp0 tg128 depth 0: 84.6 t/s
+20:35:31 == gemma26bq8-v100+1070 (CUDA0/RPC0 -ts 26/6)
+20:41:36    2 rows in 365 s 
+   pp512 tg0 depth 0: 638.1 t/s
+   pp0 tg128 depth 0: 10.1 t/s
+20:41:36 == llama70b-v100+4070 (CUDA0/CUDA1 )
+20:45:01    4 rows in 205 s 
+   pp512 tg0 depth 0: 327.5 t/s
+   pp0 tg128 depth 0: 16.5 t/s
+   pp512 tg0 depth 8192: 309.2 t/s
+   pp0 tg128 depth 8192: 15.6 t/s
+20:45:01 == llama70b-v100+1070 (CUDA0/RPC0 -ts 31/7)
+20:54:43    2 rows in 582 s 
+   pp512 tg0 depth 0: 134.6 t/s
+   pp0 tg128 depth 0: 7.7 t/s
+20:54:43 == llama70b-v100+4070+1070 (CUDA0/CUDA1/RPC0 -ts 30/10/6)
+21:00:47    4 rows in 364 s 
+   pp512 tg0 depth 0: 156.5 t/s
+   pp0 tg128 depth 0: 8.1 t/s
+   pp512 tg0 depth 8192: 113.5 t/s
+   pp0 tg128 depth 8192: 6.0 t/s
+21:00:53 swap used 4401 MiB; RPC-DONE

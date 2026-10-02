@@ -1,0 +1,7 @@
+ggml_cuda_init: found 2 CUDA devices (Total VRAM: 44358 MiB):
+  Device 0: Tesla V100-PCIE-32GB, compute capability 7.0, VMM: yes, VRAM: 32494 MiB
+  Device 1: NVIDIA GeForce RTX 4070, compute capability 8.9, VMM: yes, VRAM: 11864 MiB
+/home/chris/bonsai/llama.cpp/ggml/src/ggml-cuda/ggml-cuda.cu:107: CUDA error
+warning: 30	../sysdeps/unix/sysv/linux/wait4.c: No such file or directory
+warning: 58	../sysdeps/nptl/libc_start_call_main.h: No such file or directory
+warning: 360	../csu/libc-start.c: No such file or directory

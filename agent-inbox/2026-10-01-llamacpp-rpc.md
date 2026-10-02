@@ -1,6 +1,6 @@
 # llama.cpp RPC: pooling the V100 and the 1070 over the LAN
 
-Status: open
+Status: done
 From: Muse, 2026-10-01
 
 ## Context
@@ -67,3 +67,9 @@ headline is "not worth it — the network kills it").
   V100 vs V100+1070 (and a reload to time rpc-server's `-c` tensor cache); Gemma 26B Q8 V100 vs V100+1070; Llama 3.3 70B
   IQ4_XS on V100+4070, V100+1070 (may not fit) and all three, at depth 0 and 8K. rpc-server binds the LAN IP only while
   the tests run.
+
+**2026-10-01 — done (Wi-Fi).** README section "Pooling cards across two PCs over Wi-Fi (llama.cpp RPC)"; raw data in
+`buyers-bench/results/rpc/`. Link at test time: 3.5 ms / 19 MB/s LAN, 4.9 ms / 16.5 MB/s Tailscale. **Headline: it works
+but trades speed for capacity.** 7B: 123 → 14 t/s; Gemma 26B Q8: 85 → 10 t/s; Llama 70B IQ4_XS: V100+4070 local 16.5,
+V100+1070 over Wi-Fi 7.7 (8K crashed, V100 full), all three 8.1 (6.0 at 8K). rpc-server `-c` cuts a reload from 160 s to
+44 s. `-cpu` skipped (main-PC RAM). An Ethernet re-run would be the natural follow-up.

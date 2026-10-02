@@ -1,0 +1,6 @@
+20:07:00 network (gateway -> this PC, Wi-Fi both ends)
+rtt min/avg/max/mdev = 2.560/3.504/7.959/1.273 ms
+192.168.0.53: 210 MB in 10.9s = 19.3 MB/s
+rtt min/avg/max/mdev = 3.344/4.644/8.429/1.046 ms
+100.114.197.44: 210 MB in 12.1s = 17.3 MB/s
+20:08:33 == coder7b-v100 (CUDA0 )

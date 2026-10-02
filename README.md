@@ -119,6 +119,40 @@ The 70B fills 29.7 GB of the V100 and 11.2 GB of the 4070 — about the ceiling 
 and draws ~280 W across both cards. System RAM on this box is 16 GB, so nothing
 here spills to CPU; everything is fully offloaded (`-ngl 99`).
 
+### Pooling cards across two PCs over Wi-Fi (llama.cpp RPC)
+
+llama.cpp's RPC backend lets one machine use another machine's GPU: run `rpc-server` there, add `--rpc host:port`
+here, and the remote card shows up as a device (`RPC0`) that `-dev`/`-ts` can place layers on. Tested: the gateway
+(V100 + 4070) using the main PC's GTX 1070 over **Wi-Fi on both ends** (no Ethernet), measured right before the run at
+**3.5 ms ping and 19 MB/s** (17 MB/s through Tailscale). Same PrismML build with `-DGGML_RPC=ON`; `llama-bench -fa on
+-p 512 -n 128 -r 2`. Raw data: [results/rpc](buyers-bench/results/rpc).
+
+| Model | Devices | Prompt t/s | Generation t/s | Generation at 8K |
+| :--- | :--- | ---: | ---: | ---: |
+| Qwen2.5-Coder 7B Q4_K_M | V100 alone | 3,147 | **123** | — |
+| | V100 + 1070 over Wi-Fi (1:1) | 481 | 14.2 | — |
+| Gemma 4 26B-A4B Q8_0 | V100 alone | 980 | **85** | — |
+| | V100 + 1070 over Wi-Fi (26:6) | 638 | 10.1 | — |
+| **Llama 3.3 70B IQ4_XS** (37.9 GB) | V100 + 4070, same PC | 328 | **16.5** | **15.6** |
+| | V100 + 1070 over Wi-Fi (31:7) | 135 | 7.7 | crashed (CUDA error, V100 full) |
+| | V100 + 4070 + 1070 over Wi-Fi | 157 | 8.1 | 6.0 |
+
+- **It works, and it's slow.** Every split loaded and produced output. But any layer across the network makes every
+  token wait on it: 70 ms per token for the 7B is far more than one 3.5 ms round trip, so each token makes many trips.
+- **It's only worth it for a model that fits nowhere else.** Models that fit one card got 8–9× slower. The 70B ran
+  across the V100 and a 1070 in another PC at 7.7 t/s, about reading speed. That's the case RPC exists for, but it's
+  half of what the same model does on two cards in one PC.
+- **A third card over the network halves a local pair's speed** (16.5 → 8.1 t/s). It adds room for a bigger model or
+  more context, not speed.
+- **Loading pays the network once:** the remote card's weights are sent over Wi-Fi (~2 min for 2.3 GB). `rpc-server
+  -c` caches them on the remote disk, and the second load of the 7B took 44 s instead of 160 s.
+- **Practical notes:** in this tree the server target is `ggml-rpc-server`. It prints "This is an experimental feature and
+  is not secure!" (no authentication), so bind it to the LAN address and run it only while needed. ik_llama.cpp's
+  rpc-server adds `-cpu` to lend the remote PC's system RAM as well; that wasn't tried, because the main PC (24 GB,
+  systemd-oomd) has no RAM to spare.
+- **Not yet tested: Ethernet.** Both PCs have unused Ethernet ports. Since latency per trip is what costs, a wired
+  link should help; how much is an open question.
+
 ### KV-cache quantization: how much context does it buy?
 
 llama.cpp can store the conversation memory (the KV cache) at 8 or 4 bits instead of 16: `-ctk q8_0 -ctv q8_0`

@@ -1,0 +1,29 @@
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,load_mode,embeddings,no_op_offload,no_host,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"3ae4f51","1","13th Gen Intel(R) Core(TM) i7-13700KF","Tesla V100-PCIE-32GB, NVIDIA GeForce RTX 4070, 192.168.0.53:50052","CUDA,RPC","/mnt/steam/models/Llama-3.3-70B-Instruct-IQ4_XS.gguf","llama 70B IQ4_XS - 4.25 bpw","37894799616","70553706560","2048","512","8","0x0","0","50","f16","f16","99","0","layer","0","0","1","CUDA0/RPC0","31.00/7.00","none","auto","0","0","0","0","0","512","0","0","2026-10-02T01:53:53Z","3805336371","33197911","134.553016","1.173842"
+"3ae4f51","1","13th Gen Intel(R) Core(TM) i7-13700KF","Tesla V100-PCIE-32GB, NVIDIA GeForce RTX 4070, 192.168.0.53:50052","CUDA,RPC","/mnt/steam/models/Llama-3.3-70B-Instruct-IQ4_XS.gguf","llama 70B IQ4_XS - 4.25 bpw","37894799616","70553706560","2048","512","8","0x0","0","50","f16","f16","99","0","layer","0","0","1","CUDA0/RPC0","31.00/7.00","none","auto","0","0","0","0","0","0","128","0","2026-10-02T01:54:06Z","16524114126","16022236","7.746259","0.007511"
+[New LWP 643393]
+[New LWP 643392]
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+0x00007f2fd9f10913 in __GI___wait4 (pid=646134, stat_loc=0x0, options=0, usage=0x0) at ../sysdeps/unix/sysv/linux/wait4.c:30
+#0  0x00007f2fd9f10913 in __GI___wait4 (pid=646134, stat_loc=0x0, options=0, usage=0x0) at ../sysdeps/unix/sysv/linux/wait4.c:30
+30	in ../sysdeps/unix/sysv/linux/wait4.c
+#1  0x00007f2fda4a97b3 in ggml_print_backtrace () from /home/chris/bonsai/llama.cpp/build-rpc/bin/libggml-base.so.0
+#2  0x00007f2fda4a995b in ggml_abort () from /home/chris/bonsai/llama.cpp/build-rpc/bin/libggml-base.so.0
+#3  0x00007f2fd3468147 in ggml_cuda_error(char const*, char const*, char const*, int, char const*) () from /home/chris/bonsai/llama.cpp/build-rpc/bin/libggml-cuda.so.0
+#4  0x00007f2fd3483de3 in ggml_cuda_pool_vmm::alloc(unsigned long, unsigned long*) () from /home/chris/bonsai/llama.cpp/build-rpc/bin/libggml-cuda.so.0
+#5  0x00007f2fd3471538 in void ggml_cuda_mul_mat_cublas_impl<(ggml_type)1>(ggml_backend_cuda_context&, ggml_tensor const*, ggml_tensor const*, ggml_tensor*) () from /home/chris/bonsai/llama.cpp/build-rpc/bin/libggml-cuda.so.0
+#6  0x00007f2fd347b419 in ggml_cuda_compute_forward(ggml_backend_cuda_context&, ggml_tensor*) () from /home/chris/bonsai/llama.cpp/build-rpc/bin/libggml-cuda.so.0
+#7  0x00007f2fd347e141 in ggml_cuda_graph_evaluate_and_capture(ggml_backend_cuda_context*, ggml_cgraph*, bool, bool, void const*) () from /home/chris/bonsai/llama.cpp/build-rpc/bin/libggml-cuda.so.0
+#8  0x00007f2fd3480f00 in ggml_backend_cuda_graph_compute(ggml_backend*, ggml_cgraph*) () from /home/chris/bonsai/llama.cpp/build-rpc/bin/libggml-cuda.so.0
+#9  0x00007f2fda4c88a7 in ggml_backend_sched_graph_compute_async () from /home/chris/bonsai/llama.cpp/build-rpc/bin/libggml-base.so.0
+#10 0x00007f2fd9503f91 in llama_context::graph_compute(ggml_cgraph*, bool) () from /home/chris/bonsai/llama.cpp/build-rpc/bin/libllama.so.0
+#11 0x00007f2fd950899a in llama_context::process_ubatch(llama_ubatch const&, llm_graph_type, llama_memory_context_i*, ggml_status&) () from /home/chris/bonsai/llama.cpp/build-rpc/bin/libllama.so.0
+#12 0x00007f2fd950df5d in llama_context::decode(llama_batch const&) () from /home/chris/bonsai/llama.cpp/build-rpc/bin/libllama.so.0
+#13 0x00007f2fd950f61f in llama_decode () from /home/chris/bonsai/llama.cpp/build-rpc/bin/libllama.so.0
+#14 0x00007f2fda5cdd31 in test_prompt(llama_context*, int, int, int) () from /home/chris/bonsai/llama.cpp/build-rpc/bin/libllama-bench-impl.so
+#15 0x00007f2fda5dccee in llama_bench(int, char**) () from /home/chris/bonsai/llama.cpp/build-rpc/bin/libllama-bench-impl.so
+#16 0x00007f2fd9e2a1ca in __libc_start_call_main (main=main@entry=0x57b27ab6c270 <main>, argc=argc@entry=23, argv=argv@entry=0x7fff60f5bca8) at ../sysdeps/nptl/libc_start_call_main.h:58
+#17 0x00007f2fd9e2a28b in __libc_start_main_impl (main=0x57b27ab6c270 <main>, argc=23, argv=0x7fff60f5bca8, init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, stack_end=0x7fff60f5bc98) at ../csu/libc-start.c:360
+#18 0x000057b27ab6c2a5 in _start ()
+[Inferior 1 (process 643387) detached]
