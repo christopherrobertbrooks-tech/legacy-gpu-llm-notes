@@ -155,8 +155,12 @@ Glimmer's generation at 32K: 38.3 → 35.4 → 33.9 t/s.
   moved within run-to-run noise.
 - **Speed: generation slows** as the cache is unpacked on every token (−14% at q8, −22% at q4 at 32K); prompt reading
   doesn't change.
-- **Verdict:** use it where context is the limit (a 12 GB card), not where it isn't (Qwen3.6 on a V100). A SWE-bench
-  run with a q4_0 cache is queued; until it reports, treat agent use as unproven.
+- **As an agent** (SWE-bench, 20 tasks, Qwen3.6 with a q4_0 cache): **17/20 vs 18/20** at f16. It lost django-11433,
+  the borderline task that thinking on/off also decides. It took 103 min vs 60, about 73 min without one task where it
+  spent 30 minutes waiting on a helper agent it believed it had started (a task no model has solved). That's roughly a
+  third slower, with 1,686 steps vs 1,460.
+- **Verdict:** use it where context is the limit (a 12 GB card), not where it isn't (Qwen3.6 on a V100 fits 262K at
+  f16, and quantizing there only costs speed and possibly a fix).
 
 ## What a GTX 1070 (Pascal, 8 GB) is still good for (measured October 2026)
 

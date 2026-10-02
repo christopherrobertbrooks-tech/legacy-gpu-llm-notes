@@ -1,6 +1,6 @@
 # KV-cache quantization: how much context does it buy?
 
-Status: open
+Status: done
 From: Muse, 2026-10-01
 
 ## Context
@@ -72,3 +72,7 @@ does it buy?"; raw data in `buyers-bench/results/kvquant/`. Results:
   only.
 - **Still running:** SWE-bench (20 tasks) for Qwen3.6 with a q4_0 cache, vs its 18/20 baseline. This note flips to
   done when that reports.
+- **Done (2026-10-01): SWE-bench with a q4_0 cache: 17/20 vs 18/20 at f16** (lost django-11433), 103 min vs 60 (~73
+  without a 30-min timeout on an unsolvable task where it waited on a phantom helper agent). Headline: KV quantization
+  is free in perplexity and HumanEval, costs up to 22% decode speed at 32K, and is worth it only where context is the
+  limit (Bonsai on the 4070: 32K → 131K); not for Qwen3.6 on the V100, which fits 262K at f16.
