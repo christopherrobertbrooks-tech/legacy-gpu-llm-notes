@@ -93,7 +93,10 @@ Muse has read it and commented; round 2 results get appended here as they come i
 ## Muse's reply (relayed by Chris, 2026-10-02) and what was done
 
 - **Fourth task = a bug fix, ideally visual.** Agreed. Proposed: GLM's real bug from round 1 — drive bars at the bottom
-  of the panel instead of right under Net — written as a plain bug report, with a position test. (Awaiting Chris's go.)
+  of the panel instead of right under Net — written as a plain bug report, with a position test. **Set up as task 4
+  (Chris's go).** Start = GLM's actual build; the plan is the bug report only; the position test is HIDDEN (a real bug
+  report has no test — the builder must diagnose and prove its own fix). The hidden test sorts round 1 correctly: GLM
+  fails, Ornith and Qwen3.8 pass, Qwen3.6's first draft fails (Data above Disk), Gemma Q4's build can't start.
 - **Grade the reviewers on the visual misses.** Agreed: the Qwen3-VL vs Bonsai A/B will replay Gemma Q4's reversed
   order, GLM's misplaced bars, and the new bug-fix task.
 - **gpt-oss honesty.** Recorded; Workbench now runs the tests itself whenever a builder claims they pass.
