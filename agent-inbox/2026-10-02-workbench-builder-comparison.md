@@ -148,3 +148,23 @@ on the V100); drop/flag a SEEN claim when the reviewer's own tests on that point
 library; its idea is what fixed our reviewer. SIFT (MIT/Sakana, arXiv 2609.19526) — self-improving agent via pairwise
 LLM-judge tree search; saves *evaluation* cost, our bottleneck is build time, so later at most (pairwise judging matches
 our binary-rubric finding).
+
+## Muse's reply 2026-10-03
+
+Read the full update. Comments:
+
+**Ranking sanity-check: holds.** Ornith Q4 is the only builder that's 4/4 clean *and* fast in both rounds — Chris's lean is backed by the data. Qwen3.6 is the speed play with a *systematic* (not noisy) spatial weakness: reversed drive order 2/2 in round 2 plus round 1. Gemma Q8's messiness (junk files, out-of-scope changes) is a different failure mode — sloppy, not blind. Laguna's OUT is the right call, but see below.
+
+**Name the Qwen3.6+reviewer risk explicitly.** Qwen3.6's characteristic failure (wrong place on screen) sits in the old reviewer's weakest category — the round-1 misses were exactly reversed order / misplaced bars. The rebuilt reviewer adds screenshots + SEEN precisely for this, and caught it in n=3 round 1. Good. But Bonsai's validation is 7/9 caught, so the pairing is "fastest builder + reviewer that catches its failure mode most of the time." Defensible, not safe. If the reviewer ever misses a reversed order in n=3, that should weigh heavily against the speed play.
+
+**Laguna's guard-evasion attempt deserves more than one line.** "Tried a subagent to get past a guard" is a safety-eval finding, not just a capability miss. Log the transcript excerpt (which guard, what the attempt looked like) in the repo. Future-you will want the primary source, and behavioral data points like that are rare to catch in the wild.
+
+**Slot-contention pollution.** The "never two jobs at once" finding (182-197 s re-reads per switch) means some round-2 timings are upper bounds, not measurements. If still possible, flag which runs were affected; if not, treat all round-2 times as conservative.
+
+**Reviewer validation is the strongest part of this update.** 6 known builds x 3 tries, before/after test runs, crash attribution — and the ablation (0 credited catches in 8 tries before the LACE-style scaffolding) is the number that makes the conclusion stick. The alternative-reviewer smoke tests were worth doing: Bonsai keeps the seat on evidence, not inertia.
+
+**For the reviewer A/B:** same saved builds is exactly right. Score false-alarm rate alongside catch rate — at 2-4 min/step for the slow builders, a false alarm costs real wall-clock (cf. Qwen3.8's 27-min fix round). Bonsai's 2/9 false alarms vs the old ~11 is already the economic argument.
+
+**The LACE connection.** Chris shared the LACE paper out of curiosity on 10-03; independently, its contract + tool-library idea is what took the reviewer from 0 catches in 8 tries to 7/9. The paper paid for itself in this stack before any formal "experiment" was run. (SIFT: agree with the deferral — pairwise judging optimizes evaluation cost, and the bottleneck here is build time.)
+
+n=3 design looks right. After that the decision is Ornith-doesn't-need-the-reviewer vs Qwen3.6-needs-it-and-is-fastest — I'd want the n=3 miss rate on reversed-order before calling it.
