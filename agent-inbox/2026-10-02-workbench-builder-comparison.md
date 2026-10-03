@@ -102,3 +102,49 @@ Muse has read it and commented; round 2 results get appended here as they come i
 - **gpt-oss honesty.** Recorded; Workbench now runs the tests itself whenever a builder claims they pass.
 - **Diff-size tripwire.** Done: both graders print files touched and +/- lines, and warn when a change removes far more
   than the job needs. Checked on known builds: flags the 12B (-693), quiet on Ornith (-8) and Qwen3.8 stale-memory (-15).
+
+## Update 2026-10-03 — round 2 results, reviewer rebuilt, n=3 started
+
+**Round 2 (4 tasks: ember-dash, ember-stale-memory, ember-lookup-bench, ember-dash bug fix).** Time = to all tests passing.
+| Builder | Right on its own | Notes |
+|---|---|---|
+| Ornith 1.5 Q4 | 4/4 | 5 / ~14 / 5 / 4½ min; cleanest overall |
+| Ornith 1.5 Q5 + vision | 4/4 | reviewer flagged nothing on any task; had eyes, read 0 screenshots unprompted |
+| Ornith 1.5 Q6 | 3/4 | ember-dash drive order reversed; not slower than Q4 (fewer steps offset slower steps) |
+| Qwen3.6 | 2/4 alone, 4/4 after review | fastest by far (3½ / 3½ / 8 / 5 min) but reversed the drive order on its own in 2 of 2 runs |
+| Qwen3.8 27B | 4/4 | meticulous, slow (17–37 min) |
+| Gemma 4 26B Q8 | 4/4 after review | fast, messy (junk files, an out-of-scope change), repeats the reversed order |
+| Laguna XS 2.1 | OUT | stale-memory right in 3:44, then looped / added the reviewer's buggy test / tried a subagent to get past a guard |
+Ember tasks had to keep all 100 of Ember's existing tests passing; every finished build did. Chris leans Ornith (Q4 or Q5+vision).
+
+**Reviewer rebuilt** (`~/Code/workbench/review-core.js`, shared with a replay harness that re-runs reviews on saved builds):
+tests must give a BASIS (plan quote or "worked before"; inferred if missing); every test runs on the code BEFORE and
+AFTER the change; a crash counts only if the change caused it (a crash about the test's own fake = broken test); broken
+tests go back to the reviewer once; prompt + reply sized to the reviewer's real context with its own tokenizer; a
+screenshot of the app (new `tools/wb-look`: invisible screen, no session bus so it never collides with his running copy)
+plus a `SEEN: … | PLAN: "…"` channel; and a LACE-style contract + tool library (THE PLAN in its own section, a fixed
+answer shape, ready-made helpers `gtk/in_order/labels_between/fake`, the project's own fixtures listed with import lines).
+Validation, 6 known builds × 3 tries: **Bonsai 7/9 real bugs caught, 2/9 false alarms** (one misread screenshot, one
+unrequested edge case), median 4.6 min — vs ~6 caught / ~11 false alarms for the old reviewer in live runs. Before the
+LACE-style scaffolding: 0 credited catches in 8 tries. Smoke-tested and dropped: Qwen3-VL-8B (fast, misses), Qwen3.5-9B
+(rambles or misses), Ornith 1.5 9B (0/4 in validation — sees the bug, can't format the proof).
+
+**Workbench changes since the last update:** vision push for builders with eyes (wb-look + "look before you finish" +
+nudge); builders without vision can't open images (one did, and every later request was refused); tool calls written as
+plain text get sent back; .pyc files never count as changes or tests; test mode (approval boxes auto-yes except his real
+projects, which get a normal box); a start door so Claude can start jobs in the open window; **never two jobs at once** —
+two jobs sharing the V100's single slot made each re-read 60–90K tokens on every switch (182–197 s each, seen in the
+llama-server log), which had silently slowed some round-2 runs.
+
+**Now:** n = 3 — Ornith Q4+vision, Ornith Q5+vision, Qwen3.6+vision, all 4 tasks × 3, with the vision push and the
+rebuilt reviewer. Ornith Q4+vision round 1: 4/4 after review; it took 2 screenshots on ember-dash but still reversed the
+order — the reviewer caught it (test + SEEN), the fix round fixed it.
+
+**After n=3:** Qwen3.8 27B+vision as reviewer on the V100 (swapping with the builder) on the same saved builds; A/B prompt
+lookup decoding (`--spec-type ngram-simple`) and prefill settings (bigger `-ub`, flash attention — Ornith reads ~470 t/s
+on the V100); drop/flag a SEEN claim when the reviewer's own tests on that point pass.
+
+**Papers Chris found, noted:** LACE (Nat. Mach. Intell. 2026) — same model 0.571 → 0.945 with a fixed contract + tool
+library; its idea is what fixed our reviewer. SIFT (MIT/Sakana, arXiv 2609.19526) — self-improving agent via pairwise
+LLM-judge tree search; saves *evaluation* cost, our bottleneck is build time, so later at most (pairwise judging matches
+our binary-rubric finding).
