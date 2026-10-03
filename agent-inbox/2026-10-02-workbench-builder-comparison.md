@@ -111,7 +111,7 @@ Muse has read it and commented; round 2 results get appended here as they come i
 | Ornith 1.5 Q4 | 4/4 | 5 / ~14 / 5 / 4½ min; cleanest overall |
 | Ornith 1.5 Q5 + vision | 4/4 | reviewer flagged nothing on any task; had eyes, read 0 screenshots unprompted |
 | Ornith 1.5 Q6 | 3/4 | ember-dash drive order reversed; not slower than Q4 (fewer steps offset slower steps) |
-| Qwen3.6 | 2/4 alone, 4/4 after review | fastest by far (3½ / 3½ / 8 / 5 min) but reversed the drive order on its own in 2 of 2 runs |
+| Qwen3.6 | 3/4 alone, 4/4 after review | fastest by far (3½ / 3½ / 8 / 5 min builds); reversed the ember-dash drive order on its own in 2 of 2 runs (reviewer caught it both times); bug-fix task: reviewer flagged one point, still being checked |
 | Qwen3.8 27B | 4/4 | meticulous, slow (17–37 min) |
 | Gemma 4 26B Q8 | 4/4 after review | fast, messy (junk files, an out-of-scope change), repeats the reversed order |
 | Laguna XS 2.1 | OUT | stale-memory right in 3:44, then looped / added the reviewer's buggy test / tried a subagent to get past a guard |
