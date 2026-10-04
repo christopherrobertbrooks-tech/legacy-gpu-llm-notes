@@ -31,6 +31,14 @@ First results: the Coder version's 12,288 experts all fit on the V100, so 16 GB 
 reads ~1,450 tokens/s, scores 158/164 on HumanEval, and did 4 of 4 real coding tasks right on its own as a local coding
 agent's builder. Details in `agent-inbox/2026-10-04-strata-v100-low-ram.md`.
 
+### Does the V100's x4 PCIe slot matter? (measured October 2026)
+
+Not for inference with the model resident on the card. Measured with `nvidia-smi dmon -s t` while Strata (125B MoE Coder,
+all 12,288 experts on the V100) was working as a coding agent's builder: **120–150 MB/s into the card and 3–19 MB/s out**,
+against ~3,900 MB/s for PCIe 3.0 x4 — about 4% of the narrow link. Model loading is limited by the SATA SSD (~0.5 GB/s),
+not the slot. x16 would only start to matter for splitting a model across both cards or streaming experts from system RAM,
+neither of which this setup does. (The 4070 has the x16 slot and drives the display; the i7-13700KF has no integrated GPU.)
+
 ## Is a used V100 32GB worth it? (measured September 2026)
 
 Same machine, same llama.cpp build (PrismML fork `3ae4f51`, CUDA 12.9),

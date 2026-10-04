@@ -136,3 +136,14 @@ its assumption "(guess)". n=1.
 **Low thinking, same task:** still correct (hidden layout OK, all extras) but **10.1 min / 44 steps** -- slower than medium
 (6.5 / 34) and high (9.7 / 55). Less planning bought more trial-and-fix steps. Workbench now has a per-chat selector
 (Quick/Normal/Careful = low/medium/high), default Normal.
+
+**PCIe x4 check (Chris asked whether to swap the V100 into the x16 slot):** `nvidia-smi dmon -s t` on the V100 during a live
+n=3 task: 120–150 MB/s in, 3–19 MB/s out — ~4% of PCIe 3.0 x4 (~3.9 GB/s). With all experts resident, per-token traffic is
+tiny; loads are SATA-bound (~0.5 GB/s). Not swapping (the 4070 drives the display on a no-iGPU CPU). Would matter only for a
+cross-card layer split or RAM-streamed experts. Added to the README.
+
+**n=3 round 1 (Normal):** 4/4 correct, ~35 min. ember-dash showed two Strata weaknesses: it wrote "The window looks right"
+before reading the screenshot (Workbench's look nudge caught it: "Fair point -- I captured the screenshots but never actually
+looked at them"), and one thinking block then ran 140,267 chars until the engine's 32K output cap (~5 min), forcing a resume
++ auto-compaction. The task was still correct. This revises the earlier "looked without the nudge" note -- it did in round
+s1, not here. Candidate fix after n=3: Strata's hard thinking cap (`reasoning_budget_tokens`). Real example for #710/#728.
