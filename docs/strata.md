@@ -74,7 +74,8 @@ both architectures (`"archs": [70, 89]`) and split the layers itself. Same bench
 - **Mixed-architecture split works on NVIDIA in both orders**, including prompts far past the 8,192-token chunk -- the case
   that fails on a mixed AMD pair in Strata issue #690.
 - A fixed split point changed nothing: in 0.1.39 the automatic split already loads only each card's own layers.
-- During long prompts ~2 GB/s crosses into the V100 -- about half its x4 link, so the slot starts to matter here.
+- During long prompts, traffic into the V100 peaks at ~3.6 GB/s -- essentially its whole x4 link (median ~0.4 GB/s), so in
+  a split the narrow slot does saturate in bursts while reading prompts; the 4070 peaks at 13.7 GB/s on its x16 slot.
 - Against the RTX 5090 community report (same IQ2_XS, 32 GB card + 64 GB RAM: decode 179 / 176 / 165, prompt ~4,300–5,800):
   the 2017 + 2022 pair reaches **~45% of its decode** and ~29% of its prompt speed.
 - **But it scored 154/164 on HumanEval**, below the Coder's 158, in the same time -- the full model at 2-bit loses more to

@@ -20,8 +20,8 @@
   version is fully VRAM-resident, 67–77 tok/s decode to 128K. [Strata](strata.md)
 - **Mixed-architecture layer split in Strata** (sm_70 + sm_89): works in both card orders, long prompts included -- the
   pattern that fails on a mixed AMD pair (Strata #690). [Strata](strata.md#both-cards-the-full-model-v100--rtx-4070)
-- **The V100's PCIe 3.0 x4 slot** uses ~4% of its link with a resident MoE model; ~50% only during long-prompt reading
-  in a two-card split. [Buyer's guide](v100-buyers-guide.md)
+- **The V100's PCIe 3.0 x4 slot** uses ~4% of its link with a resident MoE model; in a two-card split it saturates
+  in bursts (~3.6 GB/s peaks) while reading long prompts. [Buyer's guide](v100-buyers-guide.md)
 
 ### Performance traps
 
