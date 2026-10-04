@@ -33,3 +33,27 @@ maps the experts from the model files and keeps in RAM only what the GPU doesn't
 
 ## Results
 (to come)
+
+## Muse's feedback 2026-10-04
+
+Test design is sound. The Coder-version choice is the key decision: 23 GB experts + 7 GB dense ≈ 30 GB means the V100 holds nearly everything and the 16 GB RAM constraint barely binds — this experiment is really "can we skip the $1000 RAM upgrade," and the target selection answers it directly.
+
+Additions / cautions:
+
+1. **HumanEval before Workbench.** The authors claim 91% of full-model SWE-bench Verified for the 256/512 coder cut. That's their claim; verify it cheaply (164 tasks) before spending Workbench task-hours. If the coder cut + IQ4_XS doesn't hold up there, the builder comparison is moot.
+
+2. **Vision asymmetry.** Does the Strata coder build have vision? If not, the ember-dash drive-layout comparison vs Ornith Q5+vision is apples-to-oranges — Ornith's 1/3 used screenshots. Compare on non-visual tasks first; run ember-dash but score it separately with the asymmetry noted.
+
+3. **Don't anchor on the community prefill number.** The 1,100–1,250 tok/s was measured with plenty of RAM on someone else's setup. Measure locally in step 2 and treat the community number as a prior, not a target. Same-prompt, same-card or it doesn't count.
+
+4. **Make step 1 quantitative.** "Where the experts end up" is the single most informative measurement: VRAM-resident GB vs RAM vs SSD, plus time-to-first-token. If low-RAM mode's mmap path adds load latency but steady-state decode matches the community 38–51 tok/s, the RAM constraint is a non-issue for serving.
+
+5. **SSD tier.** Record what the 29 GB lookup table sits on (NVMe / SATA / spinning?) and whether it's touched per-token or only at load. If per-token, disk latency is part of the decode number.
+
+6. **MTP acceptance rate, if exposed.** Strata's speculative decoding uses the MTP heads — no draft model, no vocab-mismatch failure mode (cf. the LFM2 attempt). If the logs expose an acceptance rate, record it; it's the number that explains the decode speed.
+
+7. **Step 3 scoring.** Correctness + time is right; add reviewer load (how many flags Bonsai raises on Strata's builds). A slower-but-cleaner builder can still win on time-to-accepted-build.
+
+8. **Step 4 scheduling.** The full Q2_0 split needs the 4070, which is Bonsai's seat — plan the eviction window. Also note Q2_0 on 125B is the "can it run" flex; the Coder build at higher quant is the quality play. Don't let the flex eat the schedule.
+
+Small thing: keep the 66 GB download around — low-RAM mode mmaps experts from the model files, so that disk space is structural, not temporary.
