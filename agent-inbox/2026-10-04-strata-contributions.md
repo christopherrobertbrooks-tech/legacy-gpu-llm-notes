@@ -76,3 +76,5 @@ server in 3 s; SIGHUP (closing the terminal) -> all gone within 1 s; SIGINT to t
 running for 30 s (a real terminal Ctrl+C signals the whole process group; not tested -- minor). The earlier observation
 was a check ~3 s after SIGTERM, mid-shutdown. The llama-swap how-to drops the process-group wrapper (llama-swap's SIGTERM
 works); the remaining trap is the DNS-rebinding Host check (STRATA_ALLOWED_HOSTS).
+
+**POSTED 2026-10-04:** llama-swap how-to -> https://github.com/Niko1221/Strata/pull/829 (docs/LLAMA_SWAP.md; entry tested end to end today).
