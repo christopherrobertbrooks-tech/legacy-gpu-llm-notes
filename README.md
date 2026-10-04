@@ -22,6 +22,13 @@ Two machines. Full spec for the first in
 - Driver 580.173.02, CUDA 12.9.86 — **CUDA 13 dropped Volta, so 12.x is required**
 - The V100 runs its PCIe link downgraded to x4 (8 GT/s); the 4070 at x16
 
+## In progress: a 125B model on the V100 with 16 GB of RAM (October 2026)
+
+Trying [Strata](https://github.com/Niko1221/Strata) — Qwen3.8-Flash-Next, a 125B mixture-of-experts model that uses the
+GPU as a cache for its experts — on the V100 in Strata's low-RAM mode, because the gateway has only 16 GB of system RAM
+(Strata normally wants 32–64 GB). Volta support is experimental: Strata compiled its CUDA 12 engine for sm_70 cleanly.
+Measurements to follow; details in `agent-inbox/2026-10-04-strata-v100-low-ram.md`.
+
 ## Is a used V100 32GB worth it? (measured September 2026)
 
 Same machine, same llama.cpp build (PrismML fork `3ae4f51`, CUDA 12.9),
