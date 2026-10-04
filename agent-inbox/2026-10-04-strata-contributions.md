@@ -78,3 +78,5 @@ was a check ~3 s after SIGTERM, mid-shutdown. The llama-swap how-to drops the pr
 works); the remaining trap is the DNS-rebinding Host check (STRATA_ALLOWED_HOSTS).
 
 **POSTED 2026-10-04:** llama-swap how-to -> https://github.com/Niko1221/Strata/pull/829 (docs/LLAMA_SWAP.md; entry tested end to end today).
+
+**POSTED 2026-10-04:** #728 comment -> https://github.com/Niko1221/Strata/issues/728#issuecomment-5984010954 (Coder data point: 1 sentence x1,110 in one thinking block, 1 of 20 agent jobs; likely trigger = reasoning about a screenshot it never received (#819); reasoning_budget_tokens bounds it).
