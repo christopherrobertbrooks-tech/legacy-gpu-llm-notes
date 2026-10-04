@@ -103,3 +103,5 @@ Possible posts (Chris approves): a #690 comment (NVIDIA mixed pair works), a sec
 the full model solved 10/113/156 that the Coder missed, and missed 91/93/101/130/132/140/163. Below the Coder ->
 no Workbench trial; the Coder stays the builder (the full model at 2-bit loses more to quantisation than it gains from
 all 512 experts, and it ties up both cards).
+
+**POSTED 2026-10-04:** #690 comment -> https://github.com/Niko1221/Strata/issues/690#issuecomment-5985234418 (mixed V100+4070 split works in both orders, long prompts included).
