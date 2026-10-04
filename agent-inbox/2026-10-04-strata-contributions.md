@@ -69,3 +69,10 @@ Coder IQ1_M: prompt 1,233/1,580/1,394 tok/s, decode 69/69/67 tok/s at 4K/32K/128
 V100 + 4070 (44 GB) and compare with the RTX 5090 community report (same size IQ2_XS, 32 GB card + 64 GB RAM; its medians:
 prompt 4,270 / 5,543 / 5,779 tok/s, decode 179 / 176 / 165 tok/s at 4K/32K/128K). Same benchmark.py + needles. Download
 only shard 1 (~40 GB; shard 2 and the vision encoder are shared with the Coder). Also answers #690 on NVIDIA.
+
+**Tested 2026-10-04 -- the "engine left running" bug is NOT real (dropped).** Strata started normally (run-coder-iq1_m.sh),
+one signal to serve/server.py, engine + V100 memory watched for 30 s: SIGTERM -> engine gone and VRAM freed in 2 s,
+server in 3 s; SIGHUP (closing the terminal) -> all gone within 1 s; SIGINT to the server process alone -> both kept
+running for 30 s (a real terminal Ctrl+C signals the whole process group; not tested -- minor). The earlier observation
+was a check ~3 s after SIGTERM, mid-shutdown. The llama-swap how-to drops the process-group wrapper (llama-swap's SIGTERM
+works); the remaining trap is the DNS-rebinding Host check (STRATA_ALLOWED_HOSTS).
