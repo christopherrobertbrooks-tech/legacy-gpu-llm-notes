@@ -153,3 +153,14 @@ runaway thinking block; rounds 2-3 none. **Vision correction:** Strata never act
 inside Anthropic `tool_result` blocks were dropped by Strata's frontend (details + tested fix in the contributions note).
 It passed ember-dash anyway through tests-first and text checks (phone page, widget-order test); in round 3 it said honestly
 it couldn't see the picture. With the local fix, the tool_result image is read correctly.
+
+## Status at the end of 2026-10-04 (Claude Code)
+- **Workbench's builder is Strata's Coder** (V100, medium thinking, `reasoning_budget_tokens` 8192, vision via the local
+  #819 fix). Reviewer off; tests-first-with-proof + phases carry correctness.
+- **The full model** (IQ2_XS, V100 + 4070 split) is faster at decode (75–85 tok/s) but scored 154/164 vs the Coder's 158 in
+  the same time, and needs both cards -> not used. Dual-card results and the #690 answer are in the contributions note.
+- **Posted upstream (Chris approved each):** PR #819 (tool_result images; confirmed by a 4x RTX 5080 user), PR #823 (V100
+  benchmark), PR #829 (llama-swap how-to), #728 comment (loop data point + cap). Dropped after testing: the suspected
+  "engine left running" bug. Drafted, awaiting Chris: a #690 comment.
+- **The notes repo was reorganised:** README is now a front door (headline findings + page index); topics moved to `docs/`
+  (v100-buyers-guide, strata, coding-quality, gtx-1070, v100-linux-setup, findings). agent-inbox paths are unchanged.
