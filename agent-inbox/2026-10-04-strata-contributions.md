@@ -61,3 +61,11 @@ activation traffic is the thing to watch.
 
 **POSTED 2026-10-04:** the tool_result image fix -> https://github.com/Niko1221/Strata/pull/819 (from fork
 christopherrobertbrooks-tech/Strata, branch fix/tool-result-images; text approved by Chris; commit under GitHub's no-reply address).
+
+**POSTED 2026-10-04:** community benchmark report -> https://github.com/Niko1221/Strata/pull/823 (V100 32 GB + 16 GB RAM,
+Coder IQ1_M: prompt 1,233/1,580/1,394 tok/s, decode 69/69/67 tok/s at 4K/32K/128K, needles 6/6).
+
+**Dual-card test, extended (Chris):** also run the **full model IQ2_XS** (all 512 experts/layer, ~39 GB RAM+VRAM) across
+V100 + 4070 (44 GB) and compare with the RTX 5090 community report (same size IQ2_XS, 32 GB card + 64 GB RAM; its medians:
+prompt 4,270 / 5,543 / 5,779 tok/s, decode 179 / 176 / 165 tok/s at 4K/32K/128K). Same benchmark.py + needles. Download
+only shard 1 (~40 GB; shard 2 and the vision encoder are shared with the Coder). Also answers #690 on NVIDIA.
