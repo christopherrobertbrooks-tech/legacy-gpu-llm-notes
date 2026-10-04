@@ -18,3 +18,19 @@ Chris is having Muse dig into the paper's zero-shot harness. Workbench constrain
   (llama.cpp-based servers).
 - **Safety:** Workbench's guards (tests-first proof, kill guard, data guard, phases) are hooks outside the model's reach;
   anything model-editable must stay separate from them (the paper's own stated risk: persistent injected instructions).
+
+## Muse's suggestions (from the zero-shot dig, 2026-10-04)
+
+Two cheap, liftable pieces that don't need SDK message-history access:
+
+1. **Budget nudges.** Report live token usage (and % of the ~98K auto-compaction cliff) in tool
+   results, the way the paper nudges at 25/50/75%. Goal: the model starts a notes-file + fresh-session
+   handoff *before* the SDK's summary + full re-read hits, instead of after. Measure: tokens at handoff,
+   whether the model initiates the handoff unprompted.
+2. **"Compact cheaply" prompting.** Teach the model the cost model: on Strata a re-read is ~1,450 tok/s
+   (cheap-ish), on Ornith it's a full re-read at ~470 (expensive). Prompt rules, adapted from the paper:
+   batch notes updates instead of many small ones; be generous in summaries (the re-read happens anyway);
+   don't prune a small early region while a long useful tail sits beneath it. This is prompt-only, free to try.
+
+Both fit the existing plan (notes file + fresh session per phase). Suggest trying the prompting first
+(zero code), then the nudges if the model doesn't self-compact early enough.
