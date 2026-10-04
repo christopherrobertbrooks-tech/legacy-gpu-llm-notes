@@ -53,3 +53,8 @@ Fix tested on our copy (v0.1.39): after the tool message, pass the result's imag
 images in user turns. After the fix the tool_result case answers "Swap, Net, Disk, Data". serve/test_server.py: 139 tests OK.
 For the PR: add a unit test for anthropic_to_messages() with an image inside tool_result; check the OpenAI path's tool
 messages with image content too. **Top of the contribution list** (Chris approves the text first).
+
+Muse's addition (2026-10-04): run the V100-alone baseline (same prompts, same chunk sizes) in the *same
+session*, immediately before the split runs -- thermal state and background load then can't pollute the
+comparison. Record nvidia-smi dmon on both cards during the split runs: with the V100 on x4, cross-card
+activation traffic is the thing to watch.
