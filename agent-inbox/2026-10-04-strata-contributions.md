@@ -39,3 +39,17 @@ Plan (needs both cards, so Workbench's builder and Ember are paused for the sess
 3. Speed vs the V100 alone (decode, prefill) -- and PCIe traffic now that activations cross cards (the V100 is on x4).
 4. Optional: the full model Q2_0 (37.6 GB, needs both cards; ~70 GB download -- Chris's OK first).
 Report: works / fails with logs, numbers, both orders -> a #690 comment (NVIDIA data point) + the multi-GPU docs.
+
+## FOUND + FIXED LOCALLY (2026-10-04): images inside Anthropic `tool_result` blocks never reach the model
+Symptom: in Workbench (Claude Agent SDK -> Anthropic Messages API), Strata said a screenshot "came back black" (the PNG was
+fine) and once wrote "The window looks right" without having seen it. Repro (same image, same question, thinking disabled):
+image in a plain user message -> "Swap, Net, Disk, Data" (correct); the same image inside a `tool_result` (how Claude Code
+returns a Read of a PNG) -> "A, B, C, D, E" (made up).
+Cause: `serve/frontend.py` `anthropic_to_messages()` -- the image path skips any user message containing a `tool_result`,
+and the `tool_result` branch builds the tool message with `_text_of(block.get("content"))`, which keeps text only; image
+blocks are silently dropped.
+Fix tested on our copy (v0.1.39): after the tool message, pass the result's image parts on as a user message
+(`[{"type":"text","text":"(image returned by the tool above)"}] + image parts from _parts_of(content)`) -- the template shows
+images in user turns. After the fix the tool_result case answers "Swap, Net, Disk, Data". serve/test_server.py: 139 tests OK.
+For the PR: add a unit test for anthropic_to_messages() with an image inside tool_result; check the OpenAI path's tool
+messages with image content too. **Top of the contribution list** (Chris approves the text first).

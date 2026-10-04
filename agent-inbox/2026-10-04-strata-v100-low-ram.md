@@ -147,3 +147,9 @@ before reading the screenshot (Workbench's look nudge caught it: "Fair point -- 
 looked at them"), and one thinking block then ran 140,267 chars until the engine's 32K output cap (~5 min), forcing a resume
 + auto-compaction. The task was still correct. This revises the earlier "looked without the nudge" note -- it did in round
 s1, not here. Candidate fix after n=3: Strata's hard thinking cap (`reasoning_budget_tokens`). Real example for #710/#728.
+
+**n=3 at Normal DONE:** 12/12 correct, hidden layout/position 6/6 on its own, rounds ~35 / ~30 / ~29 min. Round 1 had the
+runaway thinking block; rounds 2-3 none. **Vision correction:** Strata never actually saw Workbench's screenshots -- images
+inside Anthropic `tool_result` blocks were dropped by Strata's frontend (details + tested fix in the contributions note).
+It passed ember-dash anyway through tests-first and text checks (phone page, widget-order test); in round 3 it said honestly
+it couldn't see the picture. With the local fix, the tool_result image is read correctly.
