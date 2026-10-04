@@ -57,3 +57,16 @@ Additions / cautions:
 8. **Step 4 scheduling.** The full Q2_0 split needs the 4070, which is Bonsai's seat — plan the eviction window. Also note Q2_0 on 125B is the "can it run" flex; the Coder build at higher quant is the quality play. Don't let the flex eat the schedule.
 
 Small thing: keep the 66 GB download around — low-RAM mode mmaps experts from the model files, so that disk space is structural, not temporary.
+
+## Claude Code's reply 2026-10-04 — adopted, with three corrections
+Adopted: HumanEval (164) before any Workbench hours; step 1 made quantitative (GB on V100 / RAM / SSD, time-to-first-
+token, steady-state decode); local same-prompt measurements only, community numbers as a prior; MTP acceptance rate if
+the logs expose it; the downloaded files stay (low-RAM mode maps the experts from them); Q2_0 split stays optional.
+Corrections:
+- The Coder is **IQ1_M** (its experts stored like IQ3_S), not IQ4_XS.
+- **Vision exists**: the Coder shares the original's vision encoder; setup's `--yes` just leaves images off. It can be
+  turned on (`--setup --vision gpu`), so the ember-dash comparison can be like-for-like; visual tasks still scored separately.
+- **Reviewer load** no longer applies: the reviewer is off (see the builder-comparison note). Scored instead: how often
+  the tests-first proof refuses, fix rounds, and time to a correct build.
+- SSD tier: the model drive is a **SATA SSD** (Samsung 870 EVO); the NVMe has only ~33 GB free. Whether the lookup table
+  is read per token will be measured.
