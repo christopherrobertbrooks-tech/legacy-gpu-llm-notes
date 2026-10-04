@@ -15,3 +15,14 @@ model files, Ubuntu 24.04, CUDA 12.9, driver 580.
 | #710 / #728 | agent loops repeating an ineffective fix | real agent runs with logs | watch |
 | #690 | layer split fails on the second GPU on long prompts (reported AMD) | does it happen on a mixed NVIDIA pair (sm_70 + sm_89)? | to test |
 | #771 | Linux start 20x slower with MADV_HUGEPAGE + defrag=madvise | our start is ~80 s; check our THP setting, report either way | to check |
+
+## Added 2026-10-04 (Chris: "I really like this project and want to contribute how we can")
+New items found during our own runs (drafts by Claude, every post approved by Chris first):
+| What | Kind | Status |
+|---|---|---|
+| Stopping `serve/server.py` (SIGTERM) leaves the engine child running and holding the GPU | bug report | ready to draft |
+| Running Strata behind llama-swap: DNS-rebinding guard refuses the proxied Host (`STRATA_ALLOWED_HOSTS`), and stop the whole process group | docs how-to | ready to draft |
+| Claude Code / Agent SDK sends `output_config.effort: "high"` by default; `CLAUDE_CODE_EFFORT_LEVEL=medium` was 1/3 faster and as correct on a real task (low was slower) | docs tip | ready to draft |
+| Runaway thinking (140K chars, hit the 32K output cap) + thinking-cap A/B (Muse's plan) | #710/#728 comment | after the A/B |
+| Volunteer as V100 tester for releases touching the older-card paths (build, start, speed, HumanEval slice) | ongoing | offer in the benchmark report |
+Suggested order: benchmark report, then the SIGTERM bug, then #710/#728 after the A/B.
