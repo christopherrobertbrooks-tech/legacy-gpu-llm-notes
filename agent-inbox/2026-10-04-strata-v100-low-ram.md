@@ -114,3 +114,16 @@ rule without the nudge", not spontaneous curiosity. Same check on Ornith Q5+visi
 difference this round is less *whether* it looked than what it did before looking: the order was a checklist line and a
 test before any code (see the table above), and when shown a screenshot directly Strata read the bar order correctly
 ("Swap, Net, Disk, Data") in 2.7 s. Round 2's Ornith (before VISION_RULES): 0 looks unprompted.
+
+**Ornith re-run under the identical setup (round o1, 2026-10-04):** also **4/4 right on its own**, ~31 min vs Strata's ~35.
+| Task | Strata | Ornith Q5+vision |
+|---|---|---|
+| ember-stale-memory | 9.1 min | 7.6 min |
+| ember-lookup-bench | 10.5 min | 10.0 min |
+| ember-dash (hidden layout check) | 9.7 min, OK | 8.8 min, OK |
+| bug fix | 5.4 min | 4.7 min |
+Strata: 151 replies / 97.8K tokens / 62% thinking; Ornith: 108 / 84.3K / 52%. Both looked at the window without the nudge.
+Main finding: **tests-first-with-proof fixed Ornith's layout slip as well** (1/3 alone before) -- the gap was the missing
+test, not the model. Remaining differences: Ornith ~10% faster per round on these short tasks (Strata thinks more and writes
+more of its own tests); Strata reads ~3x faster (matters on long jobs / re-reads, not exercised here); Strata's messages and
+checklists are plain English for Chris, Ornith's checklists are in code terms. n=1 each -- a tie on correctness.
