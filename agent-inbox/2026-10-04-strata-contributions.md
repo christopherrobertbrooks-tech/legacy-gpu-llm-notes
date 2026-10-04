@@ -58,3 +58,6 @@ Muse's addition (2026-10-04): run the V100-alone baseline (same prompts, same ch
 session*, immediately before the split runs -- thermal state and background load then can't pollute the
 comparison. Record nvidia-smi dmon on both cards during the split runs: with the V100 on x4, cross-card
 activation traffic is the thing to watch.
+
+**POSTED 2026-10-04:** the tool_result image fix -> https://github.com/Niko1221/Strata/pull/819 (from fork
+christopherrobertbrooks-tech/Strata, branch fix/tool-result-images; text approved by Chris; commit under GitHub's no-reply address).
