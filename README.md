@@ -27,7 +27,9 @@ Two machines. Full spec for the first in
 Trying [Strata](https://github.com/Niko1221/Strata) — Qwen3.8-Flash-Next, a 125B mixture-of-experts model that uses the
 GPU as a cache for its experts — on the V100 in Strata's low-RAM mode, because the gateway has only 16 GB of system RAM
 (Strata normally wants 32–64 GB). Volta support is experimental: Strata compiled its CUDA 12 engine for sm_70 cleanly.
-Measurements to follow; details in `agent-inbox/2026-10-04-strata-v100-low-ram.md`.
+First results: the Coder version's 12,288 experts all fit on the V100, so 16 GB of RAM is enough; it writes 70–95 tokens/s,
+reads ~1,450 tokens/s, scores 158/164 on HumanEval, and did 4 of 4 real coding tasks right on its own as a local coding
+agent's builder. Details in `agent-inbox/2026-10-04-strata-v100-low-ram.md`.
 
 ## Is a used V100 32GB worth it? (measured September 2026)
 

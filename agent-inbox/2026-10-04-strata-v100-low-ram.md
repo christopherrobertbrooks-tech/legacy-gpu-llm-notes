@@ -83,3 +83,23 @@ Corrections:
   the tests-first proof refuses, fix rounds, and time to a correct build.
 - SSD tier: the model drive is a **SATA SSD** (Samsung 870 EVO); the NVMe has only ~33 GB free. Whether the lookup table
   is read per token will be measured.
+
+**Step 3, Workbench builder test, round s1 (2026-10-04):** same 4 real tasks as the builder comparison, Workbench as it is
+today (tests-first with proof ON, reviewer OFF, prompt "...all of it in one go, no phases"), Strata reached through
+llama-swap (entry "strata", ~80 s load, vision on).
+| Task | Result | Time |
+|---|---|---|
+| ember-stale-memory | 12/12 + all of Ember's tests; 11 own tests, proof OK | 9.1 min |
+| ember-lookup-bench | 13/13 + all Ember tests; Ember's code untouched | 10.5 min |
+| ember-dash | 21/21, all 6 regression extras, **hidden order/position OK on its own** | 9.7 min |
+| bug fix (bar position) | 12/12, hidden position OK, +13/-3 | 5.4 min |
+**4/4 right on its own, ~35 min round.** On ember-dash its checklist named the risk before any code ("The drive bars sit
+directly under the Net bar, in the same order on both panels"), turned it into tests, and it looked at the window and the
+phone page before finishing. For reference, Ornith Q5+vision (n=3, *before* tests-first, with the reviewer): layout right
+on its own 1/3, rounds 39-57 min -- not a like-for-like comparison, so Ornith is being re-run under the identical setup now.
+Chris's qualitative note: Strata's messages are the best organized of any builder so far (bullets, clean paragraphs).
+First attempt failed instantly: Strata's DNS-rebinding guard refused the proxied Host header (`ember-gateway:8040`) ->
+STRATA_ALLOWED_HOSTS set in the llama-swap wrapper. The wrapper also runs Strata in its own process group: stopping only the
+Python server had left the engine holding the V100.
+Model size, from the GGUF: Coder = 4.9 B shared + 60.4 B experts (12,288 = 256 x 48 layers, 10 used per token, ~7 B active)
++ a 51 B-entry lookup table on the SSD; the advertised 125 B is the full model's shared + experts.
