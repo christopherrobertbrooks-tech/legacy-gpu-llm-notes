@@ -127,3 +127,9 @@ Main finding: **tests-first-with-proof fixed Ornith's layout slip as well** (1/3
 test, not the model. Remaining differences: Ornith ~10% faster per round on these short tasks (Strata thinks more and writes
 more of its own tests); Strata reads ~3x faster (matters on long jobs / re-reads, not exercised here); Strata's messages and
 checklists are plain English for Chris, Ornith's checklists are in code terms. n=1 each -- a tie on correctness.
+
+**Thinking level (2026-10-04):** Workbench's engine (Claude Agent SDK) sends `output_config.effort: "high"` on every request
+(captured with a logging proxy), so Strata ran at high. `CLAUDE_CODE_EFFORT_LEVEL=medium` changes it (now a Workbench
+setting). ember-dash at **medium: 6.5 min** vs 9.7 at high (Ornith 8.8) -- still correct on its own (hidden layout check OK,
+all regression extras), a smaller change (+79 vs +191 lines), 34 steps vs 55. Its checklist still named the order and marked
+its assumption "(guess)". n=1.
