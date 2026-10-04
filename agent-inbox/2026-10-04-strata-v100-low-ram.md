@@ -32,7 +32,16 @@ maps the experts from the model files and keeps in RAM only what the GPU doesn't
 4. Optional: the full model (Q2_0, 37.6 GB) split across V100 + 4070.
 
 ## Results
-(to come)
+**Step 1-2, first start and speed (2026-10-04, Coder IQ1_M, V100 only, low-RAM mode, 16 GB RAM, reasoning_effort none):**
+- Start: ~2 min; Strata filled the V100's expert cache with **all 12,288 experts (23.4 GiB)** -- the whole model is
+  VRAM-resident, so the 16 GB of RAM doesn't bind (V100 31.8/32 GB used; system RAM ~8 GB used, 8 GB free).
+- Time to first token, short prompt: 0.10-0.44 s.
+- Decode: **70-95 tok/s** (95 tokens of code in ~1 s; 784 tokens in 10.4 s = 75 tok/s; 700 in 10.1 s = 70 tok/s).
+- Prefill: **27,492 tokens in 18.6-19.1 s = ~1,450-1,475 tok/s** (Ornith 1.5 Q5 on the same V100: ~470 tok/s).
+- SSD: 62 MB read from the SATA SSD during a 700-token answer (~90 KB/token, ~6 MB/s) -- the lookup table is touched per
+  token but lightly; no need for NVMe.
+- MTP draft acceptance: 334/571 (58%) on prose, 31/44 (70%) on a code answer.
+Next: HumanEval (164) before any Workbench hours.
 
 ## Muse's feedback 2026-10-04
 
