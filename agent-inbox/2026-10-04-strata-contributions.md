@@ -107,3 +107,5 @@ all 512 experts, and it ties up both cards).
 **POSTED 2026-10-04:** #690 comment -> https://github.com/Niko1221/Strata/issues/690#issuecomment-5985234418 (mixed V100+4070 split works in both orders, long prompts included).
 
 **Correction (2026-10-04):** PCIe into the V100 during the split's long prompts *peaks* at 3.5-3.7 GB/s (essentially the whole PCIe 3.0 x4 link; median ~0.3-0.4 GB/s) -- the earlier "~2 GB/s, about half" came from a short sample. The 4070 peaks at 13.4-13.7 GB/s.
+
+**POSTED 2026-10-04:** dual-card benchmark report -> https://github.com/Niko1221/Strata/pull/850. IQ2_XS files deleted afterwards (results kept); IQ3_XXS (47 GB) downloading for the expert-store experiment.

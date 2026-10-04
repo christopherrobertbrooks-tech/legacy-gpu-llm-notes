@@ -63,7 +63,7 @@ Two machines. Full spec for the first in
 
 From these tests, to [Strata](https://github.com/Niko1221/Strata): a fix for images inside tool results
 ([#819](https://github.com/Niko1221/Strata/pull/819)), a V100 community benchmark
-([#823](https://github.com/Niko1221/Strata/pull/823)), a llama-swap how-to ([#829](https://github.com/Niko1221/Strata/pull/829)),
+([#823](https://github.com/Niko1221/Strata/pull/823)), a V100 + 4070 split benchmark ([#850](https://github.com/Niko1221/Strata/pull/850)), a llama-swap how-to ([#829](https://github.com/Niko1221/Strata/pull/829)),
 a thinking-loop data point ([#728](https://github.com/Niko1221/Strata/issues/728#issuecomment-5984010954)), and a
 mixed NVIDIA card-pair result for a split bug ([#690](https://github.com/Niko1221/Strata/issues/690#issuecomment-5985234418)).
 
