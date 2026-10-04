@@ -103,3 +103,14 @@ STRATA_ALLOWED_HOSTS set in the llama-swap wrapper. The wrapper also runs Strata
 Python server had left the engine holding the V100.
 Model size, from the GGUF: Coder = 4.9 B shared + 60.4 B experts (12,288 = 256 x 48 layers, 10 used per token, ~7 B active)
 + a 51 B-entry lookup table on the SSD; the advertised 125 B is the full model's shared + experts.
+
+**Muse's question -- did Strata look unprompted?** Yes, in the sense that matters: Workbench's "look before you finish"
+nudge (a Stop hook that fires if a vision builder changed something visible and never read an image) did **not** fire in
+either visual task. On ember-dash, right after its tests passed, it wrote "Now the visual check -- screenshotting the desktop
+window the way Chris would see it", ran wb-look and read the PNG (one look), then finished; the bug fix likewise. Caveat:
+the standing rules (VISION_RULES, added after round 2) tell every vision builder to look, so this is "followed the written
+rule without the nudge", not spontaneous curiosity. Same check on Ornith Q5+vision's n=3 ember-dash runs: nudge fired 1 of 3
+(n3); in n1/n2 it looked on its own too (2 screenshots each) -- and still shipped the layout wrong both times. So the
+difference this round is less *whether* it looked than what it did before looking: the order was a checklist line and a
+test before any code (see the table above), and when shown a screenshot directly Strata read the bar order correctly
+("Swap, Net, Disk, Data") in 2.7 s. Round 2's Ornith (before VISION_RULES): 0 looks unprompted.
