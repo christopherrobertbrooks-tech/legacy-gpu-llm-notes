@@ -41,7 +41,11 @@ maps the experts from the model files and keeps in RAM only what the GPU doesn't
 - SSD: 62 MB read from the SATA SSD during a 700-token answer (~90 KB/token, ~6 MB/s) -- the lookup table is touched per
   token but lightly; no need for NVMe.
 - MTP draft acceptance: 334/571 (58%) on prose, 31/44 (70%) on a code answer.
-Next: HumanEval (164) before any Workbench hours.
+**Step 2b, HumanEval (164, greedy, thinking off, same prompt + grader as every earlier row):** **158/164 (96.3%)** in
+7.1 min (2.6 s/problem, 84 tok/s overall, 0 cut off). Failed: /10, /38, /50, /113, /145, /156 (Ornith also failed 38,
+113, 145). Same table: Gemma 4 26B Q8 159, Qwen3.8 27B Q8 156, Ornith 1.5 (Q4, thinking off) 155 in 9.3 min, Qwen3.6 153,
+Qwen3.5 122B UD-IQ2_M 151, Qwen3-Coder-Next 149, Bonsai 2 27B 147, Llama 3.3 70B 140. The authors' "91% of the full
+model" claim holds up at this level. Next: Workbench builder test on the real tasks (vision on, llama-swap entry).
 
 ## Muse's feedback 2026-10-04
 
