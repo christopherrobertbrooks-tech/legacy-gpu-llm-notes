@@ -98,3 +98,8 @@ same benchmark.py (3 runs each, 256-token cap, reasoning none) + needles 32k/128
 - vs the RTX 5090 community report (same IQ2_XS, 32 GB card + 64 GB RAM): decode 179 / 176 / 165, prompt 4,270 / 5,543 /
   5,779 -> this pair is ~45% of its decode and ~29% of its prompt speed. vs the Coder IQ1_M on the V100 alone: decode 69 / 69 / 67.
 Possible posts (Chris approves): a #690 comment (NVIDIA mixed pair works), a second benchmark report (dual card).
+**HumanEval gate for the full model (both cards, vision on, 128K ctx, 90% of experts resident with vision):** 154/164 in
+7.2 min (thinking off, same harness) vs the Coder's 158/164 in 7.1 min on the V100 alone. Failures overlap on 38/50/145;
+the full model solved 10/113/156 that the Coder missed, and missed 91/93/101/130/132/140/163. Below the Coder ->
+no Workbench trial; the Coder stays the builder (the full model at 2-bit loses more to quantisation than it gains from
+all 512 experts, and it ties up both cards).
