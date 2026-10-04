@@ -80,3 +80,21 @@ works); the remaining trap is the DNS-rebinding Host check (STRATA_ALLOWED_HOSTS
 **POSTED 2026-10-04:** llama-swap how-to -> https://github.com/Niko1221/Strata/pull/829 (docs/LLAMA_SWAP.md; entry tested end to end today).
 
 **POSTED 2026-10-04:** #728 comment -> https://github.com/Niko1221/Strata/issues/728#issuecomment-5984010954 (Coder data point: 1 sentence x1,110 in one thinking block, 1 of 20 agent jobs; likely trigger = reasoning about a screenshot it never received (#819); reasoning_budget_tokens bounds it).
+
+## Dual-card results (2026-10-04): full Qwen3.8-Flash-Next IQ2_XS split across V100 (sm_70, PCIe 3.0 x4) + RTX 4070 (sm_89)
+Engine 0.1.39 rebuilt by setup for archs [70, 89] (CUDA 12.9); low-RAM mode (`--mmap-experts`, 16 GB RAM); context 131,072;
+same benchmark.py (3 runs each, 256-token cap, reasoning none) + needles 32k/128k x 10/50/90.
+| Configuration | Split chosen | Decode tok/s 4K / 32K / 128K (medians) | Prompt tok/s 4K / 32K / 128K | Needles |
+|---|---|---|---|---|
+| 1. V100 first, auto | K=39: V100 layers 0-38, 4070 39-47; 95% of experts resident | **84.9 / 81.5 / 75.1** | 996 / 1,602 / 1,552 | 6/6 |
+| 2. V100 first, `layer_split: 39` | same | 84.9 / 82.0 / 75.2 | 925 / 1,601 / 1,553 | 6/6 |
+| 3. 4070 first, auto | K=11: 4070 layers 0-10, V100 11-47 | 79.1 / 83.8 / 77.1 | 985 / 1,535 / 1,533 | 6/6 |
+- **#690 on NVIDIA:** no "no kernel image" (or any) failure in either card order; 32K and 128K prompts (past the 8,192-token
+  chunk) ran on the second card every time. Mixed-arch NVIDIA layer split works on 0.1.39.
+- A fixed split point changed nothing here: in 0.1.39 the auto split already loads only each card's own layers' weights
+  ("CUDA1 holds its weights, session [39, 48)"), so MULTI_GPU.md's note about auto keeping full copies looks out of date.
+- PCIe during long prompts: ~2 GB/s into the V100 (about half its x4 link), ~2 GB/s into the 4070; 112-794 MB per request
+  read from the SSD (mmap experts not resident).
+- vs the RTX 5090 community report (same IQ2_XS, 32 GB card + 64 GB RAM): decode 179 / 176 / 165, prompt 4,270 / 5,543 /
+  5,779 -> this pair is ~45% of its decode and ~29% of its prompt speed. vs the Coder IQ1_M on the V100 alone: decode 69 / 69 / 67.
+Possible posts (Chris approves): a #690 comment (NVIDIA mixed pair works), a second benchmark report (dual card).
