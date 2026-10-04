@@ -26,3 +26,16 @@ New items found during our own runs (drafts by Claude, every post approved by Ch
 | Runaway thinking (140K chars, hit the 32K output cap) + thinking-cap A/B (Muse's plan) | #710/#728 comment | after the A/B |
 | Volunteer as V100 tester for releases touching the older-card paths (build, start, speed, HumanEval slice) | ongoing | offer in the benchmark report |
 Suggested order: benchmark report, then the SIGTERM bug, then #710/#728 after the A/B.
+
+## Mixed-architecture dual card (added 2026-10-04, Chris)
+Our pair is unusual and exactly what Strata's docs call untested: **V100 (Volta, sm_70) + RTX 4070 (Ada, sm_89)** in one PC.
+NVIDIA_V100.md says a V100 + newer-card build (`-DCMAKE_CUDA_ARCHITECTURES="70;86"`) ran once in a community report (#509)
+"and was not repeated here"; OLDER_GPUS.md says a V100 + RTX 30/40 model runs both on the CUDA 12 engine. #690 reports the
+second GPU of a mixed **AMD** layer split failing on long prompts ("no kernel image is available").
+Plan (needs both cards, so Workbench's builder and Ember are paused for the session):
+1. Build the CUDA 12 engine for both arches (`70;89`).
+2. Coder IQ1_M forced across both cards (`--gpus 1,0`, layer split): does it start; short prompt; then a prompt larger than
+   the 8,192-token prompt chunk (#690's trigger); both card orders.
+3. Speed vs the V100 alone (decode, prefill) -- and PCIe traffic now that activations cross cards (the V100 is on x4).
+4. Optional: the full model Q2_0 (37.6 GB, needs both cards; ~70 GB download -- Chris's OK first).
+Report: works / fails with logs, numbers, both orders -> a #690 comment (NVIDIA data point) + the multi-GPU docs.
