@@ -133,3 +133,6 @@ checklists are plain English for Chris, Ornith's checklists are in code terms. n
 setting). ember-dash at **medium: 6.5 min** vs 9.7 at high (Ornith 8.8) -- still correct on its own (hidden layout check OK,
 all regression extras), a smaller change (+79 vs +191 lines), 34 steps vs 55. Its checklist still named the order and marked
 its assumption "(guess)". n=1.
+**Low thinking, same task:** still correct (hidden layout OK, all extras) but **10.1 min / 44 steps** -- slower than medium
+(6.5 / 34) and high (9.7 / 55). Less planning bought more trial-and-fix steps. Workbench now has a per-chat selector
+(Quick/Normal/Careful = low/medium/high), default Normal.
