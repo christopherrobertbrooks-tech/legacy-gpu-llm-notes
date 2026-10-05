@@ -68,3 +68,22 @@ Acceptance + decode measured at two context lengths, compared against
 no-spec baseline and Strata reference, README section written, and this note
 flipped to `Status: done` with the headline (even if the headline is "MTP
 doesn't transfer — acceptance X%, slower than Strata").
+
+## Feasibility check (Claude Code, 2026-10-04)
+
+**Ready:** ik_llama.cpp PR #2369 (qwen4exp MTP / NextN self-speculative decoding) is **merged** (2026-09-02, 563b798);
+llama.cpp #20533 was closed unmerged, so stock llama.cpp can't use the head. The pentacoxian file is a **splice**
+(routed experts + PLE from unsloth UD-IQ3_XXS, dense Q8_0 tensors from UD-IQ4_XS, MTP head via
+`convert_hf_to_gguf.py --mtp` streaming only the `mtp.*` tensors, ~8 GB) -- no full 360 GB BF16 / 186 GB FP8 download needed.
+
+**Blocker: size.** unsloth's GGUFs (all include the PLE table): UD-IQ1_S 72.5 GB, UD-IQ1_M 74.5, UD-Q2_K_XL 78.9,
+UD-IQ3_XXS 82.0, UD-IQ4_XS 93.7 (pentacoxian: 85.9 GB, sized for 2x32 GB VRAM). Even UD-IQ1_S leaves ~47 GB of non-PLE
+tensors -- over this pair's 44 GB (less ~1 GB for the display and the KV cache) -- and it's 1-bit. Strata's IQ2_XS (37.6 GB
+RAM+VRAM requirement) fits only because of its own GSQ-RCO format, which other engines can't load. Spilling experts to RAM
+isn't an option here (16 GB RAM) and SSD-streaming kills the speed MTP is meant to buy (measured today: Strata IQ3_XXS with
+~22% of experts off the SATA SSD reads prompts at ~150-350 tok/s vs ~1,600 when resident).
+
+**Verdict:** as specified (all experts resident on 32 + 12 GB, compare decode), **not feasible on this hardware** -- needs a
+second 32 GB card or much more RAM. **Cheaper partial answer:** acceptance doesn't depend on speed, so the pentacoxian file
+could run with experts streamed from the SSD to measure **per-position MTP acceptance only** (speeds meaningless) -- the
+"is the draft path sane / does it transfer" half. Cost: 86 GB download + deleting the IQ3_XXS files. Chris decides.
