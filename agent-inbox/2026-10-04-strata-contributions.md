@@ -109,3 +109,9 @@ all 512 experts, and it ties up both cards).
 **Correction (2026-10-04):** PCIe into the V100 during the split's long prompts *peaks* at 3.5-3.7 GB/s (essentially the whole PCIe 3.0 x4 link; median ~0.3-0.4 GB/s) -- the earlier "~2 GB/s, about half" came from a short sample. The 4070 peaks at 13.4-13.7 GB/s.
 
 **POSTED 2026-10-04:** dual-card benchmark report -> https://github.com/Niko1221/Strata/pull/850. IQ2_XS files deleted afterwards (results kept); IQ3_XXS (47 GB) downloading for the expert-store experiment.
+
+**IQ3_XXS across V100 + 4070 (2026-10-04, the "expert store" candidate):** ~47 GB model on 44 GB of cards -> auto K=38,
+19,065 of 24,576 profiled pairs cached (99.3% of routed mass), 1.2-5.8 GB read from the SATA SSD per request.
+Prompt 184 / 325 / 320 tok/s, decode 62.5 / 52.8 / 54.0 tok/s, TTFT 22 / 101 / 400 s at 4K / 32K / 128K; needles 6/6;
+**HumanEval 158/164 = the Coder's 158**, in 10.8 min (vs 7.1). Same accuracy, ~5x slower prompt reading, both cards ->
+the expert-store experiment is dropped (its point was a model better than the Coder; the best case is matching it).
