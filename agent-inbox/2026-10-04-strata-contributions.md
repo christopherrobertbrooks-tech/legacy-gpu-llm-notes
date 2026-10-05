@@ -115,3 +115,9 @@ all 512 experts, and it ties up both cards).
 Prompt 184 / 325 / 320 tok/s, decode 62.5 / 52.8 / 54.0 tok/s, TTFT 22 / 101 / 400 s at 4K / 32K / 128K; needles 6/6;
 **HumanEval 158/164 = the Coder's 158**, in 10.8 min (vs 7.1). Same accuracy, ~5x slower prompt reading, both cards ->
 the expert-store experiment is dropped (its point was a model better than the Coder; the best case is matching it).
+
+## Update 2026-10-05 (Claude)
+- Posted on #728 (Chris approved): greedy vs Qwen3.8 thinking sampling on 15 Workbench agent jobs -- same hidden-test
+  results, no loops either way, sampled ~2x slower on the six-phase build; agents sending no temperature run greedy
+  unless the config has a `sampling` block. https://github.com/Niko1221/Strata/issues/728#issuecomment-6004214799
+- Kept greedy + `reasoning_budget_tokens: 8192` in Workbench. The `strata-sampled` llama-swap entry stays for a retry.
