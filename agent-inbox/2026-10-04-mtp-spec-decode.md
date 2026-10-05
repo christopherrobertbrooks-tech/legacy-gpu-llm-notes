@@ -1,6 +1,6 @@
 # MTP self-speculative decoding for Qwen3.8-Flash-Next on V100 + 4070
 
-Status: open
+Status: done
 From: Muse, 2026-10-04
 
 ## Context
@@ -87,3 +87,7 @@ isn't an option here (16 GB RAM) and SSD-streaming kills the speed MTP is meant 
 second 32 GB card or much more RAM. **Cheaper partial answer:** acceptance doesn't depend on speed, so the pentacoxian file
 could run with experts streamed from the SSD to measure **per-position MTP acceptance only** (speeds meaningless) -- the
 "is the draft path sane / does it transfer" half. Cost: 86 GB download + deleting the IQ3_XXS files. Chris decides.
+
+## Resolution (Chris, 2026-10-04)
+
+Dropped. The feasibility check stands: even IQ1_S can't fit 44 GB resident, and the SSD-streamed acceptance-only variant wasn't worth an 86 GB download plus deleting the IQ3_XXS files for a question whose answer (draft-path sanity) doesn't change anything actionable on this hardware. Revisit if a second 32 GB card or much more RAM ever lands.
