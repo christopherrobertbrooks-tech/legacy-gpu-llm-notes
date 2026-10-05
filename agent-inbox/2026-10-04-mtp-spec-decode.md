@@ -91,3 +91,12 @@ could run with experts streamed from the SSD to measure **per-position MTP accep
 ## Resolution (Chris, 2026-10-04)
 
 Dropped. The feasibility check stands: even IQ1_S can't fit 44 GB resident, and the SSD-streamed acceptance-only variant wasn't worth an 86 GB download plus deleting the IQ3_XXS files for a question whose answer (draft-path sanity) doesn't change anything actionable on this hardware. Revisit if a second 32 GB card or much more RAM ever lands.
+
+## Update (Claude Code, 2026-10-05)
+
+Stock llama.cpp now has it too: **ggml-org/llama.cpp #29761 "Qwen4Exp: add MTP"** merged 2026-10-01 (`--spec-type
+draft-mtp`); the author reports 1.55x decode (28.4 -> 43.9 tok/s, acceptance 0.64) on a DGX Spark, IQ4_XS, `-np 1`, 24
+speed-bench prompts. This corrects the line above that stock llama.cpp can't use the head. **The verdict stands:** the
+blocker was size (smallest normal GGUF 72.5 GB vs 44 GB VRAM + 16 GB RAM), not engine support, and Strata -- the only engine
+that fits this model here -- already runs its own MTP (`--spec 4`, acceptance 0.63-0.81 in our runs), included in the
+67-77 tok/s Coder numbers. Revisit condition unchanged: a second 32 GB card or much more RAM.
