@@ -45,6 +45,8 @@ engine 0.1.39. Full report: [Strata PR #823](https://github.com/Niko1221/Strata/
 - HumanEval: 158/164 (see [coding quality](coding-quality.md)).
 - As a coding agent's builder on 4 real tasks with hidden checks: 12/12 over three rounds, ~30–35 min per round at medium
   thinking ([details](coding-quality.md#local-models-as-a-coding-agents-builder-october-2026)).
+- The same four tasks plus a six-phase web app, run three more times on 2026-10-05 (before and after a cleanup of the
+  agent's code, and with different sampling): every hidden check passed every time.
 
 ## Things we found
 
@@ -58,6 +60,18 @@ engine 0.1.39. Full report: [Strata PR #823](https://github.com/Niko1221/Strata/
   [#728](https://github.com/Niko1221/Strata/issues/728#issuecomment-5984010954).
 - **Claude Code asks for "high" thinking unless told otherwise** (`output_config.effort`); `CLAUDE_CODE_EFFORT_LEVEL=medium`
   was a third faster on one real task, and `low` was slower (more trial and error). One run each.
+- **An agent that sends no temperature runs greedy.** Claude Code sends `"temperature": null` (seen by logging its
+  requests), and with no `sampling` block in `strata-<model>.json` Strata then decodes greedily -- nothing in the client
+  shows it. Greedy vs the Qwen3.8 thinking defaults (`"sampling": {"temperature": 1.0, "top_p": 0.95, "top_k": 20}`) on
+  the same five agent jobs (four hidden-test tasks + a six-phase app; greedy twice, sampled once): identical results, no
+  runaway thinking in any of the 15 jobs, and the sampled run took about twice as long on the six-phase build (47.5 vs
+  24-40 min, prompts up to 97K vs 60K). We kept greedy plus the 8K reasoning budget. Posted on
+  [#728](https://github.com/Niko1221/Strata/issues/728#issuecomment-6004214799); 15 jobs are too few to measure a
+  ~1-in-20 loop, so this is a data point, not a verdict.
+- **Answer room vs context:** Claude Code reserves 32K tokens for each answer. Strata refuses any request where prompt +
+  answer room exceeds the context (131,072 here), so a long resumed chat past ~99.5K died for good -- its compaction
+  request was refused the same way. `CLAUDE_CODE_MAX_OUTPUT_TOKENS=20000` (thinking is capped at 8K) fixed it: the same
+  dead session compacted and finished.
 - **Stopping the server stops its engine** (SIGTERM: GPU free in 2 s; closing the terminal: under 1 s). An early suspicion
   that it left the engine running was a check made mid-shutdown; tested before anything was reported.
 
