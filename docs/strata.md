@@ -51,6 +51,9 @@ engine 0.1.39. Full report: [Strata PR #823](https://github.com/Niko1221/Strata/
 - **0.1.40.1 (2026-10-06):** installed side by side with 0.1.39 (model files hard-linked), with
   `"reasoning_loop_recovery": "stop"` (new in 0.1.40, #728) and the 8K reasoning budget: the same baseline passed every
   hidden check (6-13 min a task, six-phase app 21 min), so it became the builder.
+  Same speed benchmark as the 0.1.39 table above (3 runs each, thinking off): **decode 72.2 / 76.5 / 71.9 tok/s** at
+  4K / 32K / 128K (0.1.39: 69.3 / 68.6 / 67.1, so +4% / +12% / +7%, with tighter ranges); prompt reading unchanged
+  (1,234 / 1,580 / 1,396 tok/s). The fused decode/verify/MTP kernels ported from #783 help on Volta too.
 
 ## Things we found
 
