@@ -48,6 +48,10 @@ engine 0.1.39. Full report: [Strata PR #823](https://github.com/Niko1221/Strata/
 - The same four tasks plus a six-phase web app, run three more times on 2026-10-05 (before and after a cleanup of the
   agent's code, and with different sampling): every hidden check passed every time.
 
+- **0.1.40.1 (2026-10-06):** installed side by side with 0.1.39 (model files hard-linked), with
+  `"reasoning_loop_recovery": "stop"` (new in 0.1.40, #728) and the 8K reasoning budget: the same baseline passed every
+  hidden check (6-13 min a task, six-phase app 21 min), so it became the builder.
+
 ## Things we found
 
 - **Images inside a tool result were dropped.** Claude Code-style agents return a screenshot (a Read of a PNG) inside an

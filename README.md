@@ -26,6 +26,7 @@ in place ([corrections](docs/findings.md#corrections)).
 | [Is a used V100 32GB worth it?](docs/v100-buyers-guide.md) | Speeds, power and prices vs the 4070; MoE vs dense; splitting across two cards; pooling over Wi-Fi; KV-cache quantization; the x4 slot |
 | [Strata: a 125B model on a V100 with 16 GB RAM](docs/strata.md) | Setup, speeds, recall, HumanEval, coding-agent results, the full model on V100 + 4070, what we found and fixed upstream |
 | [Coding quality](docs/coding-quality.md) | HumanEval, LiveCodeBench, SWE-bench as an agent, the reviewer test, DFlash, DiffusionGemma, expert counts, local models as an agent's builder |
+| [A coding agent on a 12 GB card](docs/small-cards.md) | Our agent on an RTX 4070 alone with 9-27B models: MiMo 9B passed every hidden check, Ornith 3 of 4; 64K context is too small; what to buy instead |
 | [What a GTX 1070 is still good for](docs/gtx-1070.md) | Speeds next to the V100 and 4070, real helper jobs, the verdict, Pascal setup notes |
 | [Setting up a used V100 on Linux](docs/v100-linux-setup.md) | Before you buy, power (the EPS socket), cooling, BIOS, the driver step that bites, CUDA 12 |
 | [Findings by question, and corrections](docs/findings.md) | Works-despite-the-docs, performance traps, tooling gotchas, and the claims we got wrong |
