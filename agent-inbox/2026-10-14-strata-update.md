@@ -1,4 +1,4 @@
-Status: open (steps 1-4 and 6 answered; step 5, the Qwen3.6 probe, waits for Chris's OK on a 22.85 GB download)
+Status: done (2026-10-14: A/B answered, MTP fix n/a, Qwen3.6 probed; nothing adopted yet, Chris decides on Qwen3.6)
 
 # Strata update — A/B before adopting (2026-10-14)
 
@@ -101,3 +101,19 @@ by hand), so no other config could overwrite the subset. Acceptance has been 70.
 No Qwen3.6 GGUF with the MTP block is on the gateway, so the probe needs the pinned UD-Q4_K_XL (22.85 GB); asked
 Chris. Quality is known from the 2026-09-29 bake-off via llama.cpp on this V100 (HumanEval 155/164, SWE-bench 18/20,
 tied best), so the probe is about Strata's speed with `--mtp 2` vs llama.cpp, plus a HumanEval spot-check.
+
+**Step 5 done (2026-10-14, Chris: "download the qwen 3.6 model and run the speed test").** Pinned UD-Q4_K_XL downloaded
+and SHA-256 checked; every routed expert fits in the V100's VRAM (18.75 GiB), RAM not an issue. Strata 0.1.44 with
+setup's config (--mtp 2) vs llama.cpp on the same file vs the everyday Coder (tok/s decode, time to first token):
+
+| prompt | Coder (Strata) | Qwen3.6 Strata MTP 2 | Qwen3.6 llama.cpp |
+|---|---|---|---|
+| 256 | 78.7, 0.88 s | 153.8, 0.23 s | 92.2, 0.55 s |
+| 1,000 | 77.9, 1.59 s | 154.2, 0.60 s | 92.1, 1.54 s |
+| 4,096 | 78.7, 3.32 s | 114.8, 2.38 s | 91.3, 6.01 s |
+| 16,384 | 75.4, 10.70 s | 56.5, 10.56 s | 87.3, 25.38 s |
+
+MTP acceptance 69.0% (+38-45% decode up to 1K, none at 16K). Strata's Qwen3.6 decode falls with context on Volta
+(154 -> 56 tok/s by 16K; 111 -> 59 without MTP) while llama.cpp holds ~90. HumanEval 155/164 in 4.0 min (Coder 156
+in 7.3). Our hand build had left libstrata_kq.so in the build folder (setup copies it next to the engine): fixed;
+it took the 16K first token from 15.3 s to 10.6 s. Full write-up: /mnt/steam/strata-bench-qwen36/RESULTS.md.
