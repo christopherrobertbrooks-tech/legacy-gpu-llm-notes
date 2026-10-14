@@ -1,4 +1,4 @@
-Status: done (2026-10-14: A/B answered, MTP fix n/a, Qwen3.6 probed; nothing adopted yet, Chris decides on Qwen3.6)
+Status: done (2026-10-14: A/B answered, MTP fix n/a, Qwen3.6 probed and NOT kept -- slower than the Coder past ~16K tokens; Chris: "if it is slower no")
 
 # Strata update — A/B before adopting (2026-10-14)
 
