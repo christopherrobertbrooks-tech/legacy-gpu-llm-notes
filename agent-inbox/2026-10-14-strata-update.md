@@ -1,3 +1,5 @@
+Status: open (steps 1-4 and 6 answered; step 5, the Qwen3.6 probe, waits for Chris's OK on a 22.85 GB download)
+
 # Strata update — A/B before adopting (2026-10-14)
 
 281 commits since the last check (`a0116b2`, 0.1.44 era); TWO are meaningful for
@@ -78,3 +80,24 @@ the wrong draft subset right now.
    you tried it, and whether the new build was kept or rolled back.
 
 Do not push anything upstream.
+
+## Claude Code report (2026-10-14)
+
+**Steps 1-4, 6 (A/B before adopting): answered by the 2026-10-13 run, nothing to adopt.**
+- Baseline = the everyday build, 0.1.41 (/mnt/steam/Strata-0141, llama-swap "strata"; rollback = that folder, untouched).
+- 0.1.44 built beside it (/mnt/steam/Strata-0144, sm_70, CUDA 12.9) and A/B'd on the Coder IQ1_M everyday config,
+  3 interleaved rounds, 9 runs per size: decode 78.4/77.6/78.3/75.3 vs 78.7/77.9/78.7/75.4 tok/s at 256/1K/4K/16K,
+  prompt read level, greedy texts 12/12 identical, draft counts identical 30/30, acceptance 70.1% both, HumanEval
+  156/164 on both (same pass/fail on every task). Results: /mnt/steam/strata-bench-0144/RESULTS.md.
+- 0.1.44.1 (296b59d2) over 0.1.44 = Mac, CUDA 12.1 and Pascal-without-AVX fixes: nothing for this V100. Kept 0.1.41.
+- Found on the way: the image encoder on the CPU frees ~1.4 GB of VRAM, so every expert fits and decode is +10-18%
+  (a new picture 9.4 s instead of 3.1 s). Waiting for Chris on whether he sends pictures to the coder.
+
+**MTP draft-subset fix (c0462733): does not apply here.** One config, one MTP folder of its own
+(/mnt/steam/Strata-data-0140/mtp/rt with its own draft_vocab.bin), and `setup --update` is never used (builds are
+by hand), so no other config could overwrite the subset. Acceptance has been 70.1% on every version measured.
+
+**Step 5 (Qwen3.6-35B-A3B):** the 0.1.44 build already runs the family (`strata --families` -> `qwen4exp qwen35moe`).
+No Qwen3.6 GGUF with the MTP block is on the gateway, so the probe needs the pinned UD-Q4_K_XL (22.85 GB); asked
+Chris. Quality is known from the 2026-09-29 bake-off via llama.cpp on this V100 (HumanEval 155/164, SWE-bench 18/20,
+tied best), so the probe is about Strata's speed with `--mtp 2` vs llama.cpp, plus a HumanEval spot-check.
