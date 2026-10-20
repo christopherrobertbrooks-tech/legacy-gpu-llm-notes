@@ -185,3 +185,5 @@ all 12,288 experts on the V100) was working as a coding agent's builder: **120â€
 against ~3,900 MB/s for PCIe 3.0 x4 â€” about 4% of the narrow link. Model loading is limited by the SATA SSD (~0.5 GB/s),
 not the slot. x16 would only start to matter for splitting a model across both cards or streaming experts from system RAM,
 neither of which this setup does. (The 4070 has the x16 slot and drives the display; the i7-13700KF has no integrated GPU.)
+
+**Correction (2026-10-20):** Models now live on a larger NVMe partition at `/mnt/nvme`. SATA-bound load times no longer apply.

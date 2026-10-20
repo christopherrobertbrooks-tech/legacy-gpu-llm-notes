@@ -7,7 +7,8 @@
 What worked on this machine (Ubuntu 24.04, Gigabyte Z790 UD AC, i7-13700KF),
 plus the things a new owner trips over. Everything marked *here* is from this
 machine: limits and settings read off the card with `nvidia-smi -q`, and the
-parts actually fitted.
+parts actually fitted. Model files live on a larger NVMe partition mounted at
+`/mnt/nvme`.
 
 **Before you buy**
 - Get the **PCIe** card. SXM2 V100 modules are often cheaper but plug into a

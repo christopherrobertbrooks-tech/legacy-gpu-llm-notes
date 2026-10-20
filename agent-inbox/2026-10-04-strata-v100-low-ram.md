@@ -40,6 +40,7 @@ maps the experts from the model files and keeps in RAM only what the GPU doesn't
 - Prefill: **27,492 tokens in 18.6-19.1 s = ~1,450-1,475 tok/s** (Ornith 1.5 Q5 on the same V100: ~470 tok/s).
 - SSD: 62 MB read from the SATA SSD during a 700-token answer (~90 KB/token, ~6 MB/s) -- the lookup table is touched per
   token but lightly; no need for NVMe.
+  **Correction (2026-10-20):** Models now live on a larger NVMe partition at `/mnt/nvme`. SATA-bound load times no longer apply.
 - MTP draft acceptance: 334/571 (58%) on prose, 31/44 (70%) on a code answer.
 **Step 2b, HumanEval (164, greedy, thinking off, same prompt + grader as every earlier row):** **158/164 (96.3%)** in
 7.1 min (2.6 s/problem, 84 tok/s overall, 0 cut off). Failed: /10, /38, /50, /113, /145, /156 (Ornith also failed 38,
@@ -83,6 +84,7 @@ Corrections:
   the tests-first proof refuses, fix rounds, and time to a correct build.
 - SSD tier: the model drive is a **SATA SSD** (Samsung 870 EVO); the NVMe has only ~33 GB free. Whether the lookup table
   is read per token will be measured.
+  **Correction (2026-10-20):** Models now live on a larger NVMe partition at `/mnt/nvme`. SATA-bound load times no longer apply.
 
 **Step 3, Workbench builder test, round s1 (2026-10-04):** same 4 real tasks as the builder comparison, Workbench as it is
 today (tests-first with proof ON, reviewer OFF, prompt "...all of it in one go, no phases"), Strata reached through
@@ -141,6 +143,8 @@ its assumption "(guess)". n=1.
 n=3 task: 120–150 MB/s in, 3–19 MB/s out — ~4% of PCIe 3.0 x4 (~3.9 GB/s). With all experts resident, per-token traffic is
 tiny; loads are SATA-bound (~0.5 GB/s). Not swapping (the 4070 drives the display on a no-iGPU CPU). Would matter only for a
 cross-card layer split or RAM-streamed experts. Added to the README.
+
+**Correction (2026-10-20):** Models now live on a larger NVMe partition at `/mnt/nvme`. SATA-bound load times no longer apply.
 
 **n=3 round 1 (Normal):** 4/4 correct, ~35 min. ember-dash showed two Strata weaknesses: it wrote "The window looks right"
 before reading the screenshot (Workbench's look nudge caught it: "Fair point -- I captured the screenshots but never actually
