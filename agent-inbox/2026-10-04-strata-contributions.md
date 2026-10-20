@@ -8,6 +8,8 @@ model and the engine log"). House style: plain words, measured numbers with what
 measurement. Our hardware: V100-PCIE-32GB (sm_70, PCIe x4) + RTX 4070 12 GB, i7-13700KF, **16 GB DDR5**, SATA SSD for the
 model files, Ubuntu 24.04, CUDA 12.9, driver 580.
 
+**Correction (2026-10-20):** Models now live on a larger NVMe partition at `/mnt/nvme`. SATA-bound load times no longer apply.
+
 | # | Issue | What we can add | Status |
 |---|---|---|---|
 | -- | Community benchmark (COMMUNITY_BENCHMARKS.md, #713) | V100 + 16 GB RAM low-RAM mode, Coder IQ1_M: all 12,288 experts VRAM-resident, decode 70-95 tok/s, prefill ~1,450, HumanEval 158/164, real agent tasks 4/4 | **first, after the tests** |
@@ -115,6 +117,8 @@ all 512 experts, and it ties up both cards).
 Prompt 184 / 325 / 320 tok/s, decode 62.5 / 52.8 / 54.0 tok/s, TTFT 22 / 101 / 400 s at 4K / 32K / 128K; needles 6/6;
 **HumanEval 158/164 = the Coder's 158**, in 10.8 min (vs 7.1). Same accuracy, ~5x slower prompt reading, both cards ->
 the expert-store experiment is dropped (its point was a model better than the Coder; the best case is matching it).
+
+**Correction (2026-10-20):** Models now live on a larger NVMe partition at `/mnt/nvme`. SATA-bound load times no longer apply.
 
 ## Update 2026-10-05 (Claude)
 - Posted on #728 (Chris approved): greedy vs Qwen3.8 thinking sampling on 15 Workbench agent jobs -- same hidden-test

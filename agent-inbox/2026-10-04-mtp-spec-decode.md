@@ -83,6 +83,8 @@ RAM+VRAM requirement) fits only because of its own GSQ-RCO format, which other e
 isn't an option here (16 GB RAM) and SSD-streaming kills the speed MTP is meant to buy (measured today: Strata IQ3_XXS with
 ~22% of experts off the SATA SSD reads prompts at ~150-350 tok/s vs ~1,600 when resident).
 
+**Correction (2026-10-20):** Models now live on a larger NVMe partition at `/mnt/nvme`. SATA-bound load times no longer apply.
+
 **Verdict:** as specified (all experts resident on 32 + 12 GB, compare decode), **not feasible on this hardware** -- needs a
 second 32 GB card or much more RAM. **Cheaper partial answer:** acceptance doesn't depend on speed, so the pentacoxian file
 could run with experts streamed from the SSD to measure **per-position MTP acceptance only** (speeds meaningless) -- the

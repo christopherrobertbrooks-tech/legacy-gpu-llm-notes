@@ -46,6 +46,7 @@ Two machines. Full spec for the first in
 
 - Driver 580.173.02, CUDA 12.9.86 — **CUDA 13 dropped Volta, so 12.x is required**
 - The V100 runs its PCIe link downgraded to x4 (8 GT/s); the 4070 at x16
+- Models on `ember-gateway` live on a larger NVMe partition mounted at `/mnt/nvme`
 
 ## The table
 
